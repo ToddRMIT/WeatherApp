@@ -1,4 +1,5 @@
 
+
 public class SiteList{
 	
 	private static class SiteNode{
@@ -31,6 +32,9 @@ public class SiteList{
 		firstSite = null;
 		length = 0;
 	}
+	public int getLength(){
+		return length;
+	}
 
 	// Insert site in ascending alphabetical order
 	public static void insertSite( Site thisSite ){
@@ -53,6 +57,8 @@ public class SiteList{
 						++length;
 						return;
 					}
+					//Check to see if it is a repeated entry and dump if so
+					if( index.getNext().getName().compareTo( newNode.getName() ) == 0 ) return;
 					index = index.getNext();
 				}
 				index.setNext( newNode );	

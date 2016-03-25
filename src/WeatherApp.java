@@ -1,13 +1,19 @@
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+
+
 
 public class WeatherApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		SiteList siteList = new SiteList();
-		siteList.insertSite( new Site( "testSite", "testURL" ));
-		siteList.insertSite( new Site( "testSite2", "testURL2" ));
-		siteList.insertSite( new Site( "aSite", "aSiteURL" ));
+		Utility.FetchSites( siteList );
 
+		/* FOR TESTING */
 		siteList.printSites();
+		System.out.println("Number of sites: " + siteList.getLength());
 	}
 
 }
