@@ -25,6 +25,10 @@ public class WeatherApp {
 		favList.remove( "wodonga" );
 
 		favList.print();
+		favList.save();
+		favList = new FavList();
+		favList.load();
+		favList.print();
 
 	}
 

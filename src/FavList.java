@@ -1,3 +1,11 @@
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+
+
+
 public class FavList{
 	
 	
@@ -72,6 +80,56 @@ public class FavList{
 			thisFav = thisFav.getNext();
 		}
 		return false;
+	}
+
+
+
+	public void save() throws IOException{
+		FavNode thisFav = favHead;
+		FileWriter file = null;
+		PrintWriter writer = null;
+		try{
+			file = new FileWriter( "favourites.txt" );
+			writer = new PrintWriter( file );
+			while( thisFav != null ){
+				writer.println( thisFav.getName() + "," + thisFav.getURL() + "," + thisFav.getCurrentTemp() );
+				thisFav = thisFav.getNext();
+			}
+		}
+		catch( IOException x ){
+			System.err.println( x );
+		}
+		finally{
+			if( file != null ){
+				file.close();
+			}
+		}
+	}
+
+
+
+	public void load() throws IOException{
+		FavNode thisFav = favHead;
+		FileReader file = null;
+		BufferedReader reader = null;
+		try{
+			file = new FileReader( "favourites.txt" );
+			reader = new BufferedReader( file );
+			String line = null;
+			while(( line = reader.readLine()) != null ){
+				String[] tokens = line.split(",");
+				this.add( new Site( tokens[0], tokens[1] ), tokens[2] );
+			}
+		}
+		catch( IOException x ){
+			System.err.println( x );
+		}
+		finally{
+			if( file != null ){
+				file.close();
+			}
+		}
+		
 	}
 
 
