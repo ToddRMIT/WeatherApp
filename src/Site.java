@@ -10,11 +10,7 @@ public class Site{
 		this.name = name;
 		this.url = url;
 	}
-	public String getName(){
-		return name;
-	}
-	public String getURL(){
-		return url;
-	}
+	public String getName(){ return name; }
+	public String getURL(){ return url; }
 
 }
