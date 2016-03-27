@@ -39,31 +39,30 @@ public class SiteList{
 	// Insert site in ascending alphabetical order
 	public static void insertSite( Site thisSite ){
 		SiteNode newNode = new SiteNode( thisSite );
+		SiteNode thisNode = firstSite;
+		// Check if only site
 		if( length == 0 ){
 			firstSite = newNode;
 			++length;
+			return;
 		}
-		else{
-			SiteNode index = firstSite;
-			if( firstSite.getName().compareTo( newNode.getName() ) > 0 ){
-				newNode.setNext( index );
-				firstSite = newNode;
-			}
-			else{
-				while( index.getNext() != null ){
-					if( index.getNext().getName().compareTo( newNode.getName() ) > 0 ){
-						newNode.setNext( index.getNext() );
-						index.setNext( newNode );
-						++length;
-						return;
-					}
-					//Check to see if it is a repeated entry and dump if so
-					if( index.getNext().getName().compareTo( newNode.getName() ) == 0 ) return;
-					index = index.getNext();
-				}
-				index.setNext( newNode );	
-			}
+		// Check if new site should be before first site
+		if( newNode.getName().compareTo( firstSite.getName() ) < 0 ){
+			newNode.setNext( thisNode );
+			firstSite = newNode;
 			++length;
+			return;
+		}
+		// Find new sites place in the list
+		while( thisNode.getNext() != null ){
+			if( newNode.getName().compareTo( thisNode.getNext().getName() ) <= 0 ) break;
+			thisNode = thisNode.getNext();
+		}
+		// Check if duplicate
+		if( thisNode.getNext() == null || newNode.getName().compareTo( thisNode.getNext().getName() ) != 0 ){
+			newNode.setNext( thisNode.getNext() );
+			thisNode.setNext( newNode );
+			++length;	
 		}
 		return;
 	}
