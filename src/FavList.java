@@ -58,6 +58,24 @@ public class FavList{
 
 
 
+	public boolean removeFav( String name ){
+		FavNode thisFav = favHead;
+		FavNode prevFav = null;
+		while( thisFav != null ){
+			if( thisFav.getName().compareTo(name) == 0 ){
+				if( thisFav == favHead ) favHead = thisFav.nextFav();
+				else prevFav.setNext( thisFav.nextFav() );
+				favLength -= 1;
+				return true;
+			}
+			prevFav = thisFav;
+			thisFav = thisFav.nextFav();
+		}
+		return false;
+	}
+
+
+
 	public void printFav(){
 		FavNode thisFav = favHead;
 		while( thisFav != null ){
