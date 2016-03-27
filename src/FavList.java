@@ -16,7 +16,7 @@ public class FavList{
 		public String getURL(){ return site.getURL(); }
 		public String getCurrentTemp(){ return currentTemp; }
 		public void setCurrentTemp( String currentTemp ){ this.currentTemp = currentTemp; }
-		public FavNode nextFav(){ return nextFav; }
+		public FavNode getNext(){ return nextFav; }
 		public void setNext( FavNode nextFav ){ this.nextFav = nextFav; }
 	}
 
@@ -33,7 +33,7 @@ public class FavList{
 
 
 
-	public void addFav( Site site, String currentTemp ){
+	public void add( Site site, String currentTemp ){
 		FavNode newFav = new FavNode( site, currentTemp );
 		FavNode thisFav = favHead;
 		if( favLength == 0 ){
@@ -47,10 +47,10 @@ public class FavList{
 			favLength += 1;
 			return;
 		}
-		while( thisFav.nextFav() != null ){
-			if( newFav.getName().compareTo( thisFav.nextFav().getName() ) < 0 ) break;
+		while( thisFav.getNext() != null ){
+			if( newFav.getName().compareTo( thisFav.getNext().getName() ) < 0 ) break;
 		}
-		newFav.setNext( thisFav.nextFav() );
+		newFav.setNext( thisFav.getNext() );
 		thisFav.setNext( newFav );
 		favLength += 1;
 		return;
@@ -58,29 +58,29 @@ public class FavList{
 
 
 
-	public boolean removeFav( String name ){
+	public boolean remove( String name ){
 		FavNode thisFav = favHead;
 		FavNode prevFav = null;
 		while( thisFav != null ){
 			if( thisFav.getName().compareTo(name) == 0 ){
-				if( thisFav == favHead ) favHead = thisFav.nextFav();
-				else prevFav.setNext( thisFav.nextFav() );
+				if( thisFav == favHead ) favHead = thisFav.getNext();
+				else prevFav.setNext( thisFav.getNext() );
 				favLength -= 1;
 				return true;
 			}
 			prevFav = thisFav;
-			thisFav = thisFav.nextFav();
+			thisFav = thisFav.getNext();
 		}
 		return false;
 	}
 
 
 
-	public void printFav(){
+	public void print(){
 		FavNode thisFav = favHead;
 		while( thisFav != null ){
 			System.out.println( thisFav.getName() + " - " + thisFav.getURL() + " - " + thisFav.getCurrentTemp() );
-			thisFav = thisFav.nextFav();
+			thisFav = thisFav.getNext();
 		}
 		return;
 	}

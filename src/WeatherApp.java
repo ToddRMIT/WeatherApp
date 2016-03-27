@@ -16,15 +16,15 @@ public class WeatherApp {
 		siteList.printSites();
 		System.out.println("Number of sites: " + siteList.getLength());
 
-		favList.addFav( new Site( "wodonga", "wodongaURL" ), "23" );
-		favList.addFav( new Site( "albury", "alburyURL" ), "25" );
-		favList.addFav( new Site( "lavington", "lavingtonURL" ), "24" );
+		favList.add( new Site( "wodonga", "wodongaURL" ), "23" );
+		favList.add( new Site( "albury", "alburyURL" ), "25" );
+		favList.add( new Site( "lavington", "lavingtonURL" ), "24" );
 
-		favList.printFav();
+		favList.print();
 
-		favList.removeFav( "wodonga" );
+		favList.remove( "wodonga" );
 
-		favList.printFav();
+		favList.print();
 
 	}
 
