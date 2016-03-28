@@ -1,7 +1,4 @@
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 
 
 
@@ -29,6 +26,7 @@ public class WeatherApp {
         favList = new FavList();
         favList.load();
         favList.print();
+
 
     }
 
