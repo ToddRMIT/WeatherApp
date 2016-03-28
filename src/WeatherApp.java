@@ -30,6 +30,10 @@ public class WeatherApp {
         favList.load();
         favList.print();
 
+        //GUI TEST
+        GuiHandler guiHandler = new GuiHandler();
+        guiHandler.launch(GuiHandler.class,args);
+        
     }
 
 }
