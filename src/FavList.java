@@ -74,7 +74,7 @@ public class FavList{
                 if( thisFav == favHead ) favHead = thisFav.getNext();
                 else prevFav.setNext( thisFav.getNext() );
                 favLength -= 1;
-                return true;
+                return;
             }
             prevFav = thisFav;
             thisFav = thisFav.getNext();
