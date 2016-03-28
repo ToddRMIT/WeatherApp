@@ -66,7 +66,7 @@ public class FavList{
 
 
 
-    public boolean remove( String name ){
+    public void remove( String name ){
         FavNode thisFav = favHead;
         FavNode prevFav = null;
         while( thisFav != null ){
@@ -79,7 +79,7 @@ public class FavList{
             prevFav = thisFav;
             thisFav = thisFav.getNext();
         }
-        return false;
+        return;
     }
 
 
