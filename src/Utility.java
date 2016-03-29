@@ -16,9 +16,10 @@ public class Utility{
         int start;
         int end;
         for( int i = 0; i < sites.length; ++i ){
-            System.out.print( "Fetching " + sites[i] );
+            System.out.println( "Fetching " + sites[i] );
             URL urls = new URL("http://www.bom.gov.au/".concat(sites[i]).concat("/observations/").concat(sites[i]).concat("all.shtml"));
             BufferedReader in = new BufferedReader( new InputStreamReader( urls.openStream() ) );
+            System.out.println( "Processing " );
             while( (inputLine = in.readLine() ) != null ){
                 if( inputLine.matches( ".*station.*shtml.*" ) ){
                     start = inputLine.indexOf("shtml\">") + 7;
