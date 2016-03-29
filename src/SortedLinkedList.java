@@ -2,20 +2,20 @@ public class SortedLinkedList<T>{
 
 
 
-	private class Node<T>{
+    private class Node<T>{
 
-		private T data;
-		private Node<T> next;
+        private T data;
+        private Node<T> next;
 
-		public Node( T data ){
-			this.data = data;
-			next = null;
-		}
+        public Node( T data ){
+            this.data = data;
+            next = null;
+        }
 
-		// public T getData(){ return data; }
+        // public T getData(){ return data; }
         public Object getData(){ return data; } 
-		public Node<T> getNext(){ return next; }
-		public void setNext( Node<T> node ){ next = node; }
+        public Node<T> getNext(){ return next; }
+        public void setNext( Node<T> node ){ next = node; }
         public String getSortField(){
             if( data instanceof Site ){
                 Site site = (Site)data;
@@ -24,27 +24,27 @@ public class SortedLinkedList<T>{
             return "Problem";
         }
 
-	}
+    }
 
 
 
-	private Node<T> head;
-	private int length;
+    private Node<T> head;
+    private int length;
     private Node<T> nextOutputNode;    
 
-	public SortedLinkedList(){
-		head = null;
-		length = 0;
+    public SortedLinkedList(){
+        head = null;
+        length = 0;
         nextOutputNode = null;
-	}
+    }
 
-	public Node<T> getHead(){ return head; }
-	public void setHead( Node<T> newHead ){ head = newHead; }
-	public int getLength(){ return length; }
+    public Node<T> getHead(){ return head; }
+    public void setHead( Node<T> newHead ){ head = newHead; }
+    public int getLength(){ return length; }
 
 
-	
-	public void add( T newData ){
+    
+    public void add( T newData ){
         Node<T> newNode = new Node<T>( newData );
         Node<T> thisNode = head;
         if( length == 0 ){
@@ -73,7 +73,7 @@ public class SortedLinkedList<T>{
 
 
     public Object next(){
-    	if( nextOutputNode == null ) return null;
+        if( nextOutputNode == null ) return null;
         Object node = nextOutputNode.getData();
         nextOutputNode = nextOutputNode.getNext();
         return node;
