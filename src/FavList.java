@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 
 
 
-public class FavList{
+public class FavList {
     
     
 

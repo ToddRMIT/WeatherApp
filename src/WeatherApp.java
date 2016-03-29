@@ -5,24 +5,38 @@ import java.io.IOException;
 public class WeatherApp {
 
     public static void main(String[] args) throws IOException{
-        FavList favList = new FavList();
+        //FavList favList = new FavList();
+        SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
         SiteList siteList = new SiteList();
         Utility.FetchSites( siteList );
 
         /* FOR TESTING */
-        siteList.printSites();
+        //siteList.printSites();
         System.out.println("Number of sites: " + siteList.getLength());
 
-        favList.add( new Site( "wodonga", "wodongaURL" ), "23" );
-        favList.add( new Site( "albury", "alburyURL" ), "25" );
-        favList.add( new Site( "lavington", "lavingtonURL" ), "24" );
+        favList.add( new Favourite( "wodonga", "wodongaURL" , 23 ) );
+        favList.add( new Favourite( "albury", "alburyURL" , 25 ) );
+        favList.add( new Favourite( "lavington", "lavingtonURL" , 24 ) );
 
-        String[][] list = new String[favList.getLength()][3];
-        favList.print( list );
+        
+        // To access a list of items:
+        // First create a symbolic link to the list
+        SortedLinkedList<Favourite> myList = favList;
 
-        for( int i = 0; i < list.length; ++i ){
-            System.out.println( list[i][0] + "," + list[i][1] + "," + list[i][2] );
+        // Then create a temporary favourite or site or whatever is appropriate
+        Favourite site;
+
+        // Then iterate over the items using the next() function
+        while( (site = (Favourite)favList.next()) != null ){
+            System.out.println("-----------------------");
+            System.out.println( site.getName() );
+            System.out.println( site.getURL() );
+            System.out.println( site.getTemp() );
         }
+        System.out.println("-----------------------");
+        
+        
+
 
 
         
