@@ -1,7 +1,4 @@
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 
 
 
@@ -30,10 +27,10 @@ public class WeatherApp {
         favList.load();
         favList.print();
 
-        //GUI TEST
+         /* GUI TEST */
         GuiHandler guiHandler = new GuiHandler();
         guiHandler.launch(GuiHandler.class,args);
-        
+
     }
 
 }

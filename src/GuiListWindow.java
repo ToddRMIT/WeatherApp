@@ -6,6 +6,7 @@ import java.net.URL;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -13,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class GuiListWindow {
@@ -51,12 +53,19 @@ public class GuiListWindow {
 	    subStage.setScene(scene);
 	    subStage.show();
 	    
+	    setWindowPos();
+	    
 	    subStage.setOnCloseRequest(e -> closeWindow());
 	    
 	   
 	}
 	
-	
+	private static void setWindowPos(){
+		//TODO
+		 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+		 subStage.setX((primScreenBounds.getWidth() - subStage.getWidth()) / 2 - 400); 
+		 subStage.setY((primScreenBounds.getHeight() - subStage.getHeight()) / 4); 
+	}
 
 	private static  void closeWindow () {
 		
@@ -67,9 +76,12 @@ public class GuiListWindow {
 
 
 	//Temporary Data-Retrieval for testing
-	public ObservableList<Site> getSite(){
+	public ObservableList<Site> getSite() throws IOException{
 		
 		ObservableList<Site> sites = FXCollections.observableArrayList();
+		
+		SiteList siteList = new SiteList();
+		Utility.FetchSites( siteList );
 		
 		sites.add(new Site( "wodonga", "wodongaURL" ) );
 		sites.add( new Site( "albury", "alburyURL" ));
