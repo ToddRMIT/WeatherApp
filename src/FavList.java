@@ -134,13 +134,18 @@ public class FavList{
 
 
 
-    public void print(){
+    public String[][] print( String[][] list ){
         FavNode thisFav = favHead;
+        //String[][] list = new String[favLength][3];
+        int i = 0;
         while( thisFav != null ){
-            System.out.println( thisFav.getName() + " - " + thisFav.getURL() + " - " + thisFav.getCurrentTemp() );
+            list[i][0] = thisFav.getName();
+            list[i][1] = thisFav.getURL();
+            list[i][2] = thisFav.getCurrentTemp();
             thisFav = thisFav.getNext();
+            ++i;
         }
-        return;
+        return list;
     }
 
 

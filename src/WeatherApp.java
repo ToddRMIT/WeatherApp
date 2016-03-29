@@ -17,16 +17,16 @@ public class WeatherApp {
         favList.add( new Site( "albury", "alburyURL" ), "25" );
         favList.add( new Site( "lavington", "lavingtonURL" ), "24" );
 
-        favList.print();
+        String[][] list = new String[favList.getLength()][3];
+        favList.print( list );
 
-        favList.remove( "wodonga" );
+        for( int i = 0; i < list.length; ++i ){
+            System.out.println( list[i][0] + "," + list[i][1] + "," + list[i][2] );
+        }
 
-        favList.print();
-        favList.save();
-        favList = new FavList();
-        favList.load();
-        favList.print();
 
+        
+        /* Testing branchs in eclipse */
 
     }
 
