@@ -16,6 +16,7 @@ public class Utility{
         int start;
         int end;
         for( int i = 0; i < sites.length; ++i ){
+            System.out.print( "Fetching " + sites[i] );
             URL urls = new URL("http://www.bom.gov.au/".concat(sites[i]).concat("/observations/").concat(sites[i]).concat("all.shtml"));
             BufferedReader in = new BufferedReader( new InputStreamReader( urls.openStream() ) );
             while( (inputLine = in.readLine() ) != null ){
@@ -25,10 +26,11 @@ public class Utility{
                     name = inputLine.subSequence( start, end ).toString();
                     address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
                     siteList.insertSite( new Site( name, address ));
+                    System.out.print(".");
                 }
             }
             in.close(); 
-            System.out.print("*");
+            System.out.println("");
         }
         System.out.println();
         return;
