@@ -1,82 +1,118 @@
 public class SortedLinkedList<T>{
 
 
-
+    // Node inner class decleration
     private class Node<T>{
-
+        // Instance variables
         private T data;
-        private Node<T> next;
-
+        private Node next;
+        // Constructor
         public Node( T data ){
             this.data = data;
             next = null;
         }
-
-        // public T getData(){ return data; }
-        public Object getData(){ return data; } 
-        public Node<T> getNext(){ return next; }
-        public void setNext( Node<T> node ){ next = node; }
-        public String getSortField(){
-            if( data instanceof Site ){
-                Site site = (Site)data;
-                return site.getName();
-            }
-            return "Problem";
-        }
-
+        // Node methods
+        private String getString(){ return ((Site)data).getName(); }
     }
 
 
 
-    private Node<T> head;
-    private int length;
-    private Node<T> nextOutputNode;    
-
+    // List instance variables
+    private Node head;
+    // List Constructor
     public SortedLinkedList(){
         head = null;
-        length = 0;
-        nextOutputNode = null;
     }
-
-    public Node<T> getHead(){ return head; }
-    public void setHead( Node<T> newHead ){ head = newHead; }
-    public int getLength(){ return length; }
 
 
     
-    public void add( T newData ){
-        Node<T> newNode = new Node<T>( newData );
-        Node<T> thisNode = head;
-        if( length == 0 ){
-            head = newNode;
-            nextOutputNode = head;
-            length += 1;
+    public void add(T item) {
+        // If the head is null this item is the new head
+        if( head == null ){
+            head = new Node<T>( item );
             return;
         }
-        if( newNode.getSortField().compareTo( thisNode.getSortField() ) < 0 ){
-            newNode.setNext( thisNode );
-            head = newNode;
-            nextOutputNode = head;
-            length += 1;
+        // Head is not null so check if head contains item. If so, ignore
+        String str = "";
+        if( item instanceof Site ) str = ((Site)item).getName();
+        if( str.compareTo( head.getString() ) == 0 ){
+            // Do nothing
             return;
         }
-        while( thisNode.getNext() != null ){
-            if( newNode.getSortField().compareTo( thisNode.getNext().getSortField() ) < 0 ) break;
+        // Head does not contain item so check if item is less than head
+        // If so, make head child of item and item new head
+        if( str.compareTo( head.getString() ) < 0 ){
+            Node newNode = new Node<T>( item );
+            Node oldHead = head;
+            newNode.next = oldHead;
+            head = newNode;
+            return;
         }
-        newNode.setNext( thisNode.getNext() );
-        thisNode.setNext( newNode );
-        length += 1;
+        // Starting with the head as the parent
+        // find a child that is greater than item
+        Node parent = head;
+        Node child = parent.next;
+        while( child != null ){
+            // If child is storing item, ignore
+            if( str.compareTo( child.getString() ) == 0 ){
+                // Do nothing
+                return;
+            }
+            // If item is less than child
+            // Make child a child of item and item a child of the parent
+            if( str.compareTo( child.getString() ) < 0 ){
+                Node newNode = new Node<T>( item );
+                newNode.next = child;
+                parent.next = newNode;
+                return;
+            }
+            //Next node
+            parent = child;
+            child = child.next;
+        }
+        // Suitable insertion point not found
+        // Add node to tail
+        parent.next = new Node<T>( item );
+    } // end of add()
 
-        return;
+
+
+    public Site search( String name ){
+        Node thisNode = head;
+        Site site;
+        while( thisNode != null ){
+            site = (Site)thisNode.data;
+            if( site.getName().compareTo( name ) == 0 ) return site;
+            thisNode = thisNode.next;
+        }
+        return null;
     }
 
 
-
+    /* Needs to be refactored
     public Object next(){
         if( nextOutputNode == null ) return null;
         Object node = nextOutputNode.getData();
         nextOutputNode = nextOutputNode.getNext();
         return node;
     }
+    */
+
+
+
+    // For testing
+    public void print(){
+        Node thisNode = head;
+        int count = 0;
+        while( thisNode != null ){
+            System.out.println( thisNode.getString() );
+            thisNode = thisNode.next;
+            count++;
+        }
+        System.out.println( "------------------------------------" );
+        System.out.println( "Number of sites: " + count );
+        System.out.println( "------------------------------------" );
+    }
+
 
 }
