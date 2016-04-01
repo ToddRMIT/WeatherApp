@@ -4,18 +4,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class GuiListWindow {
 
@@ -24,10 +33,31 @@ public class GuiListWindow {
 	 
 	  static void GuiWindow(Stage primaryStage, String stageName) throws IOException{
 		
-		
+		 
+		  TextField text = new TextField("Text");
+	      text.setMaxSize(140, 20);
+	 
+	      
 		subStage = new Stage();
 		subStage.setTitle(stageName);
 		subStage.initModality(Modality.WINDOW_MODAL); 
+		
+		//Favorite column
+		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
+		favoriteColumn.setMinWidth(10);
+		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("Favourite"));
+		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
+
+			 
+
+            public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
+
+                return new CheckBoxTableCell<Site, Boolean>();
+
+            }
+
+        });			
+		
 		
 		//Name column
 		TableColumn<Site, String> nameColumn = new TableColumn<>("Name");
@@ -42,11 +72,11 @@ public class GuiListWindow {
 		//Append columns to table and fill in data
 		table = new TableView<>();
 		table.setItems(getExtensiveSite());
-		table.getColumns().addAll(nameColumn, urlColumn);
+		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
 		VBox layout = new VBox();
-		layout.getChildren().addAll(table);
+		layout.getChildren().addAll(text, table);
 		        
 		
 	    Scene scene = new Scene(layout);
@@ -55,11 +85,12 @@ public class GuiListWindow {
 	    
 	    setWindowPos();
 	    
+	    
 	    subStage.setOnCloseRequest(e -> closeWindow());
 	    
 	   
 	}
-	
+
 	private static void setWindowPos(){
 		//TODO
 		 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -84,7 +115,7 @@ public class GuiListWindow {
 		Utility.FetchSites( siteList );
 		
 		sites.add(new Site( "wodonga", "wodongaURL" ) );
-		sites.add( new Site( "albury", "alburyURL" ));
+		sites.add( new Site( "albury", "alburyURL"));
 	    sites.add( new Site( "lavington", "lavingtonURL"));
 	    
 		return sites;
@@ -114,7 +145,7 @@ public class GuiListWindow {
 	                    end = inputLine.indexOf("</a></th>");
 	                    name = inputLine.subSequence( start, end ).toString();
 	                    address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
-	                    lsites.add(new Site( name, address ) );
+	                    lsites.add(new Site( name, address ));
 	                  
 	                }
 	                
@@ -129,4 +160,56 @@ public class GuiListWindow {
 	}
 	
 	
+	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
+
+		private final CheckBox checkBox;
+
+		private ObservableValue<T> ov;
+
+		public CheckBoxTableCell() {
+
+			this.checkBox = new CheckBox();
+
+			this.checkBox.setAlignment(Pos.CENTER);
+
+			setAlignment(Pos.CENTER);
+
+			setGraphic(checkBox);
+
+		  } 
+
+		    
+
+		   @Override public void updateItem(T item, boolean empty) {
+
+		   super.updateItem(item, empty);
+
+		    if (empty) {
+
+		    	setText(null);
+		        setGraphic(null);
+
+		      } else {
+
+		        setGraphic(checkBox);
+
+		        if (ov instanceof BooleanProperty) {
+		          checkBox.selectedProperty().unbindBidirectional((BooleanProperty) ov);
+		        }
+
+		        ov = getTableColumn().getCellObservableValue(getIndex());
+
+		        if (ov instanceof BooleanProperty) {
+		          checkBox.selectedProperty().bindBidirectional((BooleanProperty) ov);
+		        }
+
+		      }
+
+		    }
+
+		  }
+
+		
+	
 }
+

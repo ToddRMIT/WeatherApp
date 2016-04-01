@@ -24,7 +24,7 @@ public class Utility{
                     end = inputLine.indexOf("</a></th>");
                     name = inputLine.subSequence( start, end ).toString();
                     address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
-                    siteList.insertSite( new Site( name, address ));
+                    siteList.insertSite( new Site( name, address));
                 }
             }
             in.close(); 
