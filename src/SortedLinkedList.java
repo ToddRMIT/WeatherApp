@@ -89,6 +89,7 @@ public class SortedLinkedList<T>{
     }
 
 
+
     /* Needs to be refactored
     public Object next(){
         if( nextOutputNode == null ) return null;
@@ -97,6 +98,30 @@ public class SortedLinkedList<T>{
         return node;
     }
     */
+
+
+
+    public void shortList( String str, SortedLinkedList<Site> sites ){
+        Node sitesNode = sites.head;
+        Node thisNode = null;
+        while( sitesNode != null ){
+            if( sitesNode.getString().startsWith( str ) ){
+                Node newNode = new Node<Site>( (Site)sitesNode.data );
+                if( head == null ){
+                    head = newNode;
+                    thisNode = head;
+                }
+                else{
+                    thisNode.next = newNode;
+                    thisNode = thisNode.next;
+                }
+            }
+            else if( sitesNode.getString().compareTo( str ) > 0 ) return;
+            sitesNode = sitesNode.next;
+        }
+        System.out.println(".");
+        return;
+    }
 
 
 

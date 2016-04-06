@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 
 
@@ -69,6 +70,20 @@ public class WeatherApp {
         
 
 
+        // Testing the short list function
+        // The following block of code demonstrated use of the
+        // shortlist function 
+        Scanner key = new Scanner( System.in );
+        while( true ){
+            SortedLinkedList<Site> newList = new SortedLinkedList<Site>();
+            System.out.println( "Enter prefix to search for or quit" );
+            String str = key.next();
+            if( str.compareTo( "quit" ) == 0 ) break;
+            
+            newList.shortList( str, siteList );
+            newList.print();
+            
+        }
     }
 
 }
