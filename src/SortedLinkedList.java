@@ -105,6 +105,7 @@ public class SortedLinkedList<T>{
                 thisNode.next = thisNode.next.next;
                 return;
             }
+            thisNode = thisNode.next;
         }
     }
 

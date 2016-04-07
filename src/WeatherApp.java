@@ -42,14 +42,16 @@ public class WeatherApp {
 
         // Or the complete process short handed
         favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
-        
+        favList.add( new Favourite( siteList.search( "Gympie" ), 28 ) );
+        favList.add( new Favourite( siteList.search( "Horsham" ), 28 ) );
+        favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
         
         
         // Testing purpose only
         favList.print();
 
         // Now lets remove a favourite
-        favList.remove( "Yass" );
+        favList.remove( "Horsham" );
         favList.print();        
 
 
