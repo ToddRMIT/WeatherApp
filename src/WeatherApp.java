@@ -41,22 +41,25 @@ public class WeatherApp {
         favList.add( newFav );
 
         // Or the complete process short handed
+        /*
         favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Gympie" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Horsham" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
-        
+        */
         
         // Testing purpose only
-        favList.printList();
+        // favList.printList();
 
         // Now lets remove a favourite
-        favList.remove( "Horsham" );
-        favList.printList();        
+        // favList.remove( "Horsham" );
+        // favList.printList();        
 
 
         // To write a list to disk
-        favList.save();
+        // favList.save( "favourites.txt" );
+        favList.load( "favourites.txt" );
+        favList.printList();
 
 
         // Testing the short list function

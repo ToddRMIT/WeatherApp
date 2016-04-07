@@ -133,19 +133,60 @@ public class SortedLinkedList<T>{
         return node;
     }
     */
-    public void save() throws IOException{
+
+
+
+    public void load( String filename ) throws IOException{
         Node thisNode = head;
-        FileWriter fw = null;
+        Node newNode = null;
+        FileReader file = null;
+        BufferedReader in = null;
+        String str;
+        try{
+            file = new FileReader( filename );
+            in = new BufferedReader( file );
+            while( ( str = in.readLine() ) != null ){
+                String tokens[] = str.split( "," );
+                if( head.data instanceof Site ){
+                    Site site = new Site( tokens[0], tokens[1] );
+                    newNode = new Node<Site>( site );
+                }
+                if( head.data instanceof Favourite ){
+                    Site site = new Site( tokens[0], tokens[1] );
+                    Double temp = Double.parseDouble(tokens[2]);
+                    Favourite fav = new Favourite( site, temp );
+                    newNode = new Node<Favourite>( fav );
+                }
+                if( head == null ){
+                    head = newNode;
+                    thisNode = head;
+                }
+                else{
+                    thisNode.next = newNode;
+                    thisNode = thisNode.next;
+                }
+            }
+        } finally {
+            if( file != null ) file.close();
+            if( in != null ) in.close();
+        }
+    }
+
+
+
+    public void save( String filename ) throws IOException{
+        Node thisNode = head;
+        FileWriter file = null;
         PrintWriter out = null;
         try{
-            fw = new FileWriter( "favourites.txt" );
-            out = new PrintWriter( fw );
+            file = new FileWriter( filename );
+            out = new PrintWriter( file );
             while( thisNode != null ){
                 out.println( thisNode.print() );
                 thisNode = thisNode.next;
             }
         } finally {
-            if( fw != null ) fw.close();
+            if( file != null ) file.close();
             if( out != null ) out.close();
         }
     }
