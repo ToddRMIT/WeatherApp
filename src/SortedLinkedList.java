@@ -90,6 +90,26 @@ public class SortedLinkedList<T>{
 
 
 
+    public void remove( String name ){
+        Node thisNode = head;
+        // First we need to check if we are removing the head
+        // If so, make the next node the head
+        if( name.compareTo( head.getString() ) == 0 ){
+            head = head.next;
+            return;
+        }
+        // Not the head so we check the next node so that if it is
+        // the next node we can point thisNode.next at the following node
+        while( thisNode.next != null ){
+            if( name.compareTo( thisNode.next.getString() ) == 0 ){
+                thisNode.next = thisNode.next.next;
+                return;
+            }
+        }
+    }
+
+
+
     /* Needs to be refactored
     public Object next(){
         if( nextOutputNode == null ) return null;

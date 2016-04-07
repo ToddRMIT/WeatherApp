@@ -48,25 +48,11 @@ public class WeatherApp {
         // Testing purpose only
         favList.print();
 
-        
+        // Now lets remove a favourite
+        favList.remove( "Yass" );
+        favList.print();        
 
-        // To access a list of items:
-        // First create a symbolic link to the list
-        SortedLinkedList<Favourite> myList = favList;
 
-        // Then create a temporary favourite or site or whatever is appropriate
-        Favourite site;
-
-        // Then iterate over the items using the next() function
-        /*
-        while( (site = (Favourite)favList.next()) != null ){
-            System.out.println("-----------------------");
-            System.out.println( site.getName() );
-            System.out.println( site.getURL() );
-            System.out.println( site.getTemp() );
-        }
-        System.out.println("-----------------------");
-        */
         
 
 
