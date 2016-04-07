@@ -1,3 +1,11 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+
+
 public class SortedLinkedList<T>{
 
 
@@ -7,12 +15,18 @@ public class SortedLinkedList<T>{
         private T data;
         private Node next;
         // Constructor
-        public Node( T data ){
+        private Node( T data ){
             this.data = data;
             next = null;
         }
         // Node methods
         private String getString(){ return ((Site)data).getName(); }
+        private String print(){
+            String str = "";
+            if( data instanceof Site ) str = ((Site)data).print();
+            if( data instanceof Favourite ) str = ((Favourite)data).print();
+            return str;
+        }
     }
 
 
@@ -119,6 +133,22 @@ public class SortedLinkedList<T>{
         return node;
     }
     */
+    public void save() throws IOException{
+        Node thisNode = head;
+        FileWriter fw = null;
+        PrintWriter out = null;
+        try{
+            fw = new FileWriter( "favourites.txt" );
+            out = new PrintWriter( fw );
+            while( thisNode != null ){
+                out.println( thisNode.print() );
+                thisNode = thisNode.next;
+            }
+        } finally {
+            if( fw != null ) fw.close();
+            if( out != null ) out.close();
+        }
+    }
 
 
 
@@ -147,7 +177,7 @@ public class SortedLinkedList<T>{
 
 
     // For testing
-    public void print(){
+    public void printList(){
         Node thisNode = head;
         int count = 0;
         while( thisNode != null ){

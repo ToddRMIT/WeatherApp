@@ -21,7 +21,7 @@ public class WeatherApp {
 
 
         /* FOR TESTING */
-        siteList.print();
+        siteList.printList();
 
         
 
@@ -48,14 +48,15 @@ public class WeatherApp {
         
         
         // Testing purpose only
-        favList.print();
+        favList.printList();
 
         // Now lets remove a favourite
         favList.remove( "Horsham" );
-        favList.print();        
+        favList.printList();        
 
 
-        
+        // To write a list to disk
+        favList.save();
 
 
         // Testing the short list function
@@ -69,7 +70,7 @@ public class WeatherApp {
             if( str.compareTo( "quit" ) == 0 ) break;
             
             newList.shortList( str, siteList );
-            newList.print();
+            newList.printList();
             
         }
     }
