@@ -26,8 +26,12 @@ public class Utility{
                     end = inputLine.indexOf("</a></th>");
                     name = inputLine.subSequence( start, end ).toString();
                     address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
+<<<<<<< HEAD
                     siteList.insertSite( new Site( name, address ));
                     System.out.print(".");
+=======
+                    siteList.insertSite( new Site( name, address));
+>>>>>>> origin/Dan
                 }
             }
             in.close(); 

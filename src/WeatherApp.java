@@ -37,6 +37,9 @@ public class WeatherApp {
         
         
 
+         /* GUI TEST */
+        GuiHandler guiHandler = new GuiHandler();
+        guiHandler.launch(GuiHandler.class,args);
 
 
         
