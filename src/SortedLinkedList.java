@@ -208,8 +208,9 @@ public class SortedLinkedList<T>{
     public void shortList( String str, SortedLinkedList<Site> sites ){
         Node sitesNode = sites.head;
         Node thisNode = null;
+        str = str.toUpperCase();
         while( sitesNode != null ){
-            if( sitesNode.getString().startsWith( str ) ){
+            if( sitesNode.getString().toUpperCase().startsWith( str ) ){
                 Node newNode = new Node<Site>( (Site)sitesNode.data );
                 if( head == null ){
                     head = newNode;
@@ -220,7 +221,7 @@ public class SortedLinkedList<T>{
                     thisNode = thisNode.next;
                 }
             }
-            else if( sitesNode.getString().compareTo( str ) > 0 ) return;
+            else if( sitesNode.getString().toUpperCase().compareTo( str ) > 0 ) return;
             sitesNode = sitesNode.next;
         }
         System.out.println(".");
