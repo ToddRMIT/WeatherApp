@@ -16,4 +16,12 @@ public class Favourite extends Site{
             return currentTemp;
         }
 
+        public String print(){
+            String str = "";
+            str = str.concat( super.print() );
+            str = str.concat( "," );
+            str = str.concat( Double.toString( currentTemp ) );
+            return str;
+        }
+
 }
