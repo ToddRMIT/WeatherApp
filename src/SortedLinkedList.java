@@ -1,3 +1,11 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+
+
 public class SortedLinkedList<T>{
 
 
@@ -7,21 +15,29 @@ public class SortedLinkedList<T>{
         private T data;
         private Node next;
         // Constructor
-        public Node( T data ){
+        private Node( T data ){
             this.data = data;
             next = null;
         }
         // Node methods
         private String getString(){ return ((Site)data).getName(); }
+        private String print(){
+            String str = "";
+            if( data instanceof Site ) str = ((Site)data).print();
+            if( data instanceof Favourite ) str = ((Favourite)data).print();
+            return str;
+        }
     }
 
 
 
     // List instance variables
     private Node head;
+    private int length;
     // List Constructor
     public SortedLinkedList(){
         head = null;
+        length = 0;
     }
 
 
@@ -30,6 +46,7 @@ public class SortedLinkedList<T>{
         // If the head is null this item is the new head
         if( head == null ){
             head = new Node<T>( item );
+            ++length;
             return;
         }
         // Head is not null so check if head contains item. If so, ignore
@@ -46,6 +63,7 @@ public class SortedLinkedList<T>{
             Node oldHead = head;
             newNode.next = oldHead;
             head = newNode;
+            ++length;
             return;
         }
         // Starting with the head as the parent
@@ -64,6 +82,7 @@ public class SortedLinkedList<T>{
                 Node newNode = new Node<T>( item );
                 newNode.next = child;
                 parent.next = newNode;
+                ++length;
                 return;
             }
             //Next node
@@ -73,6 +92,7 @@ public class SortedLinkedList<T>{
         // Suitable insertion point not found
         // Add node to tail
         parent.next = new Node<T>( item );
+        ++length;
     } // end of add()
 
 
@@ -89,6 +109,30 @@ public class SortedLinkedList<T>{
     }
 
 
+
+    public void remove( String name ){
+        Node thisNode = head;
+        // First we need to check if we are removing the head
+        // If so, make the next node the head
+        if( name.compareTo( head.getString() ) == 0 ){
+            head = head.next;
+            --length;
+            return;
+        }
+        // Not the head so we check the next node so that if it is
+        // the next node we can point thisNode.next at the following node
+        while( thisNode.next != null ){
+            if( name.compareTo( thisNode.next.getString() ) == 0 ){
+                thisNode.next = thisNode.next.next;
+                --length;
+                return;
+            }
+            thisNode = thisNode.next;
+        }
+    }
+
+
+
     /* Needs to be refactored
     public Object next(){
         if( nextOutputNode == null ) return null;
@@ -100,8 +144,93 @@ public class SortedLinkedList<T>{
 
 
 
+    public void load( String filename ) throws IOException{
+        Node thisNode = head;
+        Node newNode = null;
+        FileReader file = null;
+        BufferedReader in = null;
+        String str;
+        try{
+            file = new FileReader( filename );
+            in = new BufferedReader( file );
+            while( ( str = in.readLine() ) != null ){
+                String tokens[] = str.split( "," );
+                // if there are 2 tokens we are dealing with a site list
+                if( tokens.length == 2 ){
+                    Site site = new Site( tokens[0], tokens[1] );
+                    newNode = new Node<Site>( site );
+                }
+                // if there are 3 tokens we are dealing with favourites list
+                if( tokens.length == 3 ){
+                    Site site = new Site( tokens[0], tokens[1] );
+                    Double temp = Double.parseDouble(tokens[2]);
+                    Favourite fav = new Favourite( site, temp );
+                    newNode = new Node<Favourite>( fav );
+                }
+                if( head == null ){
+                    head = newNode;
+                    thisNode = head;
+                    ++length;
+                }
+                else{
+                    thisNode.next = newNode;
+                    thisNode = thisNode.next;
+                    ++length;
+                }
+            }
+        } finally {
+            if( file != null ) file.close();
+            if( in != null ) in.close();
+        }
+    }
+
+
+
+    public void save( String filename ) throws IOException{
+        Node thisNode = head;
+        FileWriter file = null;
+        PrintWriter out = null;
+        try{
+            file = new FileWriter( filename );
+            out = new PrintWriter( file );
+            while( thisNode != null ){
+                out.println( thisNode.print() );
+                thisNode = thisNode.next;
+            }
+        } finally {
+            if( file != null ) file.close();
+            if( out != null ) out.close();
+        }
+    }
+
+
+
+    public void shortList( String str, SortedLinkedList<Site> sites ){
+        Node sitesNode = sites.head;
+        Node thisNode = null;
+        while( sitesNode != null ){
+            if( sitesNode.getString().startsWith( str ) ){
+                Node newNode = new Node<Site>( (Site)sitesNode.data );
+                if( head == null ){
+                    head = newNode;
+                    thisNode = head;
+                }
+                else{
+                    thisNode.next = newNode;
+                    thisNode = thisNode.next;
+                }
+            }
+            else if( sitesNode.getString().compareTo( str ) > 0 ) return;
+            sitesNode = sitesNode.next;
+        }
+        System.out.println(".");
+        return;
+    }
+
+
+
     // For testing
-    public void print(){
+    public void printList(){
         Node thisNode = head;
         int count = 0;
         while( thisNode != null ){
@@ -112,6 +241,19 @@ public class SortedLinkedList<T>{
         System.out.println( "------------------------------------" );
         System.out.println( "Number of sites: " + count );
         System.out.println( "------------------------------------" );
+    }
+
+
+
+    public String[][] listFavs(){
+        String str[][] = new String[length][2];
+        Node thisNode = head;
+        for( int i = 0; i < length; ++i ){
+            str[i][0] = ((Favourite)thisNode.data).getName();
+            str[i][1] = Double.toString(((Favourite)thisNode.data).getTemp());
+            thisNode = thisNode.next;
+        }
+        return str;
     }
 
 

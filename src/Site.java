@@ -12,5 +12,12 @@ public class Site{
 
     public String getName(){ return name; }
     public String getURL(){ return url; }
+    public String print(){
+    	String str = "";
+    	str = name;
+    	str = str.concat( "," );
+    	str = str.concat( url );
+    	return str;
+    }
 
 }
