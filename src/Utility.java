@@ -32,6 +32,7 @@ public class Utility{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     siteList.insertSite( new Site( name, address ));
 =======
                     siteList.add( new Site( name, address ) );
@@ -40,6 +41,9 @@ public class Utility{
 =======
                     siteList.insertSite( new Site( name, address));
 >>>>>>> origin/Dan
+=======
+                    siteList.insertSite( new Site( name, address));
+>>>>>>> Dan
 =======
                     siteList.insertSite( new Site( name, address));
 >>>>>>> Dan

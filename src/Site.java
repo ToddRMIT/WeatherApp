@@ -6,7 +6,10 @@ public class Site{
     private String url;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Dan
 =======
 >>>>>>> Dan
 
