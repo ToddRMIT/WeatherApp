@@ -29,24 +29,10 @@ public class Utility{
                     end = inputLine.indexOf("</a></th>");
                     name = inputLine.subSequence( start, end ).toString();
                     address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    siteList.insertSite( new Site( name, address ));
-=======
+
                     siteList.add( new Site( name, address ) );
->>>>>>> master
+
                     System.out.print(".");
-=======
-                    siteList.insertSite( new Site( name, address));
->>>>>>> origin/Dan
-=======
-                    siteList.insertSite( new Site( name, address));
->>>>>>> Dan
-=======
-                    siteList.insertSite( new Site( name, address));
->>>>>>> Dan
                 }
             }
             in.close(); 

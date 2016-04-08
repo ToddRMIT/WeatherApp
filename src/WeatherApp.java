@@ -66,15 +66,6 @@ public class WeatherApp {
         }
         System.out.println("-----------------------");
         */
-        
-<<<<<<< HEAD
-        
-
-         /* GUI TEST */
-        GuiHandler guiHandler = new GuiHandler();
-        guiHandler.launch(GuiHandler.class,args);
-=======
->>>>>>> master
 
          /* GUI TEST */
         GuiHandler guiHandler = new GuiHandler();
