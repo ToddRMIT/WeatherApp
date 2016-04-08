@@ -24,7 +24,7 @@ public class WeatherApp {
         siteList.printList();
 
         
-
+        /*
         // -------------------------------------------
         // To add a favourite to the favourites list
         // -------------------------------------------
@@ -32,13 +32,21 @@ public class WeatherApp {
         // So we need to search for the site
         // Here we are only getting a pointer to the 
         // actual node ( garbage collected )
+
         Site searchedSite = siteList.search( "Yass" );
+        
         // Next we place the searchedSite and temp in to a new Favourite 
         // Here we are instantiating a new Favourite ( wont be garbage collected )
+        
         Double temp = 28.5;
         Favourite newFav = new Favourite( searchedSite, temp );
+        
         // Then call add method of the Favourites list
+        
         favList.add( newFav );
+        */
+
+
 
         // Or the complete process short handed
         /*
@@ -58,8 +66,18 @@ public class WeatherApp {
 
         // To write a list to disk
         // favList.save( "favourites.txt" );
+        
+        // To load a list from disk
         favList.load( "favourites.txt" );
-        favList.printList();
+        
+
+
+        // To pull a list into a multi dimensional array
+        // so that you can easily iterate over the items
+        String list[][] = favList.listFavs();
+        for( int i = 0; i < list.length; ++i ){
+            System.out.println( list[i][0] + " " + list[i][1] );
+        }
 
 
         // Testing the short list function

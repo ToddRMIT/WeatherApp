@@ -9,7 +9,7 @@ public class Utility{
     
     public static void FetchSites( SortedLinkedList<Site> siteList ) throws IOException{
         // ACT is included in NSW
-        String[] sites = {"nsw","vic","qld","wa","sa","tas","nt"};
+        String[] sites = {"ant","nsw","vic","qld","wa","sa","tas","nt"};
         String inputLine;
         for( int i = 0; i < sites.length; ++i ){
             System.out.println( "Fetching " + sites[i] );
