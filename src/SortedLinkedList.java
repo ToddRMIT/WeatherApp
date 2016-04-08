@@ -178,6 +178,8 @@ public class SortedLinkedList<T>{
                     ++length;
                 }
             }
+        } catch( IOException e ){
+        	System.out.println( "Error: " + filename + " not found");
         } finally {
             if( file != null ) file.close();
             if( in != null ) in.close();
@@ -197,6 +199,8 @@ public class SortedLinkedList<T>{
                 out.println( thisNode.print() );
                 thisNode = thisNode.next;
             }
+        } catch( IOException e ) {
+        	System.out.println( "Error: " + filename + " not found");
         } finally {
             if( file != null ) file.close();
             if( out != null ) out.close();
