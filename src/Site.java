@@ -5,7 +5,10 @@ public class Site{
     private String name;
     private String url;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Dan
 
     // private float currentTemp;
 >>>>>>> origin/Dan
