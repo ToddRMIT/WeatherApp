@@ -7,7 +7,10 @@ import java.net.URL;
 
 public class Utility{
     
-    public static void FetchSites( SiteList siteList ) throws IOException{
+    public static void FetchSites( SortedLinkedList<Site> siteList ) throws IOException{
+        
+
+
         // ACT is included in NSW
         String[] sites = {"nsw","vic","qld","wa","sa","tas","nt"};
         String inputLine;
@@ -27,7 +30,11 @@ public class Utility{
                     name = inputLine.subSequence( start, end ).toString();
                     address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
 <<<<<<< HEAD
+<<<<<<< HEAD
                     siteList.insertSite( new Site( name, address ));
+=======
+                    siteList.add( new Site( name, address ) );
+>>>>>>> master
                     System.out.print(".");
 =======
                     siteList.insertSite( new Site( name, address));
@@ -35,10 +42,9 @@ public class Utility{
                 }
             }
             in.close(); 
-            System.out.println("");
+            System.out.println();
         }
         System.out.println();
-        return;
     }
 
 }

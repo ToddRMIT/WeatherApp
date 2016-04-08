@@ -5,20 +5,50 @@ import java.io.IOException;
 public class WeatherApp {
 
     public static void main(String[] args) throws IOException{
-        //FavList favList = new FavList();
+
+
+
+        // Instantiate the lists
+        SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
         SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
-        SiteList siteList = new SiteList();
-        Utility.FetchSites( siteList );
 
-        /* FOR TESTING */
-        //siteList.printSites();
-        System.out.println("Number of sites: " + siteList.getLength());
-
-        favList.add( new Favourite( "wodonga", "wodongaURL" , 23 ) );
-        favList.add( new Favourite( "albury", "alburyURL" , 25 ) );
-        favList.add( new Favourite( "lavington", "lavingtonURL" , 24 ) );
 
         
+        // Download a list of sites in to the site list
+        Utility.FetchSites( siteList );
+
+
+
+        /* FOR TESTING */
+        siteList.print();
+
+        
+
+        // -------------------------------------------
+        // To add a favourite to the favourites list
+        // -------------------------------------------
+        // A Favourite contains a site and a temp
+        // So we need to search for the site
+        // Here we are only getting a pointer to the 
+        // actual node ( garbage collected )
+        Site searchedSite = siteList.search( "Yass" );
+        // Next we place the searchedSite and temp in to a new Favourite 
+        // Here we are instantiating a new Favourite ( wont be garbage collected )
+        Double temp = 28.5;
+        Favourite newFav = new Favourite( searchedSite, temp );
+        // Then call add method of the Favourites list
+        favList.add( newFav );
+
+        // Or the complete process short handed
+        favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
+        
+        
+        
+        // Testing purpose only
+        favList.print();
+
+        
+
         // To access a list of items:
         // First create a symbolic link to the list
         SortedLinkedList<Favourite> myList = favList;
@@ -27,6 +57,7 @@ public class WeatherApp {
         Favourite site;
 
         // Then iterate over the items using the next() function
+        /*
         while( (site = (Favourite)favList.next()) != null ){
             System.out.println("-----------------------");
             System.out.println( site.getName() );
@@ -34,16 +65,17 @@ public class WeatherApp {
             System.out.println( site.getTemp() );
         }
         System.out.println("-----------------------");
+        */
         
+<<<<<<< HEAD
         
 
          /* GUI TEST */
         GuiHandler guiHandler = new GuiHandler();
         guiHandler.launch(GuiHandler.class,args);
+=======
+>>>>>>> master
 
-
-        
-        /* Testing branchs in eclipse */
 
     }
 
