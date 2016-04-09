@@ -27,12 +27,12 @@ public class GuiDataWindow {
 	
 	public static final String FAVOURITES_FILE = "favourites.txt";
 	
-	Stage dataWindow;
+	static Stage dataStage;
 	
-	public void dataWindow( final Stage stage) throws IOException {
+	public static void dataWindow(Stage primaryStage, String stageName) throws IOException {
 		
 		Pane pane = new Pane();
-		
+		dataStage = new Stage();
 		
 		Text name = new Text("Station Name:");
 		Text fName = new Text();
@@ -46,15 +46,13 @@ public class GuiDataWindow {
 		Text fThree = new Text();
 		
 		//Function that collects favourite data and sets them to the correct text fields
-		
-		fName.setFont(Font.font("Sans serif", FontWeight.NORMAL, FontPosture.REGULAR, 16));
-		
-		pane.getChildren().addAll(name, fName, max, fMax, min, fMin, six, fSix, three, fThree);
-		
-		dataWindow.setTitle("Favourite Data");
-		dataWindow.setScene(new Scene (pane, 640, 480));
-		dataWindow.setResizable(false);
-		dataWindow.show();
+
+		pane.getChildren().addAll(name, fName, max, fMax, min, fMin, six, fSix, three, fThree);	
+	
+		dataStage.setScene(new Scene (pane, 640, 480));
+		dataStage.setTitle(stageName);
+		dataStage.setResizable(false);
+		dataStage.show();
 	}
 	
 	

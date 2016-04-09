@@ -106,7 +106,22 @@ public class GuiHandler extends Application {
 					favList.printList();
 				}
 			});
-		}	
+		}
+		
+		//Button Press event handler for the favourites buttons to open data window
+				for( int i = 0; i < list.length; ++i ) {
+					final int selected = i;
+					favButtons[i].setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							try {
+								listOpen = true;
+								GuiDataWindow.dataWindow(primaryStage, "Data Window");
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}	
+						}
+					});
+				}
 		
 		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
