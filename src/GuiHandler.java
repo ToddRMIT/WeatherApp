@@ -96,9 +96,14 @@ public class GuiHandler extends Application {
 		
 		//Button Press event handler for the delete buttons
 		for( int i = 0; i < list.length; ++i ) {
-			delButtons[i].setOnAction(new EventHandler<ActionEvent>( ) {
+			final int selected = i;
+			delButtons[i].setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
-					flow.getChildren().remove(favButtons[i]);
+					flow.getChildren().removeAll(favButtons[selected], delButtons[selected]);
+					String str = favButtons[0].getText();
+					String tokens[] = str.split(" ");
+					favList.remove(tokens[0]);
+					favList.printList();
 				}
 			});
 		}	
