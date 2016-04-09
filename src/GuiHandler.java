@@ -100,7 +100,7 @@ public class GuiHandler extends Application {
 			delButtons[i].setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
 					flow.getChildren().removeAll(favButtons[selected], delButtons[selected]);
-					String str = favButtons[0].getText();
+					String str = favButtons[selected].getText();
 					String tokens[] = str.split(" ");
 					favList.remove(tokens[0]);
 					favList.printList();
