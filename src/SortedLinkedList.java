@@ -39,6 +39,7 @@ public class SortedLinkedList<T>{
         head = null;
         length = 0;
     }
+    public int getLength(){ return length; }
 
 
     
@@ -178,6 +179,8 @@ public class SortedLinkedList<T>{
                     ++length;
                 }
             }
+        } catch( IOException e ){
+        	System.out.println( "Error: " + filename + " not found");
         } finally {
             if( file != null ) file.close();
             if( in != null ) in.close();
@@ -197,6 +200,8 @@ public class SortedLinkedList<T>{
                 out.println( thisNode.print() );
                 thisNode = thisNode.next;
             }
+        } catch( IOException e ) {
+        	System.out.println( "Error: " + filename + " not found");
         } finally {
             if( file != null ) file.close();
             if( out != null ) out.close();
@@ -208,8 +213,9 @@ public class SortedLinkedList<T>{
     public void shortList( String str, SortedLinkedList<Site> sites ){
         Node sitesNode = sites.head;
         Node thisNode = null;
+        str = str.toUpperCase();
         while( sitesNode != null ){
-            if( sitesNode.getString().startsWith( str ) ){
+            if( sitesNode.getString().toUpperCase().startsWith( str ) ){
                 Node newNode = new Node<Site>( (Site)sitesNode.data );
                 if( head == null ){
                     head = newNode;
@@ -220,7 +226,7 @@ public class SortedLinkedList<T>{
                     thisNode = thisNode.next;
                 }
             }
-            else if( sitesNode.getString().compareTo( str ) > 0 ) return;
+            else if( sitesNode.getString().toUpperCase().compareTo( str ) > 0 ) return;
             sitesNode = sitesNode.next;
         }
         System.out.println(".");
@@ -245,14 +251,27 @@ public class SortedLinkedList<T>{
 
 
 
-    public String[][] listFavs(){
-        String str[][] = new String[length][2];
-        Node thisNode = head;
-        for( int i = 0; i < length; ++i ){
-            str[i][0] = ((Favourite)thisNode.data).getName();
-            str[i][1] = Double.toString(((Favourite)thisNode.data).getTemp());
-            thisNode = thisNode.next;
-        }
+    public String[][] list(){
+    	String str[][] = null;
+    	Node thisNode = head;
+    	if( head == null ) return str;
+    	if( head.data instanceof Favourite ){
+    		str = new String[length][2];
+            for( int i = 0; i < length; ++i ){
+                str[i][0] = ((Favourite)thisNode.data).getName();
+                str[i][1] = Double.toString(((Favourite)thisNode.data).getTemp());
+                thisNode = thisNode.next;
+            }
+    	}
+    	else if( head.data instanceof Site ){
+    		str = new String[length][2];
+    		for( int i = 0; i < length; ++i ){
+                str[i][0] = ((Site)thisNode.data).getName();
+                str[i][1] = ((Site)thisNode.data).getURL();
+                thisNode = thisNode.next;
+            }
+    	}
+        
         return str;
     }
 
