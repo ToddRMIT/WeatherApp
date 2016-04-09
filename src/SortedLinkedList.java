@@ -39,6 +39,7 @@ public class SortedLinkedList<T>{
         head = null;
         length = 0;
     }
+    public int getLength(){ return length; }
 
 
     
@@ -250,14 +251,27 @@ public class SortedLinkedList<T>{
 
 
 
-    public String[][] listFavs(){
-        String str[][] = new String[length][2];
-        Node thisNode = head;
-        for( int i = 0; i < length; ++i ){
-            str[i][0] = ((Favourite)thisNode.data).getName();
-            str[i][1] = Double.toString(((Favourite)thisNode.data).getTemp());
-            thisNode = thisNode.next;
-        }
+    public String[][] list(){
+    	String str[][] = null;
+    	Node thisNode = head;
+    	if( head == null ) return str;
+    	if( head.data instanceof Favourite ){
+    		str = new String[length][2];
+            for( int i = 0; i < length; ++i ){
+                str[i][0] = ((Favourite)thisNode.data).getName();
+                str[i][1] = Double.toString(((Favourite)thisNode.data).getTemp());
+                thisNode = thisNode.next;
+            }
+    	}
+    	else if( head.data instanceof Site ){
+    		str = new String[length][2];
+    		for( int i = 0; i < length; ++i ){
+                str[i][0] = ((Site)thisNode.data).getName();
+                str[i][1] = ((Site)thisNode.data).getURL();
+                thisNode = thisNode.next;
+            }
+    	}
+        
         return str;
     }
 
