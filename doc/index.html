@@ -1,20 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <link rel="stylesheet" type="text/css" href="weatherapp.css">
+    </head>
 
-
-<html lang = "en" xmlns = "http://www.w3.org/1999/xhtml">
-
-
-  <head>
-    <title>WeatherApp Help - Home</title>
-    <link rel = "stylesheet" type = "text/css" href = "weatherapp.css"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
-  </head>
-
-
-  <body>    
-    <h1>Weather App Help</h1>  
-  </body>
-
+    <body>
+        <?php include 'navbar.php';?>
+        <ul>
+            <li id="menutitle">MENU</li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#screenshots">Screenshots</a></li>
+            <li><a href="#code_snippets">Code Snippets</a></li>
+            <li><a href="#uml_diagrams">UML Diagrams</a></li>
+            <li><a href="#contact_us">Contact Us</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        
+        <div id="main">
+        <h1>User Documentation</h1>
+        <p>Your user documentation should be constructed as HTML documents, and include
+screen shots of your program. Images should be in one of the formats: jpeg, gif,
+png. You should check that your HTML files are rendered correctly on a Unix
+based machine as well as when using a Windows based browser to ensure they do
+not contain malformed HTML.(A very common mistake made by Windows users
+is to use the '\' character as a directory separator when specifying file paths. The
+HTML standard requires the use of the '/' character instead.) You can check your
+HTML at http://validator.w3.org. Passing validation at this site is is recommended
+but not required.</p>
+            
+            <img class="mockup" src="img/s1.png" alt="First Open">
+            
+            <p>Your user documentation should be constructed as HTML documents, and include
+screen shots of your program. Images should be in one of the formats: jpeg, gif,
+png. You should check that your HTML files are rendered correctly on a Unix
+based machine as well as when using a Windows based browser to ensure they do
+not contain malformed HTML.(A very common mistake made by Windows users
+is to use the '\' character as a directory separator when specifying file paths. The
+HTML standard requires the use of the '/' character instead.) You can check your
+HTML at http://validator.w3.org. Passing validation at this site is is recommended
+but not required.</p>
+            
+            <img class="mockup" src="img/s2.png" alt="Site List">
+            <img class="mockup" src="img/s3.png" alt="Favorite Functionality">
+            <img class="mockup" src="img/s4.png" alt="Site Data">
+        </div>
+        
+    </body>
 
 </html>
-

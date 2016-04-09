@@ -32,7 +32,6 @@ public class GuiHandler extends Application {
 	
 	public GuiHandler() {
 	
-
 	}
 
 	@Override
@@ -48,26 +47,28 @@ public class GuiHandler extends Application {
 		
 		//Button Press event handler
 		btn.setOnAction(new EventHandler<ActionEvent>( ) {
-			@Override public void handle(ActionEvent e){
+			@Override public void handle(ActionEvent e) {
 				 
-				    //Checking if list window already open
-					if(listOpen == false){
-						try {
-							listOpen = true;
-							GuiListWindow.GuiWindow(primaryStage,"site list");
-						}catch (IOException e1) {
-							e1.printStackTrace();
-						}
+				//Checking if list window already open
+				if(listOpen == false){
+					try {
+						listOpen = true;
+						GuiListWindow.GuiWindow(primaryStage,"site list");
+					} catch (IOException e1) {
+						e1.printStackTrace();
 					}
-					else{
-						System.out.println("m: list window already open");
-					}
+				}
+				else {
+					System.out.println("m: list window already open");
+				}
 			}
 		});
 		
+		//Loads favourites from file
 		SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 		favList.load( FAVOURITES_FILE );
 		
+		//Sets flow pane preferences
 		FlowPane flow = new FlowPane( Orientation.VERTICAL );
 		flow.setColumnHalignment(HPos.LEFT);
 		flow.setPrefWrapLength(200);
@@ -75,61 +76,66 @@ public class GuiHandler extends Application {
         flow.setStyle("-fx-background-color: #336699;");
 		flow.getChildren().addAll(btn);
 		
+		//Creates favourite buttons based on fav list and sets preferences
 		Button favButtons[] = new Button[favList.getLength()];
+		Button delButtons[] = new Button[favList.getLength()];
 		String list[][] = favList.list();
-		for( int i = 0; i < list.length; ++i ){
+		for( int i = 0; i < list.length; ++i ) {
 			String format = "%-30s%5s";
 			String str = String.format( format, list[i][0],list[i][1] );
 			favButtons[i] = new Button( str );
 			favButtons[i].setTextAlignment(TextAlignment.LEFT);
 			favButtons[i].setMinWidth(200);
+			//New delete buttons that link to each fav button
+			delButtons[i] = new Button("X");
+			delButtons[i].setMinWidth(20);
 		}
-		for( int i = 0; i < list.length; ++i ){
-			flow.getChildren().add( favButtons[i] );
+		for( int i = 0; i < list.length; ++i ) {
+			flow.getChildren().addAll( favButtons[i], delButtons[i]);
 		}
 		
+		//Button Press event handler for the delete buttons
+		for( int i = 0; i < list.length; ++i ) {
+			final int selected = i;
+			delButtons[i].setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					flow.getChildren().removeAll(favButtons[selected], delButtons[selected]);
+					String str = favButtons[selected].getText();
+					String tokens[] = str.split(" ");
+					favList.remove(tokens[0]);
+					favList.printList();
+				}
+			});
+		}
 		
-		//Setting layout
-		/*
-		VBox layout = new VBox(btn,btnRefresh);
-        layout.setPadding(new Insets (15,15,15,15));
-        layout.setSpacing(20);
-        layout.setStyle("-fx-background-color: #336699;");
-        layout.getChildren().addAll();
-        */
+		//Button Press event handler for the favourites buttons to open data window
+				for( int i = 0; i < list.length; ++i ) {
+					final int selected = i;
+					favButtons[i].setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							try {
+								listOpen = true;
+								GuiDataWindow.dataWindow(primaryStage, "Data Window");
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}	
+						}
+					});
+				}
+		
+		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
         border.setCenter(flow);
-        /*
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(15,15,15,15));
-        grid.setGridLinesVisible(true);
         
-        
-        
-        Button favEx1 = new Button("Fav 01");
-       //// favEx1.setMaxSize(20, 20);
-        Button favEx2 = new Button("Fav 02");
-       // favEx2.setMaxSize(20, 20);
-        grid.setColumnIndex(favEx1, 1);
-        grid.setColumnIndex(favEx2, 2);
-       
-        
-        grid.getChildren().addAll(favEx1,favEx2);
-        
-        
-        border.setBottom(grid);
-        */
+        //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
         
         window.show();
 	}
 	
-
-
-	
 	//sets list windows open tracking value to false
-	public static void listClosed(){
+	public static void listClosed() {
 		listOpen = false;
 	}
 
