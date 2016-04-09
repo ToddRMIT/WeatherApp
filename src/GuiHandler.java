@@ -78,6 +78,7 @@ public class GuiHandler extends Application {
 		
 		//Creates favourite buttons based on fav list and sets preferences
 		Button favButtons[] = new Button[favList.getLength()];
+		Button delButtons[] = new Button[favList.getLength()];
 		String list[][] = favList.list();
 		for( int i = 0; i < list.length; ++i ) {
 			String format = "%-30s%5s";
@@ -85,10 +86,22 @@ public class GuiHandler extends Application {
 			favButtons[i] = new Button( str );
 			favButtons[i].setTextAlignment(TextAlignment.LEFT);
 			favButtons[i].setMinWidth(200);
+			//New delete buttons that link to each fav button
+			delButtons[i] = new Button("X");
+			delButtons[i].setMinWidth(20);
 		}
 		for( int i = 0; i < list.length; ++i ) {
-			flow.getChildren().add( favButtons[i] );
+			flow.getChildren().addAll( favButtons[i], delButtons[i]);
 		}
+		
+		//Button Press event handler for the delete buttons
+		for( int i = 0; i < list.length; ++i ) {
+			delButtons[i].setOnAction(new EventHandler<ActionEvent>( ) {
+				@Override public void handle(ActionEvent e) {
+					flow.getChildren().remove(favButtons[i]);
+				}
+			});
+		}	
 		
 		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
