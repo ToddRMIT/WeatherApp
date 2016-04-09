@@ -116,6 +116,11 @@ public class GuiHandler extends Application {
 					String tokens[] = str.split(" ");
 					favList.remove(tokens[0]);
 					favList.printList();
+					try{
+						favList.save(FAVOURITES_FILE);
+					}catch (IOException f){
+						System.err.println("Error saving " + FAVOURITES_FILE );
+					}
 				}
 			});
 		}
@@ -143,7 +148,6 @@ public class GuiHandler extends Application {
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
-        
         window.show();
 	}
 	
