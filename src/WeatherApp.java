@@ -8,7 +8,7 @@ public class WeatherApp {
 	public static final String SITES_FILE = "sites.txt";
 	public static final String FAVOURITES_FILE = "favourites.txt";
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
 
 
 
@@ -27,18 +27,22 @@ public class WeatherApp {
         
         // If favourites exist
         // load from file
-        favList.load( FAVOURITES_FILE );
+        // favList.load( FAVOURITES_FILE );
+        
+        
+        
         
         
         
         // Download a list of sites in to the site list
         // Utility.FetchSites( siteList );
-        siteList.save( SITES_FILE );
+        // siteList.save( SITES_FILE );
+        
 
 
-
+        
         /* FOR TESTING */
-        siteList.printList();
+        // siteList.printList();
 
         
         /*
@@ -66,12 +70,10 @@ public class WeatherApp {
 
 
         // Or the complete process short handed
-        /*
         favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Gympie" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Horsham" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
-        */
         
         // Testing purpose only
         // favList.printList();
@@ -82,7 +84,7 @@ public class WeatherApp {
 
 
         // To write a list to disk
-        // favList.save( "favourites.txt" );
+        favList.save( "favourites.txt" );
         
 
 

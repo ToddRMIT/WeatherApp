@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,9 +42,15 @@ public class GuiHandler extends Application {
 		window.setTitle("Weather app");
 		
 		//Button creation
+		GridPane top = new GridPane();
 		Button btn = new Button("Open Site List");
+		top.add( btn,0,0 );
+		top.setPadding(new Insets (15,15,15,15));
+		top.setStyle("-fx-background-color: #336699;");
+		top.setAlignment(Pos.CENTER);
 		btn.setMinWidth(200);
-		Button btnRefresh = new Button("Refresh");
+		
+		// Button btnRefresh = new Button("Refresh");
 		
 		//Button Press event handler
 		btn.setOnAction(new EventHandler<ActionEvent>( ) {
@@ -69,16 +76,17 @@ public class GuiHandler extends Application {
 		favList.load( FAVOURITES_FILE );
 		
 		//Sets flow pane preferences
-		FlowPane flow = new FlowPane( Orientation.VERTICAL );
-		flow.setColumnHalignment(HPos.LEFT);
-		flow.setPrefWrapLength(200);
-		flow.setPadding(new Insets (15,15,15,15));
-        flow.setStyle("-fx-background-color: #336699;");
-		flow.getChildren().addAll(btn);
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets (15,15,15,15));
+		grid.setStyle("-fx-background-color: #336699;");
+		//grid.setMinHeight(500);
 		
 		//Creates favourite buttons based on fav list and sets preferences
 		Button favButtons[] = new Button[favList.getLength()];
 		Button delButtons[] = new Button[favList.getLength()];
+		
+		
+		favList.updateTemp();
 		String list[][] = favList.list();
 		for( int i = 0; i < list.length; ++i ) {
 			String format = "%-30s%5s";
@@ -86,20 +94,24 @@ public class GuiHandler extends Application {
 			favButtons[i] = new Button( str );
 			favButtons[i].setTextAlignment(TextAlignment.LEFT);
 			favButtons[i].setMinWidth(200);
+			grid.add( favButtons[i], 0, i);
 			//New delete buttons that link to each fav button
 			delButtons[i] = new Button("X");
 			delButtons[i].setMinWidth(20);
+			grid.add( delButtons[i], 1,i );
 		}
+		/*
 		for( int i = 0; i < list.length; ++i ) {
 			flow.getChildren().addAll( favButtons[i], delButtons[i]);
 		}
+		*/
 		
 		//Button Press event handler for the delete buttons
 		for( int i = 0; i < list.length; ++i ) {
 			final int selected = i;
 			delButtons[i].setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
-					flow.getChildren().removeAll(favButtons[selected], delButtons[selected]);
+					grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
 					String str = favButtons[selected].getText();
 					String tokens[] = str.split(" ");
 					favList.remove(tokens[0]);
@@ -125,8 +137,9 @@ public class GuiHandler extends Application {
 		
 		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
-        border.setCenter(flow);
-        
+        border.setTop(top);
+        border.setCenter(grid);
+		        
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);

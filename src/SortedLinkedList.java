@@ -40,6 +40,17 @@ public class SortedLinkedList<T>{
         length = 0;
     }
     public int getLength(){ return length; }
+    
+    
+    
+    // Helper function to update the favourite temps
+    public void updateTemp(){
+    	Node thisNode = head;
+    	while( thisNode != null ){
+    		((Favourite)thisNode.data).updateTemp();
+    		thisNode = thisNode.next;
+    	}
+    }
 
 
     
@@ -55,6 +66,7 @@ public class SortedLinkedList<T>{
         if( item instanceof Site ) str = ((Site)item).getName();
         if( str.compareTo( head.getString() ) == 0 ){
             // Do nothing
+        	System.out.println( "Duplicate: " + str + " " + ((Site)head.data).getURL() );
             return;
         }
         // Head does not contain item so check if item is less than head
@@ -75,6 +87,7 @@ public class SortedLinkedList<T>{
             // If child is storing item, ignore
             if( str.compareTo( child.getString() ) == 0 ){
                 // Do nothing
+            	System.out.println( "Duplicate: " + str + " " + ((Site)head.data).getURL() );
                 return;
             }
             // If item is less than child
