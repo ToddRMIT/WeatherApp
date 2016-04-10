@@ -158,7 +158,7 @@ public class GuiHandler extends Application {
 					@Override public void handle(ActionEvent e) {
 						try {
 							//listOpen = true;
-							GuiDataWindow.dataWindow(primaryStage, "Data Window");
+							GuiDataWindow.dataWindow(primaryStage, list[selected][0], favList.search(list[selected][0]) );
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}	

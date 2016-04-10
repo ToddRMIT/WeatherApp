@@ -29,7 +29,7 @@ public class GuiDataWindow {
 	
 	static Stage dataStage;
 	
-	public static void dataWindow(Stage primaryStage, String stageName) throws IOException {
+	public static void dataWindow(Stage primaryStage, String stageName, Site site ) throws IOException {
 		
 		Pane pane = new Pane();
 		dataStage = new Stage();
@@ -46,6 +46,9 @@ public class GuiDataWindow {
 		Text fThree = new Text();
 		
 		//Function that collects favourite data and sets them to the correct text fields
+		site.updateData();
+		site.save();
+		
 
 		pane.getChildren().addAll(name, fName, max, fMax, min, fMin, six, fSix, three, fThree);	
 	

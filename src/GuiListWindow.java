@@ -1,8 +1,7 @@
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -32,18 +31,18 @@ public class GuiListWindow {
 	
 	static TableView<Site> table;
 	static Stage subStage; 
-	 
-	  static void GuiWindow(Stage primaryStage, String stageName) throws IOException{
+
+	static void GuiWindow(Stage primaryStage, String stageName) throws IOException{
 		
 		 
-		  TextField text = new TextField("Text");
-	      text.setMaxSize(140, 20);
-	 
-	      
+		TextField text = new TextField("Text");
+		text.setMaxSize(140, 20);
+ 
+      
 		subStage = new Stage();
 		subStage.setTitle(stageName);
 		subStage.initModality(Modality.WINDOW_MODAL); 
-		
+	
 		//Favorite column
 		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
 		favoriteColumn.setMinWidth(10);
@@ -52,13 +51,9 @@ public class GuiListWindow {
 
 			 
 
-            public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
-
-                return new CheckBoxTableCell<Site, Boolean>();
-
-            }
-
-        });			
+		public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
+		    return new CheckBoxTableCell<Site, Boolean>();
+		}});			
 		
 		
 		//Name column
@@ -89,10 +84,10 @@ public class GuiListWindow {
 	    
 	    
 	    subStage.setOnCloseRequest(e -> closeWindow());
-	    
-	   
 	}
 
+	
+	
 	private static void setWindowPos(){
 		//TODO
 		 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -100,13 +95,15 @@ public class GuiListWindow {
 		 subStage.setY((primScreenBounds.getHeight() - subStage.getHeight()) / 4); 
 	}
 
+	
+	
 	private static  void closeWindow () {
-		
 		// System.out.println("m: list window closed" );
 		GuiHandler.listClosed();
 		subStage.close();
 	}
 
+	
 
 	//Temporary Data-Retrieval for testing
 	public ObservableList<Site> getSite() throws IOException{
