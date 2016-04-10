@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,36 +9,35 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class GuiListWindow {
 
-	public static final String SITES_FILE = "sites.txt";
-	public static final String GUI_LIST_PREFS_FILE = "guilistprefs.txt";
+	private static final String SITES_FILE = "sites.txt";
+	private static final String GUI_LIST_PREFS_FILE = "guilistprefs.txt";
 	
 	static TableView<Site> table;
 	static Stage subStage; 
 
-	static void GuiWindow(Stage primaryStage, String stageName) throws IOException{
+	static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
+		
+		
 		
 		subStage = new Stage();
 		subStage.setTitle(stageName);
 		subStage.initModality(Modality.WINDOW_MODAL);
+		
+		
 		
 		// Load prefs
 		String prefs[] = loadPrefs();
@@ -57,10 +54,9 @@ public class GuiListWindow {
 		
 		TextField text = new TextField("Text");
 		text.setMaxSize(140, 20);
- 
-      
-		 
-	
+
+		
+		
 		//Favorite column
 		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
 		favoriteColumn.setMinWidth(10);
@@ -96,31 +92,18 @@ public class GuiListWindow {
 		
 	    Scene scene = new Scene(layout);
 	    subStage.setScene(scene);
-	    subStage.show();
-	    
-	    //setWindowPos();
-	    
-	    
 	    subStage.setOnCloseRequest(e -> closeWindow());
-	}
-
-	
-	
-	private static void setWindowPos(){
-		//TODO
-		 Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-		 subStage.setX((primScreenBounds.getWidth() - subStage.getWidth()) / 2 - 400); 
-		 subStage.setY((primScreenBounds.getHeight() - subStage.getHeight()) / 4); 
+	    subStage.show();
 	}
 
 	
 	
 	private static  void closeWindow () {
-		// System.out.println("m: list window closed" );
 		GuiHandler.listClosed();
 		savePrefs( subStage.getX(), subStage.getY() );
 		subStage.close();
 	}
+	
 	
 	
 	public static String[] loadPrefs(){
@@ -129,6 +112,7 @@ public class GuiListWindow {
 			FileReader file = new FileReader( GUI_LIST_PREFS_FILE );
 			BufferedReader reader = new BufferedReader( file );
 			tokens = reader.readLine().split(",");
+			reader.close();
 		}
 		catch (IOException e){
 			System.err.println( "Error loading prefs: " + e );
@@ -136,6 +120,7 @@ public class GuiListWindow {
 		return tokens;
 	}
 
+	
 	
 	public static boolean savePrefs( Double x, Double y ){
 		try{
@@ -152,100 +137,48 @@ public class GuiListWindow {
 	}
 	
 	
-
-	//Temporary Data-Retrieval for testing
-	public ObservableList<Site> getSite() throws IOException{
-		
-		ObservableList<Site> sites = FXCollections.observableArrayList();
-		
-		SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
-		siteList.load( SITES_FILE );
-		/*
-		Utility.FetchSites( siteList );
-		
-		sites.add(new Site( "wodonga", "wodongaURL" ) );
-		sites.add( new Site( "albury", "alburyURL"));
-	    sites.add( new Site( "lavington", "lavingtonURL"));
-	    */
-		
-		
-		return sites;
-	}
-	
 	
 	//Temporary Data-Retrieval for testing modified from utilities
-	public static  ObservableList<Site> getExtensiveSite() throws IOException{
-		
+	public static  ObservableList<Site> getExtensiveSite(){
 		ObservableList<Site> lsites = FXCollections.observableArrayList();
-		/*
-	    String[] sites = {"nsw","vic","qld","wa","sa","tas","nt"};
-	    String inputLine;
-	    String name;
-	    String address;
-	    int start;
-	    int end;
-	    */
 	    SortedLinkedList<Site> sites = new SortedLinkedList<Site>();
 	    sites.load( SITES_FILE );
 	    String list[][] = sites.list();
 	    for( int i = 0; i < list.length; ++i ){
 	    	lsites.add( new Site( list[i][0], list[i][1] ) );
 	    }
-
 		return lsites;
 	}
 	
 	
-	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
-
-		private final CheckBox checkBox;
-
-		private ObservableValue<T> ov;
-
-		public CheckBoxTableCell() {
-
-			this.checkBox = new CheckBox();
-
-			this.checkBox.setAlignment(Pos.CENTER);
-
-			setAlignment(Pos.CENTER);
-
-			setGraphic(checkBox);
-
-		  } 
-
-		    
-
-		   @Override public void updateItem(T item, boolean empty) {
-
-		   super.updateItem(item, empty);
-
-		    if (empty) {
-
-		    	setText(null);
-		        setGraphic(null);
-
-		      } else {
-
-		        setGraphic(checkBox);
-
-		        if (ov instanceof BooleanProperty) {
-		          checkBox.selectedProperty().unbindBidirectional((BooleanProperty) ov);
-		        }
-
-		        ov = getTableColumn().getCellObservableValue(getIndex());
-
-		        if (ov instanceof BooleanProperty) {
-		          checkBox.selectedProperty().bindBidirectional((BooleanProperty) ov);
-		        }
-
-		      }
-
-		    }
-
-		  }
-
-		
 	
+	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
+		private final CheckBox checkBox;
+		private ObservableValue<T> ov;
+		public CheckBoxTableCell() {
+			this.checkBox = new CheckBox();
+			this.checkBox.setAlignment(Pos.CENTER);
+			setAlignment(Pos.CENTER);
+			setGraphic(checkBox);
+		}
+		
+		@Override 
+		public void updateItem(T item, boolean empty) {
+			super.updateItem(item, empty);
+			if (empty) {
+				setText(null);
+				setGraphic(null);
+			} else {
+				setGraphic(checkBox);
+				if (ov instanceof BooleanProperty) {
+					checkBox.selectedProperty().unbindBidirectional((BooleanProperty) ov);
+				}
+				ov = getTableColumn().getCellObservableValue(getIndex());
+				if (ov instanceof BooleanProperty) {
+					checkBox.selectedProperty().bindBidirectional((BooleanProperty) ov);
+				}
+			}
+		}
+	}
 }
 

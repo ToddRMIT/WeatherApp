@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.scene.Scene;
+
 
 
 public class WeatherApp {
@@ -13,15 +15,16 @@ public class WeatherApp {
 
 
         // Instantiate the lists
-        SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
-        SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
+        // SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
+        // SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 
 
         
         // If sites list exists
         // load from file
         // else fetch new list
-        siteList.load( SITES_FILE );
+        // siteList.load( SITES_FILE );
+        
         
         
         

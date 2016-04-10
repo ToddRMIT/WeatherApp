@@ -160,7 +160,7 @@ public class SortedLinkedList<T>{
 
 
 
-    public void load( String filename ) throws IOException{
+    public void load( String filename ){
         Node thisNode = head;
         Node newNode = null;
         FileReader file = null;
@@ -196,9 +196,6 @@ public class SortedLinkedList<T>{
             }
         } catch( IOException e ){
         	System.out.println( "Error: " + filename + " not found");
-        } finally {
-            if( file != null ) file.close();
-            if( in != null ) in.close();
         }
     }
 

@@ -5,9 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javafx.collections.transformation.SortedList;
-
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,7 @@ public class Site{
     private String url;
     private List<String[]> data;
     private Double[] coords;
+    private boolean favourite;
     
     private static String[] key = {
     		"sort_order", "wmo", "name", "history_product", "local_date_time",
@@ -40,6 +38,7 @@ public class Site{
         this.url = url;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
+        favourite = false;
     }
     
     
@@ -48,6 +47,29 @@ public class Site{
     public String getName(){ return name; }
     public String getURL(){ return url; }
     public Double[] getCoords(){ return coords; }
+    public boolean isFavourite(){ return favourite; }
+    
+    
+    
+    // This is a helper function to fetch the air temps from the
+    // data for specific times eg. 9:30am
+    public List<String[]> getTimeSeries( String time ){
+    	List<String[]> str = new ArrayList<String[]>();
+    	String[] temp;
+    	for( int i = 0; i < data.size(); ++i ){
+    		if( data.get(i)[4].matches( ".*"+time+".*" ) ){
+    			temp = new String[2];
+    			temp[0] = data.get(i)[4];
+    			temp[1] = data.get(i)[18];
+    			str.add( temp );
+    		}
+    	}
+    	return str;
+    }
+    
+    
+    
+    // Only for testing
     public String print(){
     	String str = "";
     	str = name;
@@ -66,6 +88,8 @@ public class Site{
     
     
     
+    //  ---{ THIS CAN POSSIBLY BE FACTORED OUT }---
+    //  ---{ updateData() may be all that is needed }---
     public List<String[]> getData(){
     	// First try to load data from file if it hasn't already been loaded
     	if( data == null ) loadData();
@@ -183,7 +207,6 @@ public class Site{
     				int start = line.indexOf(": ");
 					int end = line.indexOf(",");
     				if( line.matches(".*local_date_time_full.*") ){
-    					String thisLine =line;
     					if( line.matches( ".*"+latest+".*" ) ) break;
     				}
     				if( line.matches( ".*" + key[i] + ".*" ) ){

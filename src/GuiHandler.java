@@ -4,24 +4,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.swing.GroupLayout.Alignment;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 
@@ -41,7 +35,7 @@ public class GuiHandler extends Application {
 	}
 
 	@Override
-	public void start( final Stage primaryStage) throws Exception {
+	public void start( final Stage primaryStage ) throws Exception {
 
 		window = primaryStage;
 		window.setTitle("Weather app");
@@ -80,7 +74,7 @@ public class GuiHandler extends Application {
 				if(listOpen == false){
 					try {
 						listOpen = true;
-						GuiListWindow.GuiWindow(primaryStage,"site list");
+						GuiListWindow.GuiWindow(primaryStage,"site list" );
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -158,7 +152,7 @@ public class GuiHandler extends Application {
 					@Override public void handle(ActionEvent e) {
 						try {
 							//listOpen = true;
-							GuiDataWindow.dataWindow(primaryStage, list[selected][0], favList.search(list[selected][0]) );
+							GuiDataWindow.dataWindow(primaryStage, favList.search(list[selected][0]) );
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}	
@@ -168,11 +162,14 @@ public class GuiHandler extends Application {
 		}
 		
 		
+		
 		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
         border.setTop(top);
         border.setCenter(grid);
-		        
+
+        
+        
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
@@ -186,11 +183,9 @@ public class GuiHandler extends Application {
         	}
         });
         window.show();
-        
-        // Print the window co-ords to console
-        String windowX = Double.toString(window.getX());
-        String windowY = Double.toString(window.getY());
 	}
+	
+	
 	
 	//sets list windows open tracking value to false
 	public static void listClosed() {
