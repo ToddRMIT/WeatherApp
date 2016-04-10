@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.GroupLayout.Alignment;
 
@@ -9,6 +10,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -27,12 +29,12 @@ public class GuiDataWindow {
 	
 	public static final String FAVOURITES_FILE = "favourites.txt";
 	
-	static Stage dataStage;
+	//static Stage dataStage;
 	
 	public static void dataWindow(Stage primaryStage, String stageName, Site site ) throws IOException {
 		
 		Pane pane = new Pane();
-		dataStage = new Stage();
+		Stage dataStage = new Stage();
 		
 		Text name = new Text("Station Name:");
 		Text fName = new Text();
@@ -46,8 +48,19 @@ public class GuiDataWindow {
 		Text fThree = new Text();
 		
 		//Function that collects favourite data and sets them to the correct text fields
-		site.updateData();
-		site.save();
+		List<String[]> siteData = site.getData();
+		dataStage.setX( site.getCoords()[0] );
+		dataStage.setY( site.getCoords()[1] );
+		
+		
+		dataStage.setOnCloseRequest( new EventHandler<WindowEvent>(){ 
+        	@Override 
+        	public void handle(final WindowEvent e){
+        		site.save( dataStage.getX(), dataStage.getY() );
+        		System.out.println( dataStage.getX() );
+        		System.out.println( dataStage.getY() );
+        	}
+        });
 		
 
 		pane.getChildren().addAll(name, fName, max, fMax, min, fMin, six, fSix, three, fThree);	

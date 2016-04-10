@@ -1,6 +1,7 @@
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ public class Site{
     private String name;
     private String url;
     private List<String[]> data;
+    private Double[] coords;
     
     private static String[] key = {
     		"sort_order", "wmo", "name", "history_product", "local_date_time",
@@ -35,10 +37,12 @@ public class Site{
         this.name = name;
         this.url = url;
         data = null;
+        coords = new Double[]{ 100.0, 100.0 };
     }
     public String[] getKey(){ return key; }
     public String getName(){ return name; }
     public String getURL(){ return url; }
+    public Double[] getCoords(){ return coords; }
     public String print(){
     	String str = "";
     	str = name;
@@ -77,23 +81,48 @@ public class Site{
     
     
     public void loadData(){
-    	// TODO
+    	String filename = "./Sites/" + name + ".txt";
+    	FileReader file = null;
+    	BufferedReader reader = null;
+    	try{
+    		file = new FileReader( filename );
+    		reader = new BufferedReader( file );
+    		String line;
+    		// Get coords from file
+    		line = reader.readLine();
+    		String xytokens[] = line.split(",");
+    		coords[0] = Double.parseDouble( xytokens[0] );
+    		coords[1] = Double.parseDouble( xytokens[1] );
+    		String tokens[];
+    		data = new ArrayList<String[]>();
+    		while( ( line = reader.readLine() ) != null ){
+    			tokens = line.split(",");
+    			data.add(tokens);
+    		}
+    		if( reader != null ) reader.close();
+    	}
+    	catch( IOException e ){
+    		System.err.println( "Error loading site data: " + e );
+    	}
     }
     
     
-    public void save(){
+    public void save( Double x, Double y ){
+    	coords[0] = x;
+    	coords[1] = y;
         FileWriter file = null;
         PrintWriter out = null;
         String filename = "./Sites/" + name + ".txt";
         try{
             file = new FileWriter( filename );
             out = new PrintWriter( file );
+            out.println( x + "," + y );
             for( int i = 0; i < data.size(); ++i ){
             	String str = "";
             	String thisData[] = data.get(i);
             	for( int j = 0; j < key.length; ++j ){
             		str = str.concat(thisData[j]);
-            		if( j < key.length - 1) str = str.concat(", ");
+            		if( j < key.length - 1) str = str.concat(",");
             	}
             	out.println( str );
             }
@@ -126,6 +155,41 @@ public class Site{
     					int end = line.indexOf(",");
     					if( end < 0 ) end = line.length();
     					String str = line.substring(start+2, end);
+    					if( str.startsWith("\"") ) str = str.substring( 1, str.length() - 1 );     //Remove quotes
+    					thisKey[i] = ( str );
+    					if( i == key.length - 1 ){
+    						data.add( thisKey );
+    						thisKey = new String[ key.length ];
+    						i = 0;
+    					}
+    					else i++;
+    				}
+        		}
+    		}
+    		// data is not null therefore we need to update the existing
+    		// data that had been saved to disk
+    		else{
+    			// First we need to get the latest data from existing data
+    			String latest = (data.get(0))[5]; // 5th index is local_date_time_full
+    			// Now we copy our existing data to a temp list and clear data
+    			List<String[]> tempList = new ArrayList<String[]>(data);
+    			
+    			data.clear();
+    			// Add new entried to data until we reach latest then
+    			// append data from tempList to data
+    			String thisKey[] = new String[ key.length ];
+    			int i = 0;
+    			while( ( line = reader.readLine() ) != null ){
+    				// Check if at latest
+    				int start = line.indexOf(": ");
+					int end = line.indexOf(",");
+    				if( line.matches(".*local_date_time_full.*") ){
+    					String thisLine =line;
+    					if( line.matches( ".*"+latest+".*" ) ) break;
+    				}
+    				if( line.matches( ".*" + key[i] + ".*" ) ){
+    					if( end < 0 ) end = line.length();
+    					String str = line.substring(start+2, end);
     					if( str.startsWith("\"") ) str = str.substring( 1, str.length() - 1 );     //Remove quotes 
     					thisKey[i] = ( str );
     					if( i == key.length - 1 ){
@@ -134,14 +198,18 @@ public class Site{
     						i = 0;
     					}
     					else i++;
-    					
     				}
         		}
+    			int newItems = data.size();
+    			for( int k = 0; k < tempList.size(); ++k ){
+    				tempList.get(k)[0] = Integer.toString(Integer.parseInt( tempList.get(k)[0] ) + newItems);
+    				data.add( tempList.get(k) );
+    			}
     		}
     		
     	}
     	catch ( Exception e ){
-    		System.err.println( "Error retrieving data: " + e );
+    		System.err.println( "Error updating data: " + e );
     	}
     	
     }
