@@ -33,7 +33,7 @@ public class Favourite extends Site{
 			BufferedReader reader = new BufferedReader( isr );
 			String line;
 			while( ( line = reader.readLine() ) != null ){
-				if( line.matches( ".*apparent_t.*" ) ){
+				if( line.matches( ".*air_temp.*" ) ){
 					int start = line.indexOf(": ");
 					int end = line.indexOf(",");
 					currentTemp = Double.parseDouble( line.substring(start+2, end) );

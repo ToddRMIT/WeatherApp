@@ -54,17 +54,23 @@ public class GuiHandler extends Application {
 		String prefs[] = loadPrefs();
 		
 		
-		
 		//Button creation
-		GridPane top = new GridPane();
 		Button btn = new Button("Open Site List");
+		btn.setMinWidth(200);
+		
+		
+		// Set up the top part of the main window
+		GridPane top = new GridPane();
 		top.add( btn,0,0 );
 		top.setPadding(new Insets (15,15,15,15));
 		top.setStyle("-fx-background-color: #336699;");
 		top.setAlignment(Pos.CENTER);
-		btn.setMinWidth(200);
+		
+		
 		
 		// Button btnRefresh = new Button("Refresh");
+		
+		
 		
 		//Button Press event handler
 		btn.setOnAction(new EventHandler<ActionEvent>( ) {
@@ -85,15 +91,21 @@ public class GuiHandler extends Application {
 			}
 		});
 		
+		
+		
 		//Loads favourites from file
 		SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 		favList.load( FAVOURITES_FILE );
 		
-		//Sets flow pane preferences
+		
+		
+		// Sets flow pane preferences
+		// for the favourites list
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets (15,15,15,15));
 		grid.setStyle("-fx-background-color: #336699;");
-		//grid.setMinHeight(500);
+		grid.setMinHeight(500);
+		
 		
 		//Creates favourite buttons based on fav list and sets preferences
 		Button favButtons[] = new Button[favList.getLength()];
@@ -102,57 +114,59 @@ public class GuiHandler extends Application {
 		
 		favList.updateTemp();
 		String list[][] = favList.list();
-		for( int i = 0; i < list.length; ++i ) {
-			String format = "%-30s%5s";
-			String str = String.format( format, list[i][0],list[i][1] );
-			favButtons[i] = new Button( str );
-			favButtons[i].setTextAlignment(TextAlignment.LEFT);
-			favButtons[i].setMinWidth(200);
-			grid.add( favButtons[i], 0, i);
-			//New delete buttons that link to each fav button
-			delButtons[i] = new Button("X");
-			delButtons[i].setMinWidth(20);
-			grid.add( delButtons[i], 1,i );
+		if( list != null ){
+			for( int i = 0; i < list.length; ++i ) {
+				String format = "%-30s%5s";
+				String str = String.format( format, list[i][0],list[i][1] );
+				favButtons[i] = new Button( str );
+				favButtons[i].setTextAlignment(TextAlignment.LEFT);
+				favButtons[i].setMinWidth(200);
+				grid.add( favButtons[i], 0, i);
+				//New delete buttons that link to each fav button
+				delButtons[i] = new Button("X");
+				delButtons[i].setMinWidth(20);
+				grid.add( delButtons[i], 1,i );
+			}
 		}
-		/*
-		for( int i = 0; i < list.length; ++i ) {
-			flow.getChildren().addAll( favButtons[i], delButtons[i]);
-		}
-		*/
+		
+
+		
 		
 		//Button Press event handler for the delete buttons
-		for( int i = 0; i < list.length; ++i ) {
-			final int selected = i;
-			delButtons[i].setOnAction(new EventHandler<ActionEvent>() {
-				@Override public void handle(ActionEvent e) {
-					grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
-					String str = favButtons[selected].getText();
-					String tokens[] = str.split(" ");
-					favList.remove(tokens[0]);
-					favList.printList();
-					try{
+		if( list != null ){
+			for( int i = 0; i < list.length; ++i ) {
+				final int selected = i;
+				delButtons[i].setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent e) {
+						grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
+						String str = favButtons[selected].getText();
+						String tokens[] = str.split(" ");
+						favList.remove(tokens[0]);
+						// favList.printList(); /* Testing in console */
 						favList.save(FAVOURITES_FILE);
-					}catch (IOException f){
-						System.err.println("Error saving " + FAVOURITES_FILE );
 					}
-				}
-			});
+				});
+			}
 		}
 		
+		
 		//Button Press event handler for the favourites buttons to open data window
-		for( int i = 0; i < list.length; ++i ) {
-			final int selected = i;
-			favButtons[i].setOnAction(new EventHandler<ActionEvent>() {
-				@Override public void handle(ActionEvent e) {
-					try {
-						listOpen = true;
-						GuiDataWindow.dataWindow(primaryStage, "Data Window");
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}	
-				}
-			});
+		if( list != null ){
+			for( int i = 0; i < list.length; ++i ) {
+				final int selected = i;
+				favButtons[i].setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent e) {
+						try {
+							//listOpen = true;
+							GuiDataWindow.dataWindow(primaryStage, "Data Window");
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}	
+					}
+				});
+			}
 		}
+		
 		
 		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
@@ -168,6 +182,7 @@ public class GuiHandler extends Application {
         	@Override 
         	public void handle(final WindowEvent e){
         		savePrefs( window.getX(), window.getY() );
+        		favList.save(FAVOURITES_FILE);
         	}
         });
         window.show();
@@ -175,7 +190,6 @@ public class GuiHandler extends Application {
         // Print the window co-ords to console
         String windowX = Double.toString(window.getX());
         String windowY = Double.toString(window.getY());
-        System.out.println("X: " + windowX + ", Y: " + windowY );
 	}
 	
 	//sets list windows open tracking value to false
@@ -185,6 +199,14 @@ public class GuiHandler extends Application {
 	
 	
 	
+	/**
+	 * Loads preferences for the main window from the MAIN_PREFERENCES_FILE</br>
+	 * Currently contains 2 lines</br>
+	 * 0: x co-ords</br>
+	 * 1: y co-ords</br>
+	 * 
+	 * @return string array containing x and y co-ordinates
+	 */
 	public static String[] loadPrefs(){
 		String prefs[] = new String[2];
 		BufferedReader file = null;
@@ -209,7 +231,15 @@ public class GuiHandler extends Application {
 	}
 	
 	
-	
+	/**
+	 * Saves preferences for the main window to the MAIN_PREFERENCES_FILE</br>
+	 * Currently savess 2 lines</br>
+	 * 0: x co-ords</br>
+	 * 1: y co-ords</br>
+	 * @param Double X co-ord
+	 * @param Double Y co-ord
+	 * @return void
+	 */
 	public static void savePrefs( Double X, Double Y ){
 		PrintWriter out = null;
 		try{

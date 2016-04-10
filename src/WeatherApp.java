@@ -68,12 +68,15 @@ public class WeatherApp {
         */
 
 
-
+        /*
         // Or the complete process short handed
         favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Gympie" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Horsham" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
+        */
+        
+        
         
         // Testing purpose only
         // favList.printList();
@@ -84,11 +87,11 @@ public class WeatherApp {
 
 
         // To write a list to disk
-        favList.save( "favourites.txt" );
+        // favList.save( "favourites.txt" );
         
 
 
-
+        /*
         // To pull a list into a multi dimensional array
         // so that you can easily iterate over the items
         String list[][] = favList.list();
@@ -97,6 +100,7 @@ public class WeatherApp {
                 System.out.println( list[i][0] + " " + list[i][1] );
             }
         }
+        */
         
         
 

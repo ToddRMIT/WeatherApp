@@ -102,7 +102,7 @@ public class GuiListWindow {
 
 	private static  void closeWindow () {
 		
-		System.out.println("m: list window closed" );
+		// System.out.println("m: list window closed" );
 		GuiHandler.listClosed();
 		subStage.close();
 	}
@@ -132,14 +132,22 @@ public class GuiListWindow {
 	public static  ObservableList<Site> getExtensiveSite() throws IOException{
 		
 		ObservableList<Site> lsites = FXCollections.observableArrayList();
-		
+		/*
 	    String[] sites = {"nsw","vic","qld","wa","sa","tas","nt"};
 	    String inputLine;
 	    String name;
 	    String address;
 	    int start;
 	    int end;
+	    */
+	    SortedLinkedList<Site> sites = new SortedLinkedList<Site>();
+	    sites.load( SITES_FILE );
+	    String list[][] = sites.list();
+	    for( int i = 0; i < list.length; ++i ){
+	    	lsites.add( new Site( list[i][0], list[i][1] ) );
+	    }
 	    
+	    /*
 	    for( int i = 0; i < sites.length; ++i ){
 	         URL urls = new URL("http://www.bom.gov.au/".concat(sites[i]).concat("/observations/").concat(sites[i]).concat("all.shtml"));
 	         BufferedReader in = new BufferedReader( new InputStreamReader( urls.openStream() ) );
@@ -158,11 +166,11 @@ public class GuiListWindow {
 	          }
 	          in.close(); 
 	          System.out.print("*");
-	        }
+		}
+		*/
 	    
-	     System.out.println();
-	     
-		 return lsites;
+		System.out.println();
+		return lsites;
 	}
 	
 	

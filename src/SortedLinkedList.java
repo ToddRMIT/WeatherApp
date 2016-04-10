@@ -44,6 +44,8 @@ public class SortedLinkedList<T>{
     
     
     // Helper function to update the favourite temps
+    // THIS NEEDS TO BE REFACTORED
+    // AS IT SHOULD NOT BE A LIST FUNCTION
     public void updateTemp(){
     	Node thisNode = head;
     	while( thisNode != null ){
@@ -202,7 +204,7 @@ public class SortedLinkedList<T>{
 
 
 
-    public void save( String filename ) throws IOException{
+    public void save( String filename ){
         Node thisNode = head;
         FileWriter file = null;
         PrintWriter out = null;
@@ -216,7 +218,6 @@ public class SortedLinkedList<T>{
         } catch( IOException e ) {
         	System.out.println( "Error: " + filename + " not found");
         } finally {
-            if( file != null ) file.close();
             if( out != null ) out.close();
         }
     }
