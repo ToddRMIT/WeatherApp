@@ -33,12 +33,17 @@ public class Site{
 			"vis_km", "weather", "wind_dir", "wind_spd_kmh", "wind_spd_kt"
     };
 
+    
+    
     public Site( String name, String url ){
         this.name = name;
         this.url = url;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
     }
+    
+    
+    
     public String[] getKey(){ return key; }
     public String getName(){ return name; }
     public String getURL(){ return url; }
@@ -52,17 +57,10 @@ public class Site{
     }
     
     
+    
     public InputStreamReader getJSON() throws Exception{
     	URL thisURL = new URL( url );
     	InputStreamReader is = new InputStreamReader( thisURL.openStream() );
-    	// For testing
-    	/*
-    	BufferedReader reader = new BufferedReader( is );
-    	String line;
-    	while( ( line = reader.readLine() ) != null ){
-    		System.out.println( line );
-    	}
-    	*/
     	return is;
     }
     
@@ -71,7 +69,7 @@ public class Site{
     public List<String[]> getData(){
     	// First try to load data from file if it hasn't already been loaded
     	if( data == null ) loadData();
-    	// No update the data from the BOM
+    	// Now update the data from the BOM
     	// Note that if there was no data on file then the updateData() function
     	// will instantiate data
     	updateData();
@@ -107,6 +105,7 @@ public class Site{
     }
     
     
+    
     public void save( Double x, Double y ){
     	coords[0] = x;
     	coords[1] = y;
@@ -127,7 +126,7 @@ public class Site{
             	out.println( str );
             }
         } catch( IOException e ) {
-        	System.out.println( "Error: " + filename + " not found");
+        	System.out.println( "Error trying to save: " + filename + " not found");
         } finally {
             if( out != null ) out.close();
         }

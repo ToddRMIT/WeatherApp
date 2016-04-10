@@ -1,2 +1,2 @@
-Avalon,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94854.json,17.3
-Horsham,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95839.json,17.0
+Avalon,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94854.json,15.3
+Horsham,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95839.json,15.2

@@ -1,7 +1,10 @@
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.PrintWriter;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -28,20 +31,35 @@ import javafx.util.Callback;
 public class GuiListWindow {
 
 	public static final String SITES_FILE = "sites.txt";
+	public static final String GUI_LIST_PREFS_FILE = "guilistprefs.txt";
 	
 	static TableView<Site> table;
 	static Stage subStage; 
 
 	static void GuiWindow(Stage primaryStage, String stageName) throws IOException{
 		
-		 
+		subStage = new Stage();
+		subStage.setTitle(stageName);
+		subStage.initModality(Modality.WINDOW_MODAL);
+		
+		// Load prefs
+		String prefs[] = loadPrefs();
+		if( prefs != null ){
+			subStage.setX(Double.parseDouble(prefs[0]));
+			subStage.setY(Double.parseDouble(prefs[1]));
+		}else{
+			// Sane defaults
+			subStage.setX(100);
+			subStage.setY(100);
+		}
+		
+		
+		
 		TextField text = new TextField("Text");
 		text.setMaxSize(140, 20);
  
       
-		subStage = new Stage();
-		subStage.setTitle(stageName);
-		subStage.initModality(Modality.WINDOW_MODAL); 
+		 
 	
 		//Favorite column
 		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
@@ -80,7 +98,7 @@ public class GuiListWindow {
 	    subStage.setScene(scene);
 	    subStage.show();
 	    
-	    setWindowPos();
+	    //setWindowPos();
 	    
 	    
 	    subStage.setOnCloseRequest(e -> closeWindow());
@@ -100,9 +118,39 @@ public class GuiListWindow {
 	private static  void closeWindow () {
 		// System.out.println("m: list window closed" );
 		GuiHandler.listClosed();
+		savePrefs( subStage.getX(), subStage.getY() );
 		subStage.close();
 	}
+	
+	
+	public static String[] loadPrefs(){
+		String tokens[] = null;
+		try{
+			FileReader file = new FileReader( GUI_LIST_PREFS_FILE );
+			BufferedReader reader = new BufferedReader( file );
+			tokens = reader.readLine().split(",");
+		}
+		catch (IOException e){
+			System.err.println( "Error loading prefs: " + e );
+		}
+		return tokens;
+	}
 
+	
+	public static boolean savePrefs( Double x, Double y ){
+		try{
+			FileWriter file = new FileWriter( GUI_LIST_PREFS_FILE );
+			PrintWriter out = new PrintWriter( file );
+			out.println( Double.toString(x) + "," + Double.toString(y) );
+			if( out != null ) out.close();
+		}
+		catch( IOException e ){
+			System.err.println( "Error saving prefs: " + e );
+			return false;
+		}
+		return true;
+	}
+	
 	
 
 	//Temporary Data-Retrieval for testing
@@ -143,30 +191,7 @@ public class GuiListWindow {
 	    for( int i = 0; i < list.length; ++i ){
 	    	lsites.add( new Site( list[i][0], list[i][1] ) );
 	    }
-	    
-	    /*
-	    for( int i = 0; i < sites.length; ++i ){
-	         URL urls = new URL("http://www.bom.gov.au/".concat(sites[i]).concat("/observations/").concat(sites[i]).concat("all.shtml"));
-	         BufferedReader in = new BufferedReader( new InputStreamReader( urls.openStream() ) );
-	         
-	         while( (inputLine = in.readLine() ) != null ){
-	        	 
-	                if( inputLine.matches( ".*station.*shtml.*" ) ){
-	                    start = inputLine.indexOf("shtml\">") + 7;
-	                    end = inputLine.indexOf("</a></th>");
-	                    name = inputLine.subSequence( start, end ).toString();
-	                    address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
-	                    lsites.add(new Site( name, address ));
-	                  
-	                }
-	                
-	          }
-	          in.close(); 
-	          System.out.print("*");
-		}
-		*/
-	    
-		System.out.println();
+
 		return lsites;
 	}
 	
