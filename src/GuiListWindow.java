@@ -34,16 +34,17 @@ public class GuiListWindow {
 	  static void GuiWindow(Stage primaryStage, String stageName) throws IOException{
 		
 		 
-		  TextField text = new TextField("Text");
-	      text.setMaxSize(140, 20);
-	 
-	      
+		TextField text = new TextField("Text");
+	    text.setMaxSize(140, 20);
+	  
 		subStage = new Stage();
 		subStage.setTitle(stageName);
 		subStage.initModality(Modality.WINDOW_MODAL); 
 		
+		
+		
 		//Favorite column
-		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
+		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<Site, Boolean>("Favourite");
 		favoriteColumn.setMinWidth(10);
 		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("Favourite"));
 		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
@@ -57,7 +58,6 @@ public class GuiListWindow {
             }
 
         });			
-		
 		
 		//Name column
 		TableColumn<Site, String> nameColumn = new TableColumn<>("Name");

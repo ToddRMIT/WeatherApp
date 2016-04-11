@@ -178,6 +178,8 @@ public class SortedLinkedList<T>{
                     ++length;
                 }
             }
+        } catch( IOException e ){
+        	System.out.println( "Error: " + filename + " not found");
         } finally {
             if( file != null ) file.close();
             if( in != null ) in.close();
@@ -197,6 +199,8 @@ public class SortedLinkedList<T>{
                 out.println( thisNode.print() );
                 thisNode = thisNode.next;
             }
+        } catch( IOException e ) {
+        	System.out.println( "Error: " + filename + " not found");
         } finally {
             if( file != null ) file.close();
             if( out != null ) out.close();
@@ -208,8 +212,9 @@ public class SortedLinkedList<T>{
     public void shortList( String str, SortedLinkedList<Site> sites ){
         Node sitesNode = sites.head;
         Node thisNode = null;
+        str = str.toUpperCase();
         while( sitesNode != null ){
-            if( sitesNode.getString().startsWith( str ) ){
+            if( sitesNode.getString().toUpperCase().startsWith( str ) ){
                 Node newNode = new Node<Site>( (Site)sitesNode.data );
                 if( head == null ){
                     head = newNode;
@@ -220,7 +225,7 @@ public class SortedLinkedList<T>{
                     thisNode = thisNode.next;
                 }
             }
-            else if( sitesNode.getString().compareTo( str ) > 0 ) return;
+            else if( sitesNode.getString().toUpperCase().compareTo( str ) > 0 ) return;
             sitesNode = sitesNode.next;
         }
         System.out.println(".");
