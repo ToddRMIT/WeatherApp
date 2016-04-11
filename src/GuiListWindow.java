@@ -106,7 +106,7 @@ public class GuiListWindow {
 	}
 
 
-	//Temporary Data-Retrieval for testing
+	/*Temporary Data-Retrieval for testing
 	public ObservableList<Site> getSite() throws IOException{
 		
 		ObservableList<Site> sites = FXCollections.observableArrayList();
@@ -120,7 +120,7 @@ public class GuiListWindow {
 	    
 		return sites;
 	}
-	
+	*/
 	
 	//Temporary Data-Retrieval for testing modified from utilities
 	public static  ObservableList<Site> getExtensiveSite() throws IOException{
