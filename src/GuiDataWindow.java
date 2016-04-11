@@ -23,7 +23,7 @@ public class GuiDataWindow {
 	
 	public static void dataWindow(Stage primaryStage, Site site ) throws IOException {
 		
-		site.updateData();
+		site.getData();
 		
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();

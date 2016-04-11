@@ -48,6 +48,7 @@ public class Site{
     public String getURL(){ return url; }
     public Double[] getCoords(){ return coords; }
     public boolean isFavourite(){ return favourite; }
+    public void toggleFavourite(){ favourite = !favourite; }
     
     
     
@@ -94,6 +95,7 @@ public class Site{
     		}
     		reversed.add( temp );
     	}
+    	
     	return reversed;
     }
     

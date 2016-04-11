@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
@@ -104,6 +105,7 @@ public class GuiHandler extends Application {
 		//Creates favourite buttons based on fav list and sets preferences
 		Button favButtons[] = new Button[favList.getLength()];
 		Button delButtons[] = new Button[favList.getLength()];
+		
 		
 		
 		favList.updateTemp();
