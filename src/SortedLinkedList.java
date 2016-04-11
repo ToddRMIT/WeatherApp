@@ -40,6 +40,19 @@ public class SortedLinkedList<T>{
         length = 0;
     }
     public int getLength(){ return length; }
+    
+    
+    
+    // Helper function to update the favourite temps
+    // THIS NEEDS TO BE REFACTORED
+    // AS IT SHOULD NOT BE A LIST FUNCTION
+    public void updateTemp(){
+    	Node thisNode = head;
+    	while( thisNode != null ){
+    		((Favourite)thisNode.data).updateTemp();
+    		thisNode = thisNode.next;
+    	}
+    }
 
 
     
@@ -55,6 +68,7 @@ public class SortedLinkedList<T>{
         if( item instanceof Site ) str = ((Site)item).getName();
         if( str.compareTo( head.getString() ) == 0 ){
             // Do nothing
+        	System.out.println( "Duplicate: " + str + " " + ((Site)head.data).getURL() );
             return;
         }
         // Head does not contain item so check if item is less than head
@@ -75,6 +89,7 @@ public class SortedLinkedList<T>{
             // If child is storing item, ignore
             if( str.compareTo( child.getString() ) == 0 ){
                 // Do nothing
+            	System.out.println( "Duplicate: " + str + " " + ((Site)head.data).getURL() );
                 return;
             }
             // If item is less than child
@@ -145,7 +160,7 @@ public class SortedLinkedList<T>{
 
 
 
-    public void load( String filename ) throws IOException{
+    public void load( String filename ){
         Node thisNode = head;
         Node newNode = null;
         FileReader file = null;
@@ -181,15 +196,12 @@ public class SortedLinkedList<T>{
             }
         } catch( IOException e ){
         	System.out.println( "Error: " + filename + " not found");
-        } finally {
-            if( file != null ) file.close();
-            if( in != null ) in.close();
         }
     }
 
 
 
-    public void save( String filename ) throws IOException{
+    public void save( String filename ){
         Node thisNode = head;
         FileWriter file = null;
         PrintWriter out = null;
@@ -203,7 +215,6 @@ public class SortedLinkedList<T>{
         } catch( IOException e ) {
         	System.out.println( "Error: " + filename + " not found");
         } finally {
-            if( file != null ) file.close();
             if( out != null ) out.close();
         }
     }

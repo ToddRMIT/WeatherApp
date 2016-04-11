@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.scene.Scene;
+
 
 
 public class WeatherApp {
@@ -8,37 +10,42 @@ public class WeatherApp {
 	public static final String SITES_FILE = "sites.txt";
 	public static final String FAVOURITES_FILE = "favourites.txt";
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
 
 
 
         // Instantiate the lists
-        SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
-        SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
+        // SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
+        // SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 
 
         
         // If sites list exists
         // load from file
         // else fetch new list
-        siteList.load( SITES_FILE );
+        // siteList.load( SITES_FILE );
+        
         
         
         
         // If favourites exist
         // load from file
-        favList.load( FAVOURITES_FILE );
+        // favList.load( FAVOURITES_FILE );
+        
+        
+        
         
         
         
         // Download a list of sites in to the site list
         // Utility.FetchSites( siteList );
-        siteList.save( SITES_FILE );
+        // siteList.save( SITES_FILE );
+        
 
 
-
+        
         /* FOR TESTING */
-        siteList.printList();
+        // siteList.printList();
 
         
         /*
@@ -64,14 +71,15 @@ public class WeatherApp {
         */
 
 
-
-        // Or the complete process short handed
         /*
+        // Or the complete process short handed
         favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Gympie" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Horsham" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
         */
+        
+        
         
         // Testing purpose only
         // favList.printList();
@@ -86,7 +94,7 @@ public class WeatherApp {
         
 
 
-
+        /*
         // To pull a list into a multi dimensional array
         // so that you can easily iterate over the items
         String list[][] = favList.list();
@@ -95,6 +103,7 @@ public class WeatherApp {
                 System.out.println( list[i][0] + " " + list[i][1] );
             }
         }
+        */
         
         
 

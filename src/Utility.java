@@ -39,14 +39,15 @@ public class Utility{
         return str;
     }
 
-    private static void processLine( 
-            String inputLine, SortedLinkedList<Site> siteList ){
+    private static void processLine( String inputLine, SortedLinkedList<Site> siteList ){
         // Here we process the site name and url out of inputLine
         // and add a site to the list
         int start = inputLine.indexOf("shtml\">") + 7;
         int end = inputLine.indexOf("</a></th>");
         String name = inputLine.subSequence( start, end ).toString();
-        String address = inputLine.subSequence( inputLine.indexOf("<a href=\"") + 9, start - 2 ).toString();
+        String address = "http://www.bom.gov.au/fwo"; 
+        address = address.concat(inputLine.subSequence( inputLine.indexOf("<a href=\"") + 18, start - 7 ).toString());
+        address = address.concat( "json" );
         siteList.add( new Site( name, address ) );
         System.out.print(".");
     }

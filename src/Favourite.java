@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class Favourite extends Site{
 
     private double currentTemp;
@@ -22,6 +25,25 @@ public class Favourite extends Site{
         str = str.concat( "," );
         str = str.concat( Double.toString( currentTemp ) );
         return str;
+    }
+    
+    public void updateTemp(){
+    	try {
+			InputStreamReader isr = getJSON();
+			BufferedReader reader = new BufferedReader( isr );
+			String line;
+			while( ( line = reader.readLine() ) != null ){
+				if( line.matches( ".*air_temp.*" ) ){
+					int start = line.indexOf(": ");
+					int end = line.indexOf(",");
+					currentTemp = Double.parseDouble( line.substring(start+2, end) );
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }

@@ -1,3 +1,2 @@
-Avalon,/products/IDV60801/IDV60801.94854.shtml,28.0
-Townsville,/products/IDQ60801/IDQ60801.94294.shtml,28.0
-Yass,/products/IDN60801/IDN60801.95723.shtml,28.5
+Avalon,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94854.json,15.0
+Horsham,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95839.json,17.2
