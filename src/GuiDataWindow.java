@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.GroupLayout.Alignment;
@@ -11,9 +12,12 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -45,8 +49,8 @@ public class GuiDataWindow {
 		
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();
-		pane.setCenter(getChart( site ) );
-		pane.setBottom( getTable( site ) );
+		pane.setTop(getChart( site ) );
+		//pane.setBottom( getTable( site ) );
 		
 		List<String[]> siteData = site.getData();
 		dataStage.setX( site.getCoords()[0] );
@@ -82,7 +86,7 @@ public class GuiDataWindow {
 
 		// pane.getChildren().addAll(name, fName, max, fMax, min, fMin, six, fSix, three, fThree);	
 	
-		dataStage.setScene(new Scene (pane, 640, 480));
+		dataStage.setScene(new Scene (pane));
 		
 		dataStage.show();
 	}
@@ -92,43 +96,51 @@ public class GuiDataWindow {
 	private static BorderPane getChart( Site site ){
 		
 		BorderPane pane = new BorderPane();
-        final NumberAxis xAxis = new NumberAxis();
+		final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
+        final LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
         
-        XYChart.Series series1 = new XYChart.Series();
-        List<String[]> data = site.getTimeSeries("9:00am");
-        for( int i = 0; i < data.size(); ++i ){
-        	series1.getData().add(new XYChart.Data(i, Double.parseDouble(data.get(i)[1])));
+        String[] legends = { "min", "max", "9:00am", "3:00pm" };
+        List<XYChart.Series> seriesList = new ArrayList<XYChart.Series>();
+        
+        for( int i = 0; i < legends.length; ++i ){
+        	XYChart.Series series = new XYChart.Series<>();
+        	series.setName( legends[i] );
+        	List<String[]> data = site.getTimeSeries();
+        	String date;
+        	Double value;
+        	for( int j = 0; j < data.size(); ++j ){
+        		date = data.get( j )[ 0 ];
+        		date = date.substring( 6, 8 ) + "/" + date.substring( 4, 6 );
+        		value = Double.parseDouble( data.get( j )[ i + 1 ] );
+        		series.getData().add( new XYChart.Data( date, value ) );
+        	}
+        	seriesList.add( series );
         }
-        XYChart.Series series2 = new XYChart.Series();
-        data = site.getTimeSeries("3:00pm");
-        for( int i = 0; i < data.size(); ++i ){
-        	series2.getData().add(new XYChart.Data(i, Double.parseDouble(data.get(i)[1])));
+
+        for( int i = 0; i < seriesList.size(); ++i ){
+        	lineChart.getData().addAll( seriesList.get(i) );
         }
-        /*
-        series.getData().add(new XYChart.Data(1, 23));
-        series.getData().add(new XYChart.Data(2, 14));
-        series.getData().add(new XYChart.Data(3, 15));
-        series.getData().add(new XYChart.Data(4, 24));
-        series.getData().add(new XYChart.Data(5, 34));
-        series.getData().add(new XYChart.Data(6, 36));
-        series.getData().add(new XYChart.Data(7, 22));
-        series.getData().add(new XYChart.Data(8, 45));
-        series.getData().add(new XYChart.Data(9, 43));
-        series.getData().add(new XYChart.Data(10, 17));
-        series.getData().add(new XYChart.Data(11, 29));
-        series.getData().add(new XYChart.Data(12, 25));
-        */
+        lineChart.setLegendSide( Side.RIGHT );
+        
         pane.setCenter(lineChart);
-        lineChart.getData().addAll(series1,series2);
+        pane.setMaxHeight(400);
 		return pane;
 	}
 	
 	
 	private static BorderPane getTable( Site site ){
 		BorderPane pane = new BorderPane();
-		// TODO
+		TableView table = new TableView();
+		String[] keys = site.getKey();
+		TableColumn columns[] = new TableColumn[keys.length];
+		for( int i = 0; i < keys.length; ++i ){
+			columns[i] = new TableColumn();
+			columns[i].setText(keys[i]);
+		}
+		table.getColumns().addAll( columns );
+		pane.setCenter(table);
+		
 		return pane;
 	}
 

@@ -51,17 +51,39 @@ public class Site{
     
     
     
-    // This is a helper function to fetch the air temps from the
-    // data for specific times eg. 9:30am
-    public List<String[]> getTimeSeries( String time ){
+    
+    /**
+     * Returns a list of arrays containing the time series data
+     * relevant to the legends argument
+     * @return ArrayList<String[]> { date, min, max, 9am, 3pm }
+     */
+    public List<String[]> getTimeSeries(){
     	List<String[]> str = new ArrayList<String[]>();
-    	String[] temp;
+    	String[] temp = new String[5];
+    	String min = "";
+    	String max = "";
+    	String thisDay = "";
     	for( int i = 0; i < data.size(); ++i ){
-    		if( data.get(i)[4].matches( ".*"+time+".*" ) ){
-    			temp = new String[2];
-    			temp[0] = data.get(i)[4];
-    			temp[1] = data.get(i)[18];
-    			str.add( temp );
+    		if( thisDay.compareTo( data.get(i)[5].substring( 0, 8 ) ) != 0 ){  // New day so reset min/max
+				if( i > 0 ){
+					temp[1] = min;
+					temp[2] = max;
+					str.add( temp );
+					temp = new String[5];
+				}
+				min = data.get(i)[18];
+				max = data.get(i)[18];
+				thisDay = data.get(i)[5].substring( 0, 8 );
+			}
+			if( data.get(i)[18].compareTo( min ) < 0 ) min = data.get(i)[18];
+			if( data.get(i)[18].compareTo( max ) > 0 ) max = data.get(i)[18];
+			if( data.get(i)[4].matches( ".*9:00am.*" ) ){
+    			temp[0] = data.get(i)[5];
+    			temp[3] = data.get(i)[18];
+    		}
+			if( data.get(i)[4].matches( ".*3:00pm.*" ) ){
+    			temp[0] = data.get(i)[5];
+    			temp[4] = data.get(i)[18];
     		}
     	}
     	return str;

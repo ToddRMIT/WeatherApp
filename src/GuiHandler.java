@@ -98,7 +98,7 @@ public class GuiHandler extends Application {
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets (15,15,15,15));
 		grid.setStyle("-fx-background-color: #336699;");
-		grid.setMinHeight(500);
+		grid.setMinHeight(300);
 		
 		
 		//Creates favourite buttons based on fav list and sets preferences
