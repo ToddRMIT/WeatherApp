@@ -55,33 +55,26 @@ public class GuiListWindow {
 		TextField text = new TextField("Text");
 		text.setMaxSize(140, 20);
 
-		
-		
-		//Favorite column
-		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
-		favoriteColumn.setMinWidth(10);
-		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("Favourite"));
-		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
-
-			 
-
-		public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
-		    return new CheckBoxTableCell<Site, Boolean>();
-		}});			
-		
-		
 		//Name column
 		TableColumn<Site, String> nameColumn = new TableColumn<>("Name");
-		nameColumn.setMinWidth(200);
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 				
 		//URL column
 		TableColumn<Site, String> urlColumn = new TableColumn<>("URL");
-		urlColumn.setMinWidth(300);
 		urlColumn.setCellValueFactory(new PropertyValueFactory<>("URL"));
-				
+		
+		//Favorite column
+		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
+		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("Favourite"));
+		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
+			public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
+		    return new CheckBoxTableCell<Site, Boolean>();
+		}});
+		
+		
 		//Append columns to table and fill in data
 		table = new TableView<>();
+		table.setMinSize(640, 480);
 		table.setItems(getExtensiveSite());
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				

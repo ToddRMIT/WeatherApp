@@ -86,7 +86,15 @@ public class Site{
     			temp[4] = data.get(i)[18];
     		}
     	}
-    	return str;
+    	List<String[]> reversed = new ArrayList<String[]>();
+    	for( int i = str.size()-1; i >= 0 ; --i ){
+    		temp = new String[5];
+    		for( int j = 0; j < temp.length; ++j ){
+    			temp[j] = str.get(i)[j];
+    		}
+    		reversed.add( temp );
+    	}
+    	return reversed;
     }
     
     
@@ -134,10 +142,10 @@ public class Site{
     		String line;
     		// Get coords from file
     		line = reader.readLine();
-    		String xytokens[] = line.split(",");
-    		coords[0] = Double.parseDouble( xytokens[0] );
-    		coords[1] = Double.parseDouble( xytokens[1] );
-    		String tokens[];
+    		String tokens[] = line.split(",");
+    		coords[0] = Double.parseDouble( tokens[0] );
+    		coords[1] = Double.parseDouble( tokens[1] );
+    		favourite = ( ( tokens[2].compareTo( "true" ) == 0 ) ? true: false );
     		data = new ArrayList<String[]>();
     		while( ( line = reader.readLine() ) != null ){
     			tokens = line.split(",");
@@ -161,7 +169,8 @@ public class Site{
         try{
             file = new FileWriter( filename );
             out = new PrintWriter( file );
-            out.println( x + "," + y );
+            String fav = ( favourite ? "true": "false" );
+            out.println( x + "," + y + "," + fav );
             for( int i = 0; i < data.size(); ++i ){
             	String str = "";
             	String thisData[] = data.get(i);
