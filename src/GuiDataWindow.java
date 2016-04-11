@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.stage.Stage;
@@ -13,6 +15,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 public class GuiDataWindow {
@@ -28,9 +31,12 @@ public class GuiDataWindow {
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();
 		pane.setTop(getChart( site ) );
-		//pane.setBottom( getTable( site ) );
+		pane.setBottom( getTable( site ) );
 		
-
+		
+		
+		
+		
 		dataStage.setX( site.getCoords()[0] );
 		dataStage.setY( site.getCoords()[1] );
 		dataStage.setTitle( site.getName() );
@@ -65,9 +71,11 @@ public class GuiDataWindow {
         	Double value;
         	for( int j = 0; j < data.size(); ++j ){
         		date = data.get( j )[ 0 ];
-        		date = date.substring( 6, 8 ) + "/" + date.substring( 4, 6 );
-        		value = Double.parseDouble( data.get( j )[ i + 1 ] );
-        		series.getData().add( new XYChart.Data( date, value ) );
+        		if( date != null ){
+        			date = date.substring( 6, 8 ) + "/" + date.substring( 4, 6 );
+            		value = Double.parseDouble( data.get( j )[ i + 1 ] );
+            		series.getData().add( new XYChart.Data( date, value ) );
+        		}
         	}
         	seriesList.add( series );
         }
@@ -82,21 +90,34 @@ public class GuiDataWindow {
 		return pane;
 	}
 	
-	
+
 	private static BorderPane getTable( Site site ){
-		BorderPane pane = new BorderPane();
-		TableView table = new TableView();
+		BorderPane dataPane = new BorderPane();
+		TableView<Data> dataTable = new TableView<Data>();
 		String[] keys = site.getKey();
-		TableColumn columns[] = new TableColumn[keys.length];
+		TableColumn<Data, String> columns[] = new TableColumn[keys.length];
 		for( int i = 0; i < keys.length; ++i ){
-			columns[i] = new TableColumn();
-			columns[i].setText(keys[i]);
+			columns[i] = new TableColumn<Data, String>( keys[i] );
+			columns[i].setCellValueFactory( new PropertyValueFactory<>( keys[i] ) );
 		}
-		table.getColumns().addAll( columns );
-		pane.setCenter(table);
 		
-		return pane;
+		ObservableList<Data> data = FXCollections.observableArrayList();
+		List<String[]> siteData = site.getData();
+		String[] line;
+		for( int i = 0; i < siteData.size(); ++i ){
+			line = new String[ keys.length ];
+			for( int j = 0; j < keys.length; ++j ){
+				line[j] = siteData.get(i)[j];
+			}
+			data.add( new Data( line ) );
+		}
+		
+		dataTable.setItems( data );
+		dataTable.getColumns().addAll( columns );
+		dataPane.setCenter(dataTable);
+		return dataPane;
 	}
+
 
 
 	

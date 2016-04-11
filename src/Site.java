@@ -61,23 +61,25 @@ public class Site{
     public List<String[]> getTimeSeries(){
     	List<String[]> str = new ArrayList<String[]>();
     	String[] temp = new String[5];
-    	String min = "";
-    	String max = "";
+    	Double min = 1000.0;
+    	Double max = -1000.0;
+    	Double thisTemp;
     	String thisDay = "";
     	for( int i = 0; i < data.size(); ++i ){
     		if( thisDay.compareTo( data.get(i)[5].substring( 0, 8 ) ) != 0 ){  // New day so reset min/max
 				if( i > 0 ){
-					temp[1] = min;
-					temp[2] = max;
+					temp[1] = Double.toString( min );
+					temp[2] = Double.toString( max );
 					str.add( temp );
 					temp = new String[5];
 				}
-				min = data.get(i)[18];
-				max = data.get(i)[18];
+				min = 1000.0;
+				max = -1000.0;
 				thisDay = data.get(i)[5].substring( 0, 8 );
 			}
-			if( data.get(i)[18].compareTo( min ) < 0 ) min = data.get(i)[18];
-			if( data.get(i)[18].compareTo( max ) > 0 ) max = data.get(i)[18];
+    		thisTemp = Double.parseDouble( data.get(i)[18] );
+			if( thisTemp < min ) min = thisTemp;
+			if( thisTemp > max ) max = thisTemp;
 			if( data.get(i)[4].matches( ".*9:00am.*" ) ){
     			temp[0] = data.get(i)[5];
     			temp[3] = data.get(i)[18];
