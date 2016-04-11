@@ -1,27 +1,51 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.scene.Scene;
+
 
 
 public class WeatherApp {
 
-    public static void main(String[] args) throws IOException{
+	public static final String SITES_FILE = "sites.txt";
+	public static final String FAVOURITES_FILE = "favourites.txt";
+
+    public static void main(String[] args) throws IOException {
 
 
 
         // Instantiate the lists
-        SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
-        SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
+        // SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
+        // SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 
 
         
+        // If sites list exists
+        // load from file
+        // else fetch new list
+        // siteList.load( SITES_FILE );
+        
+        
+        
+        
+        // If favourites exist
+        // load from file
+        // favList.load( FAVOURITES_FILE );
+        
+        
+        
+        
+        
+        
         // Download a list of sites in to the site list
-        Utility.FetchSites( siteList );
+        // Utility.FetchSites( siteList );
+        // siteList.save( SITES_FILE );
+        
 
 
-
+        
         /* FOR TESTING */
-        siteList.printList();
+        // siteList.printList();
 
         
         /*
@@ -47,14 +71,15 @@ public class WeatherApp {
         */
 
 
-
-        // Or the complete process short handed
         /*
+        // Or the complete process short handed
         favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Gympie" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Horsham" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
         */
+        
+        
         
         // Testing purpose only
         // favList.printList();
@@ -67,17 +92,20 @@ public class WeatherApp {
         // To write a list to disk
         // favList.save( "favourites.txt" );
         
-        // To load a list from disk
-        favList.load( "favourites.txt" );
-        
 
 
+        /*
         // To pull a list into a multi dimensional array
         // so that you can easily iterate over the items
-        String list[][] = favList.listFavs();
-        for( int i = 0; i < list.length; ++i ){
-            System.out.println( list[i][0] + " " + list[i][1] );
+        String list[][] = favList.list();
+        if( list != null ){
+        	for( int i = 0; i < list.length; ++i ){
+                System.out.println( list[i][0] + " " + list[i][1] );
+            }
         }
+        */
+        
+        
 
          /* GUI TEST */
         GuiHandler guiHandler = new GuiHandler();
@@ -85,7 +113,8 @@ public class WeatherApp {
 
         // Testing the short list function
         // The following block of code demonstrated use of the
-        // shortlist function 
+        // shortlist function
+        /*
         Scanner key = new Scanner( System.in );
         while( true ){
             SortedLinkedList<Site> newList = new SortedLinkedList<Site>();
@@ -97,6 +126,12 @@ public class WeatherApp {
             newList.printList();
             
         }
+        key.close();
+        */
+        
+        /* Testing GUI */
+        GuiHandler guiHandler = new GuiHandler();
+        guiHandler.launch(GuiHandler.class,args);
     }
 
 }
