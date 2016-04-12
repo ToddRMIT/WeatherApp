@@ -33,10 +33,6 @@ public class GuiDataWindow {
 		pane.setTop(getChart( site ) );
 		pane.setBottom( getTable( site ) );
 		
-		
-		
-		
-		
 		dataStage.setX( site.getCoords()[0] );
 		dataStage.setY( site.getCoords()[1] );
 		dataStage.setTitle( site.getName() );
@@ -68,13 +64,15 @@ public class GuiDataWindow {
         	series.setName( legends[i] );
         	List<String[]> data = site.getTimeSeries();
         	String date;
-        	Double value;
+        	Double value = null;
         	for( int j = 0; j < data.size(); ++j ){
         		date = data.get( j )[ 0 ];
         		if( date != null ){
         			date = date.substring( 6, 8 ) + "/" + date.substring( 4, 6 );
-            		value = Double.parseDouble( data.get( j )[ i + 1 ] );
-            		series.getData().add( new XYChart.Data( date, value ) );
+        			if( data.get(j)[i+1] != null ){
+        				value = Double.parseDouble( data.get( j )[ i + 1 ] );
+        				series.getData().add( new XYChart.Data( date, value ) );
+        			}
         		}
         	}
         	seriesList.add( series );
