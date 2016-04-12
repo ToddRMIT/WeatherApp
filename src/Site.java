@@ -25,8 +25,7 @@ public class Site{
     private Double temp;
     private List<String[]> data;
     private Double[] coords;
-    private boolean favourite;
-    private BooleanProperty fav;
+    private BooleanProperty favourite;
     
     private static String[] key = {
     		"sort_order", "wmo", "name", "history_product", "local_date_time",
@@ -46,8 +45,7 @@ public class Site{
         temp = null;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
-        favourite = false;
-        this.fav = new SimpleBooleanProperty(false);
+        favourite = new SimpleBooleanProperty(false);
     }
     
     
@@ -56,40 +54,25 @@ public class Site{
         this.url = url;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
-        if( fav.compareTo( "true" ) == 0 ){
-        	favourite = true;
-        	this.fav = new SimpleBooleanProperty(true);
-        }
-        else{
-        	favourite = false;
-        	this.fav = new SimpleBooleanProperty(false);
-        }
-        this.fav.addListener(new ChangeListener<Boolean>() {
+        if( fav.compareTo( "true" ) == 0 ) favourite = new SimpleBooleanProperty(true);
+        else favourite = new SimpleBooleanProperty(false);
+        this.favourite.addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
             	setFavourite( t1 );
             }
         });
     }
     
+
     
-    
-    //Allows cellfactory to pull data
-    public BooleanProperty favProperty(){ return fav; }
-    
-    //Allows toggle to SimplePropertyBoolean favourite
-	public void setFavourite(boolean b) {
-		fav.set(b);
-		toggleFavourite();
-	}
-    
-    
-    
+    public BooleanProperty favProperty(){ return favourite; }
+	public void setFavourite(boolean b){ favourite.set(b); }
+
     public String[] getKey(){ return key; }
     public String getName(){ return name; }
     public String getURL(){ return url; }
     public Double[] getCoords(){ return coords; }
-    public boolean isFavourite(){ return favourite; }
-    public void toggleFavourite(){ favourite = !favourite; }
+    public boolean isFavourite(){ return favourite.get(); }
     public Double getTemp(){
     	if( temp == null ){ updateTemp(); }
     	return temp;
@@ -214,7 +197,8 @@ public class Site{
     		String tokens[] = line.split(",");
     		coords[0] = Double.parseDouble( tokens[0] );
     		coords[1] = Double.parseDouble( tokens[1] );
-    		favourite = ( ( tokens[2].compareTo( "true" ) == 0 ) ? true: false );
+    		if( tokens[2].compareTo( "true" ) == 0 ) favourite.set(true);
+    		else favourite.set(false);
     		data = new ArrayList<String[]>();
     		while( ( line = reader.readLine() ) != null ){
     			tokens = line.split(",");
@@ -238,7 +222,7 @@ public class Site{
         try{
             file = new FileWriter( filename );
             out = new PrintWriter( file );
-            String fav = ( favourite ? "true": "false" );
+            String fav = ( favourite.get() ? "true": "false" );
             out.println( x + "," + y + "," + fav );
             for( int i = 0; i < data.size(); ++i ){
             	String str = "";

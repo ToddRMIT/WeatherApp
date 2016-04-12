@@ -140,7 +140,7 @@ public class GuiHandler extends Application {
 					delButtons[j].setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
 							grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
-							sites.get(favselected).toggleFavourite();
+							sites.get(favselected).setFavourite(false);
 						}
 					});
 					favButtons[j].setOnAction(new EventHandler<ActionEvent>() {
