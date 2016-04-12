@@ -9,6 +9,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 
 
 
@@ -20,6 +25,7 @@ public class Site{
     private List<String[]> data;
     private Double[] coords;
     private boolean favourite;
+    private BooleanProperty fav;
     
     private static String[] key = {
     		"sort_order", "wmo", "name", "history_product", "local_date_time",
@@ -38,8 +44,22 @@ public class Site{
         this.url = url;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
-        favourite = false;
+        
+        this.favourite = false;
+      
+        	this.fav = new SimpleBooleanProperty(false);
+        
+        this.fav.addListener(new ChangeListener<Boolean>() {
 
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+
+                System.out.println(name + " favorite set to: " + t1);
+               // if(fav.equals(false))
+                	
+               
+            }
+
+        });       
     }
     
     
@@ -53,7 +73,12 @@ public class Site{
     public void toggleFavourite(){ favourite = !favourite; }
     
     //Allows cellfactory to pull data
-    public boolean getFavourite(){ return favourite; }
+    public BooleanProperty favProperty(){ return fav; }
+    
+    //Allows toggle to SimplePropertyBoolean favourite
+	public void setFavourite(boolean b) {
+		fav.set(b);
+	}
     
     /**
      * Returns a list of arrays containing the time series data
@@ -273,5 +298,8 @@ public class Site{
     	}
     	
     }
+
+
+
     
 }

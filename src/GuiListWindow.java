@@ -27,15 +27,15 @@ import javafx.util.Callback;
 
 public class GuiListWindow {
 
-
+	
 	private static final String SITES_FILE = "sites.txt";
+	public static final String FAVOURITES_FILE = "favourites.txt";
 	private static final String GUI_LIST_PREFS_FILE = "guilistprefs.txt";
 	
 	static TableView<Site> table;
 	static Stage subStage; 
 
 	static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
-		
 		
 		
 		subStage = new Stage();
@@ -69,9 +69,10 @@ public class GuiListWindow {
 		urlColumn.setCellValueFactory(new PropertyValueFactory<>("URL"));
 		
 		//Favorite column
-		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
-		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("Favourite"));
+		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("fav");
+		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("fav"));
 		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
+			
 			public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
 		    return new CheckBoxTableCell<Site, Boolean>();
 		}});
@@ -80,8 +81,9 @@ public class GuiListWindow {
 		//Append columns to table and fill in data
 		table = new TableView<>();
 		table.setMinSize(640, 480);
-
+		
 		table.setItems(getExtensiveSite());
+		//table.setEditable(true);
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
@@ -140,12 +142,26 @@ public class GuiListWindow {
 	
 	//Temporary Data-Retrieval for testing modified from utilities
 	public static  ObservableList<Site> getExtensiveSite(){
+		
 		ObservableList<Site> lsites = FXCollections.observableArrayList();
 	    SortedLinkedList<Site> sites = new SortedLinkedList<Site>();
+	    SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
+	    
+	    favList.load( FAVOURITES_FILE );
 	    sites.load( SITES_FILE );
+	    
 	    String list[][] = sites.list();
+	    String flist[][] = favList.list();
+	    
 	    for( int i = 0; i < list.length; ++i ){
 	    	lsites.add( new Site( list[i][0], list[i][1] ) );
+	    	
+	    	 for( int j = 0; j < flist.length; ++j ){
+	    		 if(list[i][0].equals(flist[j][0])){
+	    			 System.out.println("Favorite match:" + " : " + list[i][0]);
+	    			 lsites.get(lsites.size() - 1).setFavourite(true);
+	    		 }
+	    	 }
 	    }
 		return lsites;
 	}
@@ -153,7 +169,7 @@ public class GuiListWindow {
 	
 	
 	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
-		private final CheckBox checkBox;
+		private CheckBox checkBox;
 		private ObservableValue<T> ov;
 		public CheckBoxTableCell() {
 			this.checkBox = new CheckBox();
