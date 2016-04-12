@@ -30,11 +30,11 @@ public class GuiHandler extends Application {
 	
 	Stage window;
     static boolean listOpen;
-    private ObservableList<Site> sites;
+
 
 	
-	public GuiHandler( ObservableList<Site> sites ) {
-		this.sites = sites;
+	public GuiHandler( ) {
+
 	}
 
 	@Override
@@ -42,6 +42,11 @@ public class GuiHandler extends Application {
 
 		window = primaryStage;
 		window.setTitle("Weather app");
+		
+		// Instantiate a list of Site(s) and
+		// load Site data from disk
+		ObservableList<Site> sites = FXCollections.observableArrayList();
+		loadSites( sites );
 		
 		
 		
@@ -79,7 +84,7 @@ public class GuiHandler extends Application {
 				if(listOpen == false){
 					try {
 						listOpen = true;
-						GuiListWindow.GuiWindow(primaryStage,"site list" );
+						GuiListWindow.GuiWindow(primaryStage, sites );
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -107,11 +112,14 @@ public class GuiHandler extends Application {
 		
 		
 		//Creates favourite buttons based on fav list and sets preferences
-		Button favButtons[] = new Button[favList.getLength()];
-		Button delButtons[] = new Button[favList.getLength()];
+		int count = 0;
+		for( int i = 0; i < sites.size(); ++i ){ if( sites.get(i).isFavourite() ) ++count; }
+		//Button favButtons[] = new Button[favList.getLength()];
+		//Button delButtons[] = new Button[favList.getLength()];
+		Button favButtons[] = new Button[count];
+		Button delButtons[] = new Button[count];
 		
-		
-		
+		/*
 		favList.updateTemp();
 		String list[][] = favList.list();
 		if( list != null ){
@@ -128,10 +136,50 @@ public class GuiHandler extends Application {
 				grid.add( delButtons[i], 1,i );
 			}
 		}
-		
+		*/
+		if( sites != null ){
+			int j = 0;
+			for( int i = 0; i < sites.size(); ++i ){
+				if( sites.get(i).isFavourite() ){
+					String format = "%-30s%5s";
+					String str = String.format( format, sites.get(i).getName(), "99" );
+					favButtons[j] = new Button( str );
+					favButtons[j].setTextAlignment(TextAlignment.LEFT);
+					favButtons[j].setMinWidth(200);
+					grid.add( favButtons[j], 0, j);
+					//New delete buttons that link to each fav button
+					delButtons[j] = new Button("X");
+					delButtons[j].setMinWidth(20);
+					grid.add( delButtons[j], 1, j );
+					final int selected = j;
+					delButtons[j].setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
+							String str = favButtons[selected].getText();
+							String tokens[] = str.split(" ");
+							favList.remove(tokens[0]);
+							// favList.printList(); /* Testing in console */
+							favList.save(FAVOURITES_FILE);
+						}
+					});
+					final int favselected = i;
+					favButtons[j].setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							try {
+								//listOpen = true;
+								GuiDataWindow.dataWindow(primaryStage, sites.get(favselected) );
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}	
+						}
+					});
+					++j;
+				}
+			}
+		}
 
 		
-		
+		/*
 		//Button Press event handler for the delete buttons
 		if( list != null ){
 			for( int i = 0; i < list.length; ++i ) {
@@ -142,14 +190,14 @@ public class GuiHandler extends Application {
 						String str = favButtons[selected].getText();
 						String tokens[] = str.split(" ");
 						favList.remove(tokens[0]);
-						// favList.printList(); /* Testing in console */
 						favList.save(FAVOURITES_FILE);
 					}
 				});
 			}
 		}
+		*/
 		
-		
+		/*
 		//Button Press event handler for the favourites buttons to open data window
 		if( list != null ){
 			for( int i = 0; i < list.length; ++i ) {
@@ -166,6 +214,7 @@ public class GuiHandler extends Application {
 				});
 			}
 		}
+		*/
 		
 		
 		
@@ -255,6 +304,26 @@ public class GuiHandler extends Application {
 			if( out != null ) out.close();
 		}
 	}
+	
+	
+	
+	public static void loadSites( ObservableList<Site> sites ){
+    	FileReader file = null;
+    	BufferedReader buffer = null;
+    	String line = null;
+    	try{
+    		file = new FileReader( SITES_FILE );
+        	buffer = new BufferedReader( file );
+        	String[] tokens = null;
+    		while( ( line = buffer.readLine() ) != null ){
+        		tokens = line.split(",");
+        		sites.add( new Site( tokens[0], tokens[1], tokens[2] ) );
+        	}
+    	}
+    	catch (IOException e ){
+    		System.err.println( "Error: " + e );
+    	}
+    }
 	
 	
 

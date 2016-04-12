@@ -29,12 +29,13 @@ public class GuiListWindow {
 	static TableView<Site> table;
 	static Stage subStage; 
 
-	static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
+	//static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
+	static void GuiWindow(Stage primaryStage, ObservableList sites ) throws IOException{
 		
 		
 		
 		subStage = new Stage();
-		subStage.setTitle(stageName);
+		subStage.setTitle( "Site List" );
 		subStage.initModality(Modality.WINDOW_MODAL);
 		
 		
@@ -75,7 +76,7 @@ public class GuiListWindow {
 		//Append columns to table and fill in data
 		table = new TableView<>();
 		table.setMinSize(640, 480);
-		table.setItems(getExtensiveSite());
+		table.setItems(sites);
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
