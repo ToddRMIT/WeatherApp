@@ -9,6 +9,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 
 
 
@@ -21,6 +26,7 @@ public class Site{
     private List<String[]> data;
     private Double[] coords;
     private boolean favourite;
+    private BooleanProperty fav;
     
     private static String[] key = {
     		"sort_order", "wmo", "name", "history_product", "local_date_time",
@@ -41,6 +47,7 @@ public class Site{
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
         favourite = false;
+        this.fav = new SimpleBooleanProperty(false);
     }
     
     
@@ -49,9 +56,31 @@ public class Site{
         this.url = url;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
-        if( fav.compareTo( "true" ) == 0 ) favourite = true;
-        else favourite = false;
+        if( fav.compareTo( "true" ) == 0 ){
+        	favourite = true;
+        	this.fav = new SimpleBooleanProperty(true);
+        }
+        else{
+        	favourite = false;
+        	this.fav = new SimpleBooleanProperty(false);
+        }
+        this.fav.addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+            	setFavourite( t1 );
+            }
+        });
     }
+    
+    
+    
+    //Allows cellfactory to pull data
+    public BooleanProperty favProperty(){ return fav; }
+    
+    //Allows toggle to SimplePropertyBoolean favourite
+	public void setFavourite(boolean b) {
+		fav.set(b);
+		toggleFavourite();
+	}
     
     
     

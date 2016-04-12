@@ -66,7 +66,7 @@ public class GuiListWindow {
 		
 		//Favorite column
 		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
-		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("favourite"));
+		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("fav"));
 		
 		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
 			public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
