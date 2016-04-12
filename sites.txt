@@ -22,7 +22,6 @@ Armidale Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95773.json
 Avalon,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94854.json
 Ayr,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95295.json
 Badgerys Creek,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94752.json
-Badgingarra,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94603.json
 Bairnsdale,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94912.json
 Balladonia,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94642.json
 Ballarat,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94852.json
@@ -36,7 +35,6 @@ Barimunya,http://www.bom.gov.au/fwo/IDW60801/IDW60801.99313.json
 Barraba,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94761.json
 Barrow Island,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95304.json
 Batchelor,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94125.json
-Batemans Bay,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94941.json
 Bathurst,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94730.json
 Bathurst Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94729.json
 Beaudesert AWS,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95575.json
@@ -82,7 +80,6 @@ Bulga Downs,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94444.json
 Bulman,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94143.json
 Bunbury,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94604.json
 Bundaberg,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94387.json
-Bundoora,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95873.json
 Burketown Airport,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94260.json
 Burnie,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94958.json
 Burnie Port,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95963.json
@@ -174,6 +171,7 @@ Coondewanna,http://www.bom.gov.au/fwo/IDW60801/IDW60801.99312.json
 Cootamundra,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94714.json
 Corowa,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95895.json
 Corrigin,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94633.json
+Corryong Airport,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94899.json
 Cowra,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95721.json
 Cranbourne,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94879.json
 Creal Reef,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94371.json
@@ -219,9 +217,11 @@ Edi Upper,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95838.json
 Edinburgh,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95676.json
 Edithburgh,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94809.json
 Eildon Fire Tower,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94881.json
+Elliott,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94236.json
 Elliston,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94656.json
 Emerald,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94363.json
 Emu Creek,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94318.json
+Eneabba,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94414.json
 Ernabella/Pukatja,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94474.json
 Esperance,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94638.json
 Esperance Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95638.json
@@ -263,6 +263,7 @@ Gladstone Airport,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94381.json
 Glen Innes Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94588.json
 Gluepot,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95668.json
 Gold Coast Seaway,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94580.json
+Goomalling,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95631.json
 Gooseberry Hill,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94615.json
 Gosford,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94782.json
 Gosnells,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95604.json
@@ -459,7 +460,7 @@ Mortlake,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94840.json
 Moruya Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95937.json
 Moruya Heads,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94937.json
 Moss Vale,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94746.json
-Mount Barker,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94806.json
+Mount Barker,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94630.json
 Mount Baw Baw,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95901.json
 Mount Boyce,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94743.json
 Mount Buller,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94894.json
@@ -532,7 +533,6 @@ Omeo,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94908.json
 Ongerup,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95628.json
 Onslow Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95305.json
 Oodnadatta,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94476.json
-Orange AgIn,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95725.json
 Orange Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95726.json
 Orbost,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95918.json
 Orford,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95984.json
@@ -557,7 +557,6 @@ Penrith,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94763.json
 Perisher Valley,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94915.json
 Perth,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94608.json
 Perth Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94610.json
-Phillip Island,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94883.json
 Pindari Dam,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94544.json
 Pingelly,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95616.json
 Pirlangimpi,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94119.json

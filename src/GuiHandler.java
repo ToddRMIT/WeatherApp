@@ -115,7 +115,7 @@ public class GuiHandler extends Application {
 		
 		
 		
-		favList.updateTemp();
+		//favList.updateTemp();
 		String list[][] = favList.list();
 		
 		if( list != null ){

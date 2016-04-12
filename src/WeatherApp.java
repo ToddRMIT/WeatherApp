@@ -15,7 +15,7 @@ public class WeatherApp {
 
 
         //Instantiate the lists
-        //SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
+         SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
          SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 
 
@@ -23,7 +23,7 @@ public class WeatherApp {
         // If sites list exists
         // load from file
         // else fetch new list
-        // siteList.load( SITES_FILE );
+         siteList.load( SITES_FILE );
         
         
         
@@ -39,7 +39,7 @@ public class WeatherApp {
         
         // Download a list of sites in to the site list
          //Utility.FetchSites( siteList );
-         //siteList.save( SITES_FILE );
+        // siteList.save( SITES_FILE );
         
 
 
@@ -72,25 +72,25 @@ public class WeatherApp {
 
 
         /*
-        // Or the complete process short handed
+         Or the complete process short handed
         favList.add( new Favourite( siteList.search( "Townsville" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Gympie" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Horsham" ), 28 ) );
         favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
         */
         
-        
-        
+         
+         favList.add( new Favourite( siteList.search( "Avalon" ), 28 ) );
         // Testing purpose only
          //favList.printList();
 
         // Now lets remove a favourite
         // favList.remove( "Horsham" );
-        // favList.printList();        
+         favList.printList();        
 
 
         // To write a list to disk
-        // favList.save( "favourites.txt" );
+         favList.save( "favourites.txt" );
         
 
 
