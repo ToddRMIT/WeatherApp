@@ -31,7 +31,7 @@ public class GuiDataWindow {
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();
 		pane.setTop(getChart( site ) );
-		pane.setBottom( getTable( site ) );
+		//pane.setBottom( getTable( site ) );
 		
 		dataStage.setX( site.getCoords()[0] );
 		dataStage.setY( site.getCoords()[1] );
@@ -90,31 +90,26 @@ public class GuiDataWindow {
 	
 
 	private static BorderPane getTable( Site site ){
-		BorderPane dataPane = new BorderPane();
-		TableView<Data> dataTable = new TableView<Data>();
+		final BorderPane dataPane = new BorderPane();
+		final TableView<Data> dataTable = new TableView<>();
+		List<String[]> siteData = site.getData();
+		final String[] thisData = siteData.get(0);
+		final ObservableList<Data> data = FXCollections.observableArrayList( new Data( thisData ) );
+		dataTable.setEditable( false );
 		String[] keys = site.getKey();
-		TableColumn<Data, String> columns[] = new TableColumn[keys.length];
+		TableColumn columns[] = new TableColumn[ keys.length ];
 		for( int i = 0; i < keys.length; ++i ){
-			columns[i] = new TableColumn<Data, String>( keys[i] );
+			columns[i] = new TableColumn( keys[i] );
 			columns[i].setCellValueFactory( new PropertyValueFactory<>( keys[i] ) );
 		}
-		
-		ObservableList<Data> data = FXCollections.observableArrayList();
-		List<String[]> siteData = site.getData();
-		String[] line;
-		for( int i = 0; i < siteData.size(); ++i ){
-			line = new String[ keys.length ];
-			for( int j = 0; j < keys.length; ++j ){
-				line[j] = siteData.get(i)[j];
-			}
-			data.add( new Data( line ) );
-		}
-		
-		dataTable.setItems( data );
+		dataTable.setItems(data);
 		dataTable.getColumns().addAll( columns );
-		dataPane.setCenter(dataTable);
+		dataPane.setCenter( dataTable );
 		return dataPane;
 	}
+	
+	
+	
 
 
 

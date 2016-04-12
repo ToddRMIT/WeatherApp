@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,10 +30,11 @@ public class GuiHandler extends Application {
 	
 	Stage window;
     static boolean listOpen;
+    private ObservableList<Site> sites;
 
 	
-	public GuiHandler() {
-	
+	public GuiHandler( ObservableList<Site> sites ) {
+		this.sites = sites;
 	}
 
 	@Override
@@ -40,6 +42,8 @@ public class GuiHandler extends Application {
 
 		window = primaryStage;
 		window.setTitle("Weather app");
+		
+		
 		
 		
 		

@@ -42,6 +42,16 @@ public class Site{
     }
     
     
+    public Site( String name, String url, String fav ){
+        this.name = name;
+        this.url = url;
+        data = null;
+        coords = new Double[]{ 100.0, 100.0 };
+        if( fav.compareTo( "true" ) == 0 ) favourite = true;
+        else favourite = false;
+    }
+    
+    
     
     public String[] getKey(){ return key; }
     public String getName(){ return name; }

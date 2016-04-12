@@ -74,4 +74,5 @@ public class Data {
 		wind_spd_kmh = data[33];
 		wind_spd_kt = data[34];
 	}
+	public String getSortOrder(){ return sort_order; }
 }
