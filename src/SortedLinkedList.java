@@ -265,6 +265,7 @@ public class SortedLinkedList<T>{
     public String[][] list(){
     	String str[][] = null;
     	Node thisNode = head;
+    	System.out.println(head);
     	if( head == null ) return str;
     	if( head.data instanceof Favourite ){
     		str = new String[length][2];

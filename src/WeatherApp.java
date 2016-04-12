@@ -14,9 +14,9 @@ public class WeatherApp {
 
 
 
-        // Instantiate the lists
-        // SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
-        // SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
+        //Instantiate the lists
+        //SortedLinkedList<Site> siteList = new SortedLinkedList<Site>();
+         SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 
 
         
@@ -30,7 +30,7 @@ public class WeatherApp {
         
         // If favourites exist
         // load from file
-        // favList.load( FAVOURITES_FILE );
+         favList.load( FAVOURITES_FILE );
         
         
         
@@ -38,14 +38,14 @@ public class WeatherApp {
         
         
         // Download a list of sites in to the site list
-        // Utility.FetchSites( siteList );
-        // siteList.save( SITES_FILE );
+         //Utility.FetchSites( siteList );
+         //siteList.save( SITES_FILE );
         
 
 
         
         /* FOR TESTING */
-        // siteList.printList();
+         //siteList.printList();
 
         
         /*
@@ -82,7 +82,7 @@ public class WeatherApp {
         
         
         // Testing purpose only
-        // favList.printList();
+         //favList.printList();
 
         // Now lets remove a favourite
         // favList.remove( "Horsham" );
@@ -94,16 +94,16 @@ public class WeatherApp {
         
 
 
-        /*
+        
         // To pull a list into a multi dimensional array
         // so that you can easily iterate over the items
-        String list[][] = favList.list();
-        if( list != null ){
-        	for( int i = 0; i < list.length; ++i ){
-                System.out.println( list[i][0] + " " + list[i][1] );
-            }
-        }
-        */
+       // String list[][] = favList.list();
+       // if( list != null ){
+        	//for( int i = 0; i < list.length; ++i ){
+             //   System.out.println( list[i][0] + " " + list[i][1] );
+           // }
+        //}
+        
         
         
 
@@ -128,10 +128,8 @@ public class WeatherApp {
         }
         key.close();
         */
+ 
         
-        /* Testing GUI */
-        GuiHandler guiHandler = new GuiHandler();
-        guiHandler.launch(GuiHandler.class,args);
     }
 
 }

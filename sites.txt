@@ -37,8 +37,10 @@ Barraba,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94761.json
 Barrow Island,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95304.json
 Batchelor,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94125.json
 Batemans Bay,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94941.json
+Bathurst,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94730.json
 Bathurst Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94729.json
 Beaudesert AWS,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95575.json
+Bedourie,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94334.json
 Bedout Island,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94310.json
 Beerburrum,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95566.json
 Bega,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95931.json
@@ -56,6 +58,7 @@ Birdsville,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95482.json
 Black Point,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94134.json
 Blackall,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95351.json
 Blackwater Airport,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94398.json
+Bollon,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94513.json
 Bombala,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94928.json
 Bombala AWS,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94929.json
 Borroloola,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94152.json
@@ -114,6 +117,7 @@ Cape Sorell,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94974.json
 Cape Wessel,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94147.json
 Cape Willoughby,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94822.json
 Cardwell,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94292.json
+Carnamah,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94415.json
 Carnarvon,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94300.json
 Carnegie,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94451.json
 Carters Bore,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94347.json
@@ -304,6 +308,7 @@ Hughenden,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94343.json
 Hume Reservoir,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94901.json
 Hunters Hill,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94878.json
 Hyden,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95627.json
+Ingham,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95291.json
 Injune,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94511.json
 Inner Beacon,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94590.json
 Innisfail,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94291.json
@@ -331,6 +336,7 @@ Katherine,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94132.json
 Katoomba,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94744.json
 Keith,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94816.json
 Keith West,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95815.json
+Kellerberrin,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95603.json
 Kempsey Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94785.json
 Kerang,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94844.json
 Khancoban,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94919.json
@@ -386,6 +392,7 @@ Longerenong,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95835.json
 Longreach,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94346.json
 Lord Howe Island,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94995.json
 Lord Howe Island Windy Point,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95995.json
+Lostock,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95772.json
 Low Head,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95964.json
 Low Isles,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94285.json
 Low Rocky Point,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95961.json
@@ -477,6 +484,7 @@ Mt Avoca,http://www.bom.gov.au/fwo/IDV60801/IDV60801.99051.json
 Mt Misery,http://www.bom.gov.au/fwo/IDV60801/IDV60801.99052.json
 Mudgee,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94727.json
 Mullewa,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94411.json
+Mungindi,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94520.json
 Munglinup West,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95644.json
 Murganella Airstrip,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94109.json
 Murray Bridge,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95812.json
@@ -495,6 +503,7 @@ Neptune Island,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94804.json
 Nerriga,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94943.json
 New May Downs,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94349.json
 Newcastle Nobbys,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94774.json
+Newcastle University,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94781.json
 Newdegate,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94628.json
 Newman Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94317.json
 Ngayawili (Elcho Island),http://www.bom.gov.au/fwo/IDD60801/IDD60801.95146.json
@@ -536,17 +545,20 @@ Palmerville,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94276.json
 Paraburdoo,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94316.json
 Parafield,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95677.json
 Parawa West,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94811.json
+Pardoo,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94311.json
 Parkes Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95717.json
 Parndana,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94807.json
 Parramatta,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94764.json
 Paynes Find,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94404.json
 Peak Hill,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94721.json
 Pearce,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94612.json
+Pemberton,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95613.json
 Penrith,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94763.json
 Perisher Valley,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94915.json
 Perth,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94608.json
 Perth Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94610.json
 Phillip Island,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94883.json
+Pindari Dam,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94544.json
 Pingelly,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95616.json
 Pirlangimpi,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94119.json
 Point Fawcett,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94122.json
@@ -566,8 +578,10 @@ Port Pirie Airport AWS,http://www.bom.gov.au/fwo/IDS60801/IDS60801.99749.json
 Portland Airport,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94828.json
 Portland Harbour,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95826.json
 Pound Creek,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94886.json
+Price,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95669.json
 Proserpine,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94365.json
 Prospect,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94736.json
+Quirindi,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95746.json
 Rabbit Flat,http://www.bom.gov.au/fwo/IDD60801/IDD60801.95322.json
 Rainbow Beach,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94564.json
 Ravensthorpe,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94636.json
@@ -596,6 +610,7 @@ Rutherglen,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95837.json
 Salmon Gums RS,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95639.json
 Samuel Hill,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94370.json
 Scherger,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94171.json
+Scone,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94738.json
 Scone Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95758.json
 Scoresby,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95867.json
 Scotts Peak,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95958.json
@@ -701,6 +716,7 @@ Warragul (Nilma North),http://www.bom.gov.au/fwo/IDV60801/IDV60801.99806.json
 Warrnambool,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94837.json
 Warruwi,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94139.json
 Warwick,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94555.json
+Watarrka,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94323.json
 Wattamolla,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95752.json
 Wave Hill (Kalkarindji),http://www.bom.gov.au/fwo/IDD60801/IDD60801.94229.json
 Weipa,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94170.json
@@ -716,6 +732,7 @@ Williamson,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95370.json
 Williamtown,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94776.json
 Willis Island,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94299.json
 Wilsons Promontory,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94893.json
+Wiluna,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94439.json
 Windy Harbour,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94640.json
 Winton,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94342.json
 Witchcliffe,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95641.json
@@ -733,11 +750,13 @@ Yanakie,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94911.json
 Yanco,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95705.json
 Yarram Airport,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95890.json
 Yarrawonga,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94862.json
+Yass,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95723.json
 Yeelirrie,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94440.json
 Yeppoon,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94373.json
 Yongala,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94679.json
 York,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94623.json
 Young,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94712.json
+Yuendumu,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94324.json
 Yulara,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94462.json
 Yunta,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94684.json
 kunanyi / Mount Wellington,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95979.json

@@ -21,7 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.text.TextAlignment;
->>>>>>> origin/Todd
+
 
 
 
@@ -117,6 +117,7 @@ public class GuiHandler extends Application {
 		
 		favList.updateTemp();
 		String list[][] = favList.list();
+		
 		if( list != null ){
 			for( int i = 0; i < list.length; ++i ) {
 				String format = "%-30s%5s";
