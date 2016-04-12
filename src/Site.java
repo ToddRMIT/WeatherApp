@@ -17,6 +17,7 @@ public class Site{
 
     private String name;
     private String url;
+    private Double temp;
     private List<String[]> data;
     private Double[] coords;
     private boolean favourite;
@@ -36,6 +37,7 @@ public class Site{
     public Site( String name, String url ){
         this.name = name;
         this.url = url;
+        temp = null;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
         favourite = false;
@@ -59,7 +61,31 @@ public class Site{
     public Double[] getCoords(){ return coords; }
     public boolean isFavourite(){ return favourite; }
     public void toggleFavourite(){ favourite = !favourite; }
+    public Double getTemp(){
+    	if( temp == null ){ updateTemp(); }
+    	return temp;
+    }
     
+    
+    
+    public void updateTemp(){
+    	try {
+			InputStreamReader isr = getJSON();
+			BufferedReader reader = new BufferedReader( isr );
+			String line;
+			while( ( line = reader.readLine() ) != null ){
+				if( line.matches( ".*air_temp.*" ) ){
+					int start = line.indexOf(": ");
+					int end = line.indexOf(",");
+					temp = Double.parseDouble( line.substring(start+2, end) );
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
     
     
     

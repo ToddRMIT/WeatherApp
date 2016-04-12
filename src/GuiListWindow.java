@@ -66,11 +66,13 @@ public class GuiListWindow {
 		
 		//Favorite column
 		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
-		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("Favourite"));
+		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("favourite"));
+		
 		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
 			public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
 		    return new CheckBoxTableCell<Site, Boolean>();
 		}});
+		
 		
 		
 		//Append columns to table and fill in data

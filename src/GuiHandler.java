@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -96,11 +97,11 @@ public class GuiHandler extends Application {
 		});
 		
 		
-		
+		/*
 		//Loads favourites from file
 		SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 		favList.load( FAVOURITES_FILE );
-		
+		*/
 		
 		
 		// Sets flow pane preferences
@@ -119,30 +120,13 @@ public class GuiHandler extends Application {
 		Button favButtons[] = new Button[count];
 		Button delButtons[] = new Button[count];
 		
-		/*
-		favList.updateTemp();
-		String list[][] = favList.list();
-		if( list != null ){
-			for( int i = 0; i < list.length; ++i ) {
-				String format = "%-30s%5s";
-				String str = String.format( format, list[i][0],list[i][1] );
-				favButtons[i] = new Button( str );
-				favButtons[i].setTextAlignment(TextAlignment.LEFT);
-				favButtons[i].setMinWidth(200);
-				grid.add( favButtons[i], 0, i);
-				//New delete buttons that link to each fav button
-				delButtons[i] = new Button("X");
-				delButtons[i].setMinWidth(20);
-				grid.add( delButtons[i], 1,i );
-			}
-		}
-		*/
+
 		if( sites != null ){
 			int j = 0;
 			for( int i = 0; i < sites.size(); ++i ){
 				if( sites.get(i).isFavourite() ){
 					String format = "%-30s%5s";
-					String str = String.format( format, sites.get(i).getName(), "99" );
+					String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
 					favButtons[j] = new Button( str );
 					favButtons[j].setTextAlignment(TextAlignment.LEFT);
 					favButtons[j].setMinWidth(200);
@@ -152,21 +136,16 @@ public class GuiHandler extends Application {
 					delButtons[j].setMinWidth(20);
 					grid.add( delButtons[j], 1, j );
 					final int selected = j;
+					final int favselected = i;
 					delButtons[j].setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
 							grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
-							String str = favButtons[selected].getText();
-							String tokens[] = str.split(" ");
-							favList.remove(tokens[0]);
-							// favList.printList(); /* Testing in console */
-							favList.save(FAVOURITES_FILE);
+							sites.get(favselected).toggleFavourite();
 						}
 					});
-					final int favselected = i;
 					favButtons[j].setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
 							try {
-								//listOpen = true;
 								GuiDataWindow.dataWindow(primaryStage, sites.get(favselected) );
 							} catch (IOException e1) {
 								e1.printStackTrace();
@@ -234,7 +213,8 @@ public class GuiHandler extends Application {
         	@Override 
         	public void handle(final WindowEvent e){
         		savePrefs( window.getX(), window.getY() );
-        		favList.save(FAVOURITES_FILE);
+        		saveSites( sites );
+        		//favList.save(FAVOURITES_FILE);
         	}
         });
         window.show();
@@ -325,6 +305,23 @@ public class GuiHandler extends Application {
     	}
     }
 	
+	
+	
+	public static void saveSites( ObservableList<Site> sites ){
+		try( BufferedWriter buffer = new BufferedWriter( new PrintWriter( SITES_FILE ) ) ){
+			for( int i = 0; i < sites.size(); ++i ){
+				String str = sites.get(i).getName() + ",";
+				str = str.concat( sites.get(i).getURL() + "," );
+				String fav = ( sites.get(i).isFavourite() ? "true" : "false" );
+				str = str.concat( fav );
+				buffer.write( str );
+				buffer.newLine();
+			}
+		}
+		catch( IOException e ){
+			System.err.println( "Error saving sites: " + e );
+		}
+	}
 	
 
 }

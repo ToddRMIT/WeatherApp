@@ -14,10 +14,11 @@ public class Favourite extends Site{
         super( site.getName(), site.getURL() );
         this.currentTemp = currentTemp;
     }
-
+    /*
     public double getTemp(){
         return currentTemp;
     }
+    */
 
     public String print(){
         String str = "";

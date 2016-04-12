@@ -27,11 +27,24 @@ public class GuiDataWindow {
 	public static void dataWindow(Stage primaryStage, Site site ) throws IOException {
 		
 		site.getData();
+		String[] keys = site.getKey();
+		
+		
+		TableView table = new TableView();
+		TableColumn[] columns = new TableColumn[ keys.length ];
+		for( int i = 0; i < keys.length; ++i ){
+			columns[i] = new TableColumn( keys[i] );
+			
+		}
+		table.getColumns().addAll( columns );
+		
+		
+		
 		
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();
 		pane.setTop(getChart( site ) );
-		//pane.setBottom( getTable( site ) );
+		pane.setBottom( table );
 		
 		dataStage.setX( site.getCoords()[0] );
 		dataStage.setY( site.getCoords()[1] );
@@ -87,31 +100,5 @@ public class GuiDataWindow {
         pane.setMaxHeight(400);
 		return pane;
 	}
-	
-
-	private static BorderPane getTable( Site site ){
-		final BorderPane dataPane = new BorderPane();
-		final TableView<Data> dataTable = new TableView<>();
-		List<String[]> siteData = site.getData();
-		final String[] thisData = siteData.get(0);
-		final ObservableList<Data> data = FXCollections.observableArrayList( new Data( thisData ) );
-		dataTable.setEditable( false );
-		String[] keys = site.getKey();
-		TableColumn columns[] = new TableColumn[ keys.length ];
-		for( int i = 0; i < keys.length; ++i ){
-			columns[i] = new TableColumn( keys[i] );
-			columns[i].setCellValueFactory( new PropertyValueFactory<>( keys[i] ) );
-		}
-		dataTable.setItems(data);
-		dataTable.getColumns().addAll( columns );
-		dataPane.setCenter( dataTable );
-		return dataPane;
-	}
-	
-	
-	
-
-
-
 	
 }
