@@ -49,6 +49,9 @@ public class GuiHandler extends Application {
 		ObservableList<Site> sites = FXCollections.observableArrayList();
 		loadSites( sites );
 		
+		//Update siteList from BOM
+		Utility.FetchSites( sites );
+		
 		
 		
 		

@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
@@ -18,7 +19,7 @@ import javafx.beans.value.ObservableValue;
 
 
 
-public class Site{
+public class Site implements Comparable<Site>{
 
     private String name;
     private String url;
@@ -76,6 +77,12 @@ public class Site{
     public Double getTemp(){
     	if( temp == null ){ updateTemp(); }
     	return temp;
+    }
+    
+    
+    // Overide compareTo method to make Site sortable
+    public int compareTo( Site s ){
+    	return this.name.toUpperCase().compareTo( s.name.toUpperCase() );
     }
     
     
