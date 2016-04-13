@@ -95,17 +95,19 @@ public class GuiDataWindow {
 	
 	
 	private static BorderPane getTable( Site site ){
-		TableView<Data> table = new TableView<>();
 		BorderPane pane = new BorderPane();
+		
 		String[] keys = site.getKey();
 		List<String[]> dataList = site.getData();
 		String[] tokens = new String[keys.length];
 		ObservableList<Data> data = FXCollections.observableArrayList();
-		for( int i = 0; i < keys.length; ++i ){
+		for( int i = 0; i < dataList.size(); ++i ){
 			tokens = dataList.get(i);
 			data.add( new Data( tokens ) );
 		}
-
+		
+		
+		TableView<Data> table = new TableView<>( data );
 		TableColumn[] column = new TableColumn[keys.length];
 		for( int i = 0; i < keys.length; ++i ){
 			column[i] = new TableColumn<Data, String>( keys[i] );
@@ -117,6 +119,7 @@ public class GuiDataWindow {
 		table.getColumns().addAll( column );
 		table.setItems(data);
 		pane.setCenter(table);
+		pane.setPrefWidth(600);
 		return pane;
 	}
 	
