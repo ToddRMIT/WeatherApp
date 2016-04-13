@@ -114,9 +114,12 @@ public class GuiDataWindow {
 			column[i].setCellValueFactory( new PropertyValueFactory<>( keys[i]) );
 		}
 
-		
-		
 		table.getColumns().addAll( column );
+		// Ignore certain columns
+		int[] ignore = { 0, 1, 2, 3, 5, 6, 7, 8 };
+		for( int i = 0; i < ignore.length; ++i ){
+			column[ignore[i]].setVisible(false);
+		}
 		table.setItems(data);
 		pane.setCenter(table);
 		pane.setPrefWidth(600);

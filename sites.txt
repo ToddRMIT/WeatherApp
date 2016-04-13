@@ -30,7 +30,7 @@ Ballera,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95487.json,false
 Ballina,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94596.json,false
 Balranald,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94696.json,false
 Banana Bank,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94591.json,false
-Bankstown,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94765.json,false
+Bankstown,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94765.json,true
 Barcaldine,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94350.json,false
 Barimunya,http://www.bom.gov.au/fwo/IDW60801/IDW60801.99313.json,false
 Barraba,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94761.json,false
