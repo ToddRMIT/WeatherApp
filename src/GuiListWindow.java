@@ -29,12 +29,13 @@ public class GuiListWindow {
 	static TableView<Site> table;
 	static Stage subStage; 
 
-	static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
+	//static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
+	static void GuiWindow(Stage primaryStage, ObservableList sites ) throws IOException{
 		
 		
 		
 		subStage = new Stage();
-		subStage.setTitle(stageName);
+		subStage.setTitle( "Site List" );
 		subStage.initModality(Modality.WINDOW_MODAL);
 		
 		
@@ -65,17 +66,19 @@ public class GuiListWindow {
 		
 		//Favorite column
 		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
-		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("Favourite"));
+		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("fav"));
+		
 		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
 			public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
 		    return new CheckBoxTableCell<Site, Boolean>();
 		}});
 		
 		
+		
 		//Append columns to table and fill in data
 		table = new TableView<>();
 		table.setMinSize(640, 480);
-		table.setItems(getExtensiveSite());
+		table.setItems(sites);
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
@@ -130,7 +133,7 @@ public class GuiListWindow {
 	}
 	
 	
-	
+	/*
 	//Temporary Data-Retrieval for testing modified from utilities
 	public static  ObservableList<Site> getExtensiveSite(){
 		ObservableList<Site> lsites = FXCollections.observableArrayList();
@@ -142,6 +145,7 @@ public class GuiListWindow {
 	    }
 		return lsites;
 	}
+	*/
 	
 	
 	

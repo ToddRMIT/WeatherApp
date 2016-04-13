@@ -27,6 +27,10 @@ public class GuiDataWindow {
 	public static void dataWindow(Stage primaryStage, Site site ) throws IOException {
 		
 		site.getData();
+		String[] keys = site.getKey();
+		
+		
+		
 		
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();
@@ -60,7 +64,7 @@ public class GuiDataWindow {
         List<XYChart.Series> seriesList = new ArrayList<XYChart.Series>();
         
         for( int i = 0; i < legends.length; ++i ){
-        	XYChart.Series series = new XYChart.Series<>();
+        	XYChart.Series<String, Double> series = new XYChart.Series<>();
         	series.setName( legends[i] );
         	List<String[]> data = site.getTimeSeries();
         	String date;
@@ -71,7 +75,7 @@ public class GuiDataWindow {
         			date = date.substring( 6, 8 ) + "/" + date.substring( 4, 6 );
         			if( data.get(j)[i+1] != null ){
         				value = Double.parseDouble( data.get( j )[ i + 1 ] );
-        				series.getData().add( new XYChart.Data( date, value ) );
+        				series.getData().add( new XYChart.Data<String, Double>( date, value ) );
         			}
         		}
         	}
@@ -84,39 +88,44 @@ public class GuiDataWindow {
         lineChart.setLegendSide( Side.RIGHT );
         
         pane.setCenter(lineChart);
-        pane.setMaxHeight(400);
+        pane.setMaxHeight(200);
 		return pane;
 	}
 	
-
+	
+	
 	private static BorderPane getTable( Site site ){
-		BorderPane dataPane = new BorderPane();
-		TableView<Data> dataTable = new TableView<Data>();
+		BorderPane pane = new BorderPane();
+		
 		String[] keys = site.getKey();
-		TableColumn<Data, String> columns[] = new TableColumn[keys.length];
-		for( int i = 0; i < keys.length; ++i ){
-			columns[i] = new TableColumn<Data, String>( keys[i] );
-			columns[i].setCellValueFactory( new PropertyValueFactory<>( keys[i] ) );
-		}
-		
+		List<String[]> dataList = site.getData();
+		String[] tokens = new String[keys.length];
 		ObservableList<Data> data = FXCollections.observableArrayList();
-		List<String[]> siteData = site.getData();
-		String[] line;
-		for( int i = 0; i < siteData.size(); ++i ){
-			line = new String[ keys.length ];
-			for( int j = 0; j < keys.length; ++j ){
-				line[j] = siteData.get(i)[j];
-			}
-			data.add( new Data( line ) );
+		for( int i = 0; i < dataList.size(); ++i ){
+			tokens = dataList.get(i);
+			data.add( new Data( tokens ) );
 		}
 		
-		dataTable.setItems( data );
-		dataTable.getColumns().addAll( columns );
-		dataPane.setCenter(dataTable);
-		return dataPane;
+		
+		TableView<Data> table = new TableView<>( data );
+		TableColumn[] column = new TableColumn[keys.length];
+		for( int i = 0; i < keys.length; ++i ){
+			column[i] = new TableColumn<Data, String>( keys[i] );
+			column[i].setCellValueFactory( new PropertyValueFactory<>( keys[i]) );
+		}
+
+		table.getColumns().addAll( column );
+		// Ignore certain columns
+		int[] ignore = { 0, 1, 2, 3, 5, 6, 7, 8 };
+		for( int i = 0; i < ignore.length; ++i ){
+			column[ignore[i]].setVisible(false);
+		}
+		table.setItems(data);
+		pane.setCenter(table);
+		pane.setPrefWidth(600);
+		return pane;
 	}
-
-
-
+	
+	
 	
 }
