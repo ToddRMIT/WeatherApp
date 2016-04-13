@@ -1,78 +1,150 @@
+import javafx.beans.property.SimpleStringProperty;
 
 public class Data {
 
-	private String sort_order;
-	private String wmo;
-	private String name;
-	private String history_product;
-	private String local_date_time;
-	private String local_date_time_full;
-	private String aifstime_utc;
-	private String lat;
-	private String lon;
-	private String apparent_t;
-	private String cloud;
-	private String cloud_base_m;
-	private String cloud_oktas;
-	private String cloud_type;
-	private String cloud_type_id;
-	private String delta_t;
-	private String gust_kmh;
-	private String gust_kt;
-	private String air_temp;
-	private String dewpt;
-	private String press;
-	private String press_msl;
-	private String press_qnh;
-	private String press_tend;
-	private String rain_trace;
-	private String rel_hum;
-	private String sea_state;
-	private String swell_dir_worded;
-	private String swell_height;
-	private String swell_period;
-	private String vis_km;
-	private String weather;
-	private String wind_dir;
-	private String wind_spd_kmh;
-	private String wind_spd_kt;
+	private SimpleStringProperty sort_order;
+	private SimpleStringProperty wmo;
+	private SimpleStringProperty name;
+	private SimpleStringProperty history_product;
+	private SimpleStringProperty local_date_time;
+	private SimpleStringProperty local_date_time_full;
+	private SimpleStringProperty aifstime_utc;
+	private SimpleStringProperty lat;
+	private SimpleStringProperty lon;
+	private SimpleStringProperty apparent_t;
+	private SimpleStringProperty cloud;
+	private SimpleStringProperty cloud_base_m;
+	private SimpleStringProperty cloud_oktas;
+	private SimpleStringProperty cloud_type;
+	private SimpleStringProperty cloud_type_id;
+	private SimpleStringProperty delta_t;
+	private SimpleStringProperty gust_kmh;
+	private SimpleStringProperty gust_kt;
+	private SimpleStringProperty air_temp;
+	private SimpleStringProperty dewpt;
+	private SimpleStringProperty press;
+	private SimpleStringProperty press_msl;
+	private SimpleStringProperty press_qnh;
+	private SimpleStringProperty press_tend;
+	private SimpleStringProperty rain_trace;
+	private SimpleStringProperty rel_hum;
+	private SimpleStringProperty sea_state;
+	private SimpleStringProperty swell_dir_worded;
+	private SimpleStringProperty swell_height;
+	private SimpleStringProperty swell_period;
+	private SimpleStringProperty vis_km;
+	private SimpleStringProperty weather;
+	private SimpleStringProperty wind_dir;
+	private SimpleStringProperty wind_spd_kmh;
+	private SimpleStringProperty wind_spd_kt;
 	
-	public Data( String[] data ){
-		sort_order = data[0];
-		wmo = data[1];
-		name = data[2];
-		history_product = data[3];
-		local_date_time = data[4];
-		local_date_time_full = data[5];
-		aifstime_utc = data[6];
-		lat = data[7];
-		lon = data[8];
-		apparent_t = data[9];
-		cloud = data[10];
-		cloud_base_m = data[11];
-		cloud_oktas = data[12];
-		cloud_type = data[13];
-		cloud_type_id = data[14];
-		delta_t = data[15];
-		gust_kmh = data[16];
-		gust_kt = data[17];
-		air_temp = data[18];
-		dewpt = data[19];
-		press = data[20];
-		press_msl = data[21];
-		press_qnh = data[22];
-		press_tend = data[23];
-		rain_trace = data[24];
-		rel_hum = data[25];
-		sea_state = data[26];
-		swell_dir_worded = data[27];
-		swell_height = data[28];
-		swell_period = data[29];
-		vis_km = data[30];
-		weather = data[31];
-		wind_dir = data[32];
-		wind_spd_kmh = data[33];
-		wind_spd_kt = data[34];
+	private Data( String[] data ){
+		sort_order = new SimpleStringProperty( data[0] );
+		wmo = new SimpleStringProperty( data[1] );
+		name = new SimpleStringProperty( data[2] );
+		history_product = new SimpleStringProperty( data[3] );
+		local_date_time = new SimpleStringProperty( data[4] );
+		local_date_time_full = new SimpleStringProperty( data[5] );
+		aifstime_utc = new SimpleStringProperty( data[6] );
+		lat = new SimpleStringProperty( data[7] );
+		lon = new SimpleStringProperty( data[8] );
+		apparent_t = new SimpleStringProperty( data[9] );
+		cloud = new SimpleStringProperty( data[10] );
+		cloud_base_m = new SimpleStringProperty( data[11] );
+		cloud_oktas = new SimpleStringProperty( data[12] );
+		cloud_type = new SimpleStringProperty( data[13] );
+		cloud_type_id = new SimpleStringProperty( data[14] );
+		delta_t = new SimpleStringProperty( data[15] );
+		gust_kmh = new SimpleStringProperty( data[16] );
+		gust_kt = new SimpleStringProperty( data[17] );
+		air_temp = new SimpleStringProperty( data[18] );
+		dewpt = new SimpleStringProperty( data[19] );
+		press = new SimpleStringProperty( data[20] );
+		press_msl = new SimpleStringProperty( data[21] );
+		press_qnh = new SimpleStringProperty( data[22] );
+		press_tend = new SimpleStringProperty( data[23] );
+		rain_trace = new SimpleStringProperty( data[24] );
+		rel_hum = new SimpleStringProperty( data[25] );
+		sea_state = new SimpleStringProperty( data[26] );
+		swell_dir_worded = new SimpleStringProperty( data[27] );
+		swell_height = new SimpleStringProperty( data[28] );
+		swell_period = new SimpleStringProperty( data[29] );
+		vis_km = new SimpleStringProperty( data[30] );
+		weather = new SimpleStringProperty( data[31] );
+		wind_dir = new SimpleStringProperty( data[32] );
+		wind_spd_kmh = new SimpleStringProperty( data[33] );
+		wind_spd_kt = new SimpleStringProperty( data[34] );
 	}
-	public String getSortOrder(){ return sort_order; }
+	public String getSortOrder(){ return sort_order.get(); }
+	public String getWMO(){ return wmo.get(); }
+	public String getName(){ return name.get(); }
+	public String getHistoryProduct(){ return history_product.get(); }
+	public String getLocalDateTime(){ return local_date_time.get(); }
+	public String getLocalDateTimeFull(){ return local_date_time_full.get(); }
+	public String getAIFSTimeUTC(){ return aifstime_utc.get(); }
+	public String getLat(){ return lat.get(); }
+	public String getLon(){ return lon.get(); }
+	public String getApparentT(){ return apparent_t.get(); }
+	public String getCloud(){ return cloud.get(); }
+	public String getCloudBaseM(){ return cloud_base_m.get(); }
+	public String getCloudOKTAS(){ return cloud_oktas.get(); }
+	public String getCloudType(){ return cloud_type.get(); }
+	public String getCloudTypeID(){ return cloud_type_id.get(); }
+	public String getDeltaT(){ return delta_t.get(); }
+	public String getGustKMH(){ return gust_kmh.get(); }
+	public String getGustKT(){ return gust_kt.get(); }
+	public String getAirTemp(){ return air_temp.get(); }
+	public String getDewPt(){ return dewpt.get(); }
+	public String getPress(){ return press.get(); }
+	public String getPressMSL(){ return press_msl.get(); }
+	public String getPressQNH(){ return press_qnh.get(); }
+	public String getPressTend(){ return press_tend.get(); }
+	public String getRainTrace(){ return rain_trace.get(); }
+	public String getRelHum(){ return rel_hum.get(); }
+	public String getSeaState(){ return sea_state.get(); }
+	public String getSwellDirWorded(){ return swell_dir_worded.get(); }
+	public String getSwellHeight(){ return swell_height.get(); }
+	public String getSwellPeriod(){ return swell_period.get(); }
+	public String getVisKM(){ return vis_km.get(); }
+	public String getWeather(){ return weather.get(); }
+	public String getWindDir(){ return wind_dir.get(); }
+	public String getWindSpd(){ return wind_spd_kmh.get(); }
+	public String getWindSpdKT(){ return wind_spd_kt.get(); }
+	
+	public void setSortOrder( String str ){ sort_order.set( str ); }
+	public void setWMO( String str ){ wmo.set( str ); }
+	public void setName( String str ){ name.set( str ); }
+	public void setHistoryProduct( String str ){ history_product.set( str ); }
+	public void setLocalDateTime( String str ){ local_date_time.set( str ); }
+	public void setLocalDateTimeFull( String str ){ local_date_time_full.set( str ); }
+	public void setAIFSTimeUTC( String str ){ aifstime_utc.set( str ); }
+	public void setLat( String str ){ lat.set( str ); }
+	public void setLon( String str ){ lon.set( str ); }
+	public void setApparentT( String str ){ apparent_t.set( str ); }
+	public void setCloud( String str ){ cloud.set( str ); }
+	public void setCloudBaseM( String str ){ cloud_base_m.set( str ); }
+	public void setCloudOKTAS( String str ){ cloud_oktas.set( str ); }
+	public void setCloudType( String str ){ cloud_type.set( str ); }
+	public void setCloudTypeID( String str ){ cloud_type_id.set( str ); }
+	public void setDeltaT( String str ){ delta_t.set( str ); }
+	public void setGustKMH( String str ){ gust_kmh.set( str ); }
+	public void setGustKT( String str ){ gust_kt.set( str ); }
+	public void setAirTemp( String str ){ air_temp.set( str ); }
+	public void setDewPt( String str ){ dewpt.set( str ); }
+	public void setPress( String str ){ press.set( str ); }
+	public void setPressMSL( String str ){ press_msl.set( str ); }
+	public void setPressQNH( String str ){ press_qnh.set( str ); }
+	public void setPressTend( String str ){ press_tend.set( str ); }
+	public void setRainTrace( String str ){ rain_trace.set( str ); }
+	public void setRelHum( String str ){ rel_hum.set( str ); }
+	public void setSeaState( String str ){ sea_state.set( str ); }
+	public void setSwellDirWorded( String str ){ swell_dir_worded.set( str ); }
+	public void setSwellHeight( String str ){ swell_height.set( str ); }
+	public void setSwellPeriod( String str ){ swell_period.set( str ); }
+	public void setVisKM( String str ){ vis_km.set( str ); }
+	public void setWeather( String str ){ weather.set( str ); }
+	public void setWindDir( String str ){ wind_dir.set( str ); }
+	public void setWindSpd( String str ){ wind_spd_kmh.set( str ); }
+	public void setWindSpdKT( String str ){ wind_spd_kt.set( str ); }
+	
 }

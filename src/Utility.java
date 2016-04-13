@@ -3,27 +3,39 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
 
 
 
 public class Utility{
+	
     
     public static void FetchSites( ObservableList<Site> siteList ) throws IOException{
-        // ACT is included in NSW
-        String[] sites = {"ant","nsw","vic","qld","wa","sa","tas","nt"};
+    	
+    	
+    	
+    	// ACT is included in NSW
+        String[] states = {"ant","nsw","vic","qld","wa","sa","tas","nt"};
+    	
+    	
+        
         // Get the existing site names out of the siteList for comparison
         List<String> siteNames = new ArrayList();
         for( int i = 0; i < siteList.size(); ++i ){ siteNames.add( siteList.get(i).getName() ); }
         
         String inputLine;
-        for( int i = 0; i < sites.length; ++i ){
-            System.out.println( "Fetching " + sites[i] );
-            String siteurl = assembleURL( sites[i] );
+        for( int i = 0; i < states.length; ++i ){
+            System.out.println( "Fetching " + states[i] );
+            String siteurl = assembleURL( states[i] );
             URL urls = new URL( siteurl );
             InputStreamReader inreader = new InputStreamReader( urls.openStream() );
             BufferedReader in = new BufferedReader( inreader );
@@ -33,7 +45,7 @@ public class Utility{
                     processLine( inputLine, siteList, siteNames );
                 }
             }
-            in.close(); 
+            in.close();
         }
         System.out.println( "Sorting..." );
         FXCollections.sort( siteList );
