@@ -3,11 +3,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import javafx.collections.ObservableList;
+
 
 
 public class Utility{
     
-    public static void FetchSites( SortedLinkedList<Site> siteList ) throws IOException{
+    public static void FetchSites( ObservableList<Site> siteList ) throws IOException{
         // ACT is included in NSW
         String[] sites = {"ant","nsw","vic","qld","wa","sa","tas","nt"};
         String inputLine;
@@ -39,7 +41,7 @@ public class Utility{
         return str;
     }
 
-    private static void processLine( String inputLine, SortedLinkedList<Site> siteList ){
+    private static void processLine( String inputLine, ObservableList<Site> siteList ){
         // Here we process the site name and url out of inputLine
         // and add a site to the list
         int start = inputLine.indexOf("shtml\">") + 7;

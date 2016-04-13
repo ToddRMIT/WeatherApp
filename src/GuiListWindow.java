@@ -133,7 +133,7 @@ public class GuiListWindow {
 	}
 	
 	
-	
+	/*
 	//Temporary Data-Retrieval for testing modified from utilities
 	public static  ObservableList<Site> getExtensiveSite(){
 		ObservableList<Site> lsites = FXCollections.observableArrayList();
@@ -145,6 +145,7 @@ public class GuiListWindow {
 	    }
 		return lsites;
 	}
+	*/
 	
 	
 	

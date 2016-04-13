@@ -29,7 +29,7 @@ public class GuiDataWindow {
 		site.getData();
 		String[] keys = site.getKey();
 		
-		
+		/*
 		TableView table = new TableView();
 		TableColumn[] columns = new TableColumn[ keys.length ];
 		for( int i = 0; i < keys.length; ++i ){
@@ -37,14 +37,14 @@ public class GuiDataWindow {
 			
 		}
 		table.getColumns().addAll( columns );
-		
+		*/
 		
 		
 		
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();
 		pane.setTop(getChart( site ) );
-		pane.setBottom( table );
+		//pane.setBottom( table );
 		
 		dataStage.setX( site.getCoords()[0] );
 		dataStage.setY( site.getCoords()[1] );

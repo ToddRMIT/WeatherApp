@@ -1,4 +1,4 @@
-0.0,23.0,true
+496.0,77.0,true
 0,95520,Collarenebri,IDN60801,12/09:00am,20160412090000,20160411230000,-29.5,148.6,21.1,Clear,2500,0,-,null,7.1,null,null,21.8,8.4,null,null,null,-,0.0,42,-,-,null,null,45,Fine,SSW,2,1
 1,95520,Collarenebri,IDN60801,11/09:00am,20160411090000,20160410230000,-29.5,148.6,22.3,Mostly cloudy,null,7,-,30,4.3,null,null,21.1,13.7,null,null,null,-,5.0,62,-,-,null,null,40,Fine,CALM,0,0
 2,95520,Collarenebri,IDN60801,10/09:00am,20160410090000,20160409230000,-29.5,148.6,28.1,Mostly cloudy,null,6,-,30,5.7,null,null,26.1,17.0,null,null,null,-,0.0,57,-,-,null,null,40,Fine,N,2,1

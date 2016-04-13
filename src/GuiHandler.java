@@ -115,8 +115,6 @@ public class GuiHandler extends Application {
 		//Creates favourite buttons based on fav list and sets preferences
 		int count = 0;
 		for( int i = 0; i < sites.size(); ++i ){ if( sites.get(i).isFavourite() ) ++count; }
-		//Button favButtons[] = new Button[favList.getLength()];
-		//Button delButtons[] = new Button[favList.getLength()];
 		Button favButtons[] = new Button[count];
 		Button delButtons[] = new Button[count];
 		
@@ -125,11 +123,11 @@ public class GuiHandler extends Application {
 			int j = 0;
 			for( int i = 0; i < sites.size(); ++i ){
 				if( sites.get(i).isFavourite() ){
-					String format = "%-30s%5s";
+					String format = "%-40s%5s";
 					String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
 					favButtons[j] = new Button( str );
 					favButtons[j].setTextAlignment(TextAlignment.LEFT);
-					favButtons[j].setMinWidth(200);
+					favButtons[j].setMinWidth(300);
 					grid.add( favButtons[j], 0, j);
 					//New delete buttons that link to each fav button
 					delButtons[j] = new Button("X");
