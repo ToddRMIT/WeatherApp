@@ -2,43 +2,43 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Data {
 
-	private SimpleStringProperty sort_order;
-	private SimpleStringProperty wmo;
-	private SimpleStringProperty name;
-	private SimpleStringProperty history_product;
-	private SimpleStringProperty local_date_time;
-	private SimpleStringProperty local_date_time_full;
-	private SimpleStringProperty aifstime_utc;
-	private SimpleStringProperty lat;
-	private SimpleStringProperty lon;
-	private SimpleStringProperty apparent_t;
-	private SimpleStringProperty cloud;
-	private SimpleStringProperty cloud_base_m;
-	private SimpleStringProperty cloud_oktas;
-	private SimpleStringProperty cloud_type;
-	private SimpleStringProperty cloud_type_id;
-	private SimpleStringProperty delta_t;
-	private SimpleStringProperty gust_kmh;
-	private SimpleStringProperty gust_kt;
-	private SimpleStringProperty air_temp;
-	private SimpleStringProperty dewpt;
-	private SimpleStringProperty press;
-	private SimpleStringProperty press_msl;
-	private SimpleStringProperty press_qnh;
-	private SimpleStringProperty press_tend;
-	private SimpleStringProperty rain_trace;
-	private SimpleStringProperty rel_hum;
-	private SimpleStringProperty sea_state;
-	private SimpleStringProperty swell_dir_worded;
-	private SimpleStringProperty swell_height;
-	private SimpleStringProperty swell_period;
-	private SimpleStringProperty vis_km;
-	private SimpleStringProperty weather;
-	private SimpleStringProperty wind_dir;
-	private SimpleStringProperty wind_spd_kmh;
-	private SimpleStringProperty wind_spd_kt;
+	private final SimpleStringProperty sort_order;
+	private final SimpleStringProperty wmo;
+	private final SimpleStringProperty name;
+	private final SimpleStringProperty history_product;
+	private final SimpleStringProperty local_date_time;
+	private final SimpleStringProperty local_date_time_full;
+	private final SimpleStringProperty aifstime_utc;
+	private final SimpleStringProperty lat;
+	private final SimpleStringProperty lon;
+	private final SimpleStringProperty apparent_t;
+	private final SimpleStringProperty cloud;
+	private final SimpleStringProperty cloud_base_m;
+	private final SimpleStringProperty cloud_oktas;
+	private final SimpleStringProperty cloud_type;
+	private final SimpleStringProperty cloud_type_id;
+	private final SimpleStringProperty delta_t;
+	private final SimpleStringProperty gust_kmh;
+	private final SimpleStringProperty gust_kt;
+	private final SimpleStringProperty air_temp;
+	private final SimpleStringProperty dewpt;
+	private final SimpleStringProperty press;
+	private final SimpleStringProperty press_msl;
+	private final SimpleStringProperty press_qnh;
+	private final SimpleStringProperty press_tend;
+	private final SimpleStringProperty rain_trace;
+	private final SimpleStringProperty rel_hum;
+	private final SimpleStringProperty sea_state;
+	private final SimpleStringProperty swell_dir_worded;
+	private final SimpleStringProperty swell_height;
+	private final SimpleStringProperty swell_period;
+	private final SimpleStringProperty vis_km;
+	private final SimpleStringProperty weather;
+	private final SimpleStringProperty wind_dir;
+	private final SimpleStringProperty wind_spd_kmh;
+	private final SimpleStringProperty wind_spd_kt;
 	
-	private Data( String[] data ){
+	public Data( String[] data ){
 		sort_order = new SimpleStringProperty( data[0] );
 		wmo = new SimpleStringProperty( data[1] );
 		name = new SimpleStringProperty( data[2] );
@@ -75,7 +75,7 @@ public class Data {
 		wind_spd_kmh = new SimpleStringProperty( data[33] );
 		wind_spd_kt = new SimpleStringProperty( data[34] );
 	}
-	public String getSortOrder(){ return sort_order.get(); }
+	public String getSort_Order(){ return sort_order.get(); }
 	public String getWMO(){ return wmo.get(); }
 	public String getName(){ return name.get(); }
 	public String getHistoryProduct(){ return history_product.get(); }

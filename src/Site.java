@@ -14,6 +14,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 
 
 
@@ -204,8 +205,6 @@ public class Site implements Comparable<Site>{
     		String tokens[] = line.split(",");
     		coords[0] = Double.parseDouble( tokens[0] );
     		coords[1] = Double.parseDouble( tokens[1] );
-    		if( tokens[2].compareTo( "true" ) == 0 ) favourite.set(true);
-    		else favourite.set(false);
     		data = new ArrayList<String[]>();
     		while( ( line = reader.readLine() ) != null ){
     			tokens = line.split(",");

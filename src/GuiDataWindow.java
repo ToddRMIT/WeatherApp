@@ -29,22 +29,13 @@ public class GuiDataWindow {
 		site.getData();
 		String[] keys = site.getKey();
 		
-		/*
-		TableView table = new TableView();
-		TableColumn[] columns = new TableColumn[ keys.length ];
-		for( int i = 0; i < keys.length; ++i ){
-			columns[i] = new TableColumn( keys[i] );
-			
-		}
-		table.getColumns().addAll( columns );
-		*/
 		
 		
 		
 		Stage dataStage = new Stage();
 		BorderPane pane = new BorderPane();
 		pane.setTop(getChart( site ) );
-		//pane.setBottom( table );
+		pane.setBottom( getTable( site ) );
 		
 		dataStage.setX( site.getCoords()[0] );
 		dataStage.setY( site.getCoords()[1] );
@@ -73,7 +64,7 @@ public class GuiDataWindow {
         List<XYChart.Series> seriesList = new ArrayList<XYChart.Series>();
         
         for( int i = 0; i < legends.length; ++i ){
-        	XYChart.Series series = new XYChart.Series<>();
+        	XYChart.Series<String, Double> series = new XYChart.Series<>();
         	series.setName( legends[i] );
         	List<String[]> data = site.getTimeSeries();
         	String date;
@@ -84,7 +75,7 @@ public class GuiDataWindow {
         			date = date.substring( 6, 8 ) + "/" + date.substring( 4, 6 );
         			if( data.get(j)[i+1] != null ){
         				value = Double.parseDouble( data.get( j )[ i + 1 ] );
-        				series.getData().add( new XYChart.Data( date, value ) );
+        				series.getData().add( new XYChart.Data<String, Double>( date, value ) );
         			}
         		}
         	}
@@ -97,8 +88,38 @@ public class GuiDataWindow {
         lineChart.setLegendSide( Side.RIGHT );
         
         pane.setCenter(lineChart);
-        pane.setMaxHeight(400);
+        pane.setMaxHeight(200);
 		return pane;
 	}
+	
+	
+	
+	private static BorderPane getTable( Site site ){
+		TableView<Data> table = new TableView<>();
+		BorderPane pane = new BorderPane();
+		String[] keys = site.getKey();
+		List<String[]> dataList = site.getData();
+		String[] tokens = new String[keys.length];
+		ObservableList<Data> data = FXCollections.observableArrayList();
+		for( int i = 0; i < keys.length; ++i ){
+			tokens = dataList.get(i);
+			data.add( new Data( tokens ) );
+		}
+
+		TableColumn[] column = new TableColumn[keys.length];
+		for( int i = 0; i < keys.length; ++i ){
+			column[i] = new TableColumn<Data, String>( keys[i] );
+			column[i].setCellValueFactory( new PropertyValueFactory<>( keys[i]) );
+		}
+
+		
+		
+		table.getColumns().addAll( column );
+		table.setItems(data);
+		pane.setCenter(table);
+		return pane;
+	}
+	
+	
 	
 }
