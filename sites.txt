@@ -1,4 +1,4 @@
-Adelaide,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94675.json,false
+Adelaide,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94675.json,true
 Adelaide Airport,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94672.json,false
 Adele Island,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94210.json,false
 Aireys Inlet,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94846.json,false
