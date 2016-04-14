@@ -7,6 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 
+/**
+ * @author Daniel Bugeja, Jayden Joyce, Todd Ryan, Luke Young
+ *
+ */
 public class WeatherApp {
 	
     public static void main(String[] args) throws IOException {

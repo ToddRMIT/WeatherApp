@@ -21,6 +21,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author Daniel Bugeja & Todd Ryan
+ *
+ */
 public class GuiListWindow {
 
 	private static final String SITES_FILE = "sites.txt";

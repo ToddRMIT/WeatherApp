@@ -550,6 +550,7 @@ Palmerville,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94276.json,false
 Paraburdoo,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94316.json,false
 Parafield,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95677.json,false
 Parawa West,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94811.json,false
+Pardoo,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94311.json,false
 Parkes Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95717.json,false
 Parndana,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94807.json,false
 Parramatta,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94764.json,false

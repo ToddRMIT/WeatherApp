@@ -20,6 +20,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * @author Daniel Bugeja & Todd Ryan
+ *
+ */
 public class GuiHandler extends Application {
 
 	public static final String SITES_FILE = "sites.txt";

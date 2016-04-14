@@ -13,6 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * @author Todd Ryan
+ *
+ */
 public class Utility{
 	   
     public static void FetchSites( ObservableList<Site> siteList ) throws IOException{

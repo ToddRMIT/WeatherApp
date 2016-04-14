@@ -16,6 +16,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 
+/**
+ * @author Todd Ryan
+ *
+ */
 public class Site implements Comparable<Site>{
 
     private String name;
