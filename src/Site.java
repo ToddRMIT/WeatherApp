@@ -16,10 +16,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 
-
-
-
-
 public class Site implements Comparable<Site>{
 
     private String name;
@@ -39,8 +35,6 @@ public class Site implements Comparable<Site>{
 			"vis_km", "weather", "wind_dir", "wind_spd_kmh", "wind_spd_kt"
     };
 
-    
-    
     public Site( String name, String url ){
         this.name = name;
         this.url = url;
@@ -49,7 +43,6 @@ public class Site implements Comparable<Site>{
         coords = new Double[]{ 100.0, 100.0 };
         favourite = new SimpleBooleanProperty(false);
     }
-    
     
     public Site( String name, String url, String fav ){
         this.name = name;
@@ -64,9 +57,7 @@ public class Site implements Comparable<Site>{
             }
         });
     }
-    
-
-    
+     
     public BooleanProperty favProperty(){ return favourite; }
 	public void setFavourite(boolean b){ favourite.set(b); }
 
@@ -79,15 +70,12 @@ public class Site implements Comparable<Site>{
     	if( temp == null ){ updateTemp(); }
     	return temp;
     }
-    
-    
+       
     // Overide compareTo method to make Site sortable
     public int compareTo( Site s ){
     	return this.name.toUpperCase().compareTo( s.name.toUpperCase() );
     }
-    
-    
-    
+      
     public void updateTemp(){
     	try {
 			InputStreamReader isr = getJSON();
@@ -106,9 +94,7 @@ public class Site implements Comparable<Site>{
 			e.printStackTrace();
 		}
     }
-    
-    
-    
+      
     /**
      * Returns a list of arrays containing the time series data
      * relevant to the legends argument
@@ -153,10 +139,8 @@ public class Site implements Comparable<Site>{
     		}
     		reversed.add( temp );
     	}
-    	
     	return reversed;
     }
-    
     
     
     // Only for testing
@@ -168,15 +152,11 @@ public class Site implements Comparable<Site>{
     	return str;
     }
     
-    
-    
     public InputStreamReader getJSON() throws Exception{
     	URL thisURL = new URL( url );
     	InputStreamReader is = new InputStreamReader( thisURL.openStream() );
     	return is;
     }
-    
-    
     
     //  ---{ THIS CAN POSSIBLY BE FACTORED OUT }---
     //  ---{ updateData() may be all that is needed }---
@@ -190,13 +170,11 @@ public class Site implements Comparable<Site>{
     	return data;
     }
     
-    
-    
     public void loadData(){
     	String filename = "./Sites/" + name + ".txt";
     	FileReader file = null;
     	BufferedReader reader = null;
-    	try{
+    	try {
     		file = new FileReader( filename );
     		reader = new BufferedReader( file );
     		String line;
@@ -211,13 +189,10 @@ public class Site implements Comparable<Site>{
     			data.add(tokens);
     		}
     		if( reader != null ) reader.close();
-    	}
-    	catch( IOException e ){
+    	} catch( IOException e ){
     		System.err.println( "Error loading site data: " + e );
     	}
-    }
-    
-    
+    } 
     
     public void save( Double x, Double y ){
     	coords[0] = x;
@@ -225,7 +200,7 @@ public class Site implements Comparable<Site>{
         FileWriter file = null;
         PrintWriter out = null;
         String filename = "./Sites/" + name + ".txt";
-        try{
+        try {
             file = new FileWriter( filename );
             out = new PrintWriter( file );
             String fav = ( favourite.get() ? "true": "false" );
@@ -246,12 +221,10 @@ public class Site implements Comparable<Site>{
         }
     }
     
-    
-
     public void updateData(){
     	InputStreamReader isr = null;
 		BufferedReader reader = null;
-    	try{
+    	try {
     		isr = getJSON();
     		reader = new BufferedReader( isr );
     		String line;
@@ -317,13 +290,10 @@ public class Site implements Comparable<Site>{
     				tempList.get(k)[0] = Integer.toString(Integer.parseInt( tempList.get(k)[0] ) + newItems);
     				data.add( tempList.get(k) );
     			}
-    		}
-    		
-    	}
-    	catch ( Exception e ){
-    		System.err.println( "Error updating data: " + e );
-    	}
-    	
+    		}	
+    	} catch ( Exception e ){
+            System.err.println( "Error updating data: " + e );
+    	}	
     }
     
 }
