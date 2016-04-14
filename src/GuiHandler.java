@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,8 +20,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
-
-
 public class GuiHandler extends Application {
 
 	public static final String SITES_FILE = "sites.txt";
@@ -31,11 +28,9 @@ public class GuiHandler extends Application {
 	
 	Stage window;
     static boolean listOpen;
-
-
 	
 	public GuiHandler( ) {
-
+        
 	}
 
 	@Override
@@ -50,22 +45,16 @@ public class GuiHandler extends Application {
 		loadSites( sites );
 		
 		//Update siteList from BOM
-		Utility.FetchSites( sites );
-		
-		
-		
-		
+		Utility.FetchSites( sites );	
 		
 		// Load preferences
 		// Currently returns an array of dimension 2
 		// [0]: window.X    [1]: window.Y
 		String prefs[] = loadPrefs();
-		
-		
+			
 		//Button creation
 		Button btn = new Button("Open Site List");
 		btn.setMinWidth(200);
-		
 		
 		// Set up the top part of the main window
 		GridPane top = new GridPane();
@@ -74,21 +63,16 @@ public class GuiHandler extends Application {
 		top.setStyle("-fx-background-color: #336699;");
 		top.setAlignment(Pos.CENTER);
 		
-		
-		
-		// Button btnRefresh = new Button("Refresh");
-		
-		
-		
+		// Button btnRefresh = new Button("Refresh"); CAN BE REMOVED??
+			
 		//Button Press event handler
 		btn.setOnAction(new EventHandler<ActionEvent>( ) {
-			@Override public void handle(ActionEvent e) {
-				 
+			@Override public void handle(ActionEvent e) {	 
 				//Checking if list window already open
 				if(listOpen == false){
 					try {
 						listOpen = true;
-						GuiListWindow.GuiWindow(primaryStage, sites );
+						GuiListWindow.GuiWindow( primaryStage, sites );
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -99,14 +83,12 @@ public class GuiHandler extends Application {
 			}
 		});
 		
-		
 		/*
 		//Loads favourites from file
 		SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
 		favList.load( FAVOURITES_FILE );
 		*/
-		
-		
+			
 		// Sets flow pane preferences
 		// for the favourites list
 		GridPane grid = new GridPane();
@@ -114,14 +96,12 @@ public class GuiHandler extends Application {
 		grid.setStyle("-fx-background-color: #336699;");
 		grid.setMinHeight(300);
 		
-		
 		//Creates favourite buttons based on fav list and sets preferences
 		int count = 0;
 		for( int i = 0; i < sites.size(); ++i ){ if( sites.get(i).isFavourite() ) ++count; }
 		Button favButtons[] = new Button[count];
 		Button delButtons[] = new Button[count];
 		
-
 		if( sites != null ){
 			int j = 0;
 			for( int i = 0; i < sites.size(); ++i ){
@@ -131,7 +111,7 @@ public class GuiHandler extends Application {
 					favButtons[j] = new Button( str );
 					favButtons[j].setTextAlignment(TextAlignment.LEFT);
 					favButtons[j].setMinWidth(300);
-					grid.add( favButtons[j], 0, j);
+					grid.add( favButtons[j], 0, j );
 					//New delete buttons that link to each fav button
 					delButtons[j] = new Button("X");
 					delButtons[j].setMinWidth(20);
@@ -140,14 +120,14 @@ public class GuiHandler extends Application {
 					final int favselected = i;
 					delButtons[j].setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
-							grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
-							sites.get(favselected).setFavourite(false);
+							grid.getChildren().removeAll( favButtons[selected], delButtons[selected] );
+							sites.get( favselected ).setFavourite(false);
 						}
-					});
+					} );
 					favButtons[j].setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
 							try {
-								GuiDataWindow.dataWindow(primaryStage, sites.get(favselected) );
+								GuiDataWindow.dataWindow( primaryStage, sites.get(favselected) );
 							} catch (IOException e1) {
 								e1.printStackTrace();
 							}	
@@ -196,15 +176,11 @@ public class GuiHandler extends Application {
 		}
 		*/
 		
-		
-		
 		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
         border.setTop(top);
         border.setCenter(grid);
 
-        
-        
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
@@ -221,14 +197,10 @@ public class GuiHandler extends Application {
         window.show();
 	}
 	
-	
-	
 	//sets list windows open tracking value to false
 	public static void listClosed() {
 		listOpen = false;
 	}
-	
-	
 	
 	/**
 	 * Loads preferences for the main window from the MAIN_PREFERENCES_FILE</br>
@@ -246,7 +218,7 @@ public class GuiHandler extends Application {
 			String line;
 			int i = 0;
 			while( ( line = file.readLine() ) != null ){
-				prefs[i]=line;
+				prefs[i] = line;
 				++i;
 			}
 		}
@@ -260,7 +232,6 @@ public class GuiHandler extends Application {
 		}
 		return prefs;
 	}
-	
 	
 	/**
 	 * Saves preferences for the main window to the MAIN_PREFERENCES_FILE</br>
@@ -286,8 +257,6 @@ public class GuiHandler extends Application {
 		}
 	}
 	
-	
-	
 	public static void loadSites( ObservableList<Site> sites ){
     	FileReader file = null;
     	BufferedReader buffer = null;
@@ -306,8 +275,6 @@ public class GuiHandler extends Application {
     	}
     }
 	
-	
-	
 	public static void saveSites( ObservableList<Site> sites ){
 		try( BufferedWriter buffer = new BufferedWriter( new PrintWriter( SITES_FILE ) ) ){
 			for( int i = 0; i < sites.size(); ++i ){
@@ -318,11 +285,9 @@ public class GuiHandler extends Application {
 				buffer.write( str );
 				buffer.newLine();
 			}
-		}
-		catch( IOException e ){
+		} catch( IOException e ){
 			System.err.println( "Error saving sites: " + e );
 		}
 	}
 	
-
 }

@@ -13,21 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-
-
-
 public class Utility{
-	
-    
+	   
     public static void FetchSites( ObservableList<Site> siteList ) throws IOException{
-    	
-    	
-    	
+    	 	
     	// ACT is included in NSW
         String[] states = {"ant","nsw","vic","qld","wa","sa","tas","nt"};
-    	
-    	
-        
+    	  
         // Get the existing site names out of the siteList for comparison
         List<String> siteNames = new ArrayList();
         for( int i = 0; i < siteList.size(); ++i ){ siteNames.add( siteList.get(i).getName() ); }
@@ -47,6 +39,7 @@ public class Utility{
             }
             in.close();
         }
+        
         System.out.println( "Sorting..." );
         FXCollections.sort( siteList );
     }
