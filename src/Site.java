@@ -39,6 +39,8 @@ public class Site implements Comparable<Site>{
 			"vis_km", "weather", "wind_dir", "wind_spd_kmh", "wind_spd_kt"
     };
 
+    
+
     public Site( String name, String url ){
         this.name = name;
         this.url = url;

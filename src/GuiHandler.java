@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -48,8 +49,9 @@ public class GuiHandler extends Application {
 		ObservableList<Site> sites = FXCollections.observableArrayList();
 		loadSites( sites );
 		
-		//Update siteList from BOM
-		Utility.FetchSites( sites );	
+		// Update siteList from BOM
+		// This should be done when the sites window is opened
+		// Utility.FetchSites( sites );	
 		
 		// Load preferences
 		// Currently returns an array of dimension 2
@@ -86,12 +88,7 @@ public class GuiHandler extends Application {
 				}
 			}
 		});
-		
-		/*
-		//Loads favourites from file
-		SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
-		favList.load( FAVOURITES_FILE );
-		*/
+
 			
 		// Sets flow pane preferences
 		// for the favourites list
@@ -106,28 +103,41 @@ public class GuiHandler extends Application {
 		Button favButtons[] = new Button[count];
 		Button delButtons[] = new Button[count];
 		
+		// Go through the list of names to find the longest name
+		// and then set the gap between the name and temp accordingly
+		int gap = 0;
+		for( int i = 0; i < sites.size(); ++i ){
+		    if( sites.get(i).getName().length() > gap ){
+		        gap = sites.get(i).getName().length();
+		    }
+		}
+
 		if( sites != null ){
 			int j = 0;
 			for( int i = 0; i < sites.size(); ++i ){
 				if( sites.get(i).isFavourite() ){
-					String format = "%-40s%5s";
+				    int thisGap = gap - sites.get(i).getName().length();
+					String format = "%s%" + thisGap + "s";
 					String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
 					favButtons[j] = new Button( str );
-					favButtons[j].setTextAlignment(TextAlignment.LEFT);
-					favButtons[j].setMinWidth(300);
+					favButtons[j].setFont(javafx.scene.text.Font.font("Monaco", 12) );
 					grid.add( favButtons[j], 0, j );
+					
 					//New delete buttons that link to each fav button
 					delButtons[j] = new Button("X");
-					delButtons[j].setMinWidth(20);
+					delButtons[j].setFont(javafx.scene.text.Font.font("Monaco", 12) );
 					grid.add( delButtons[j], 1, j );
 					final int selected = j;
 					final int favselected = i;
+					
+					// Set action for delete button
 					delButtons[j].setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
 							grid.getChildren().removeAll( favButtons[selected], delButtons[selected] );
 							sites.get( favselected ).setFavourite(false);
 						}
 					} );
+					// Set action for favourite button
 					favButtons[j].setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
 							try {
@@ -143,42 +153,6 @@ public class GuiHandler extends Application {
 		}
 
 		
-		/*
-		//Button Press event handler for the delete buttons
-		if( list != null ){
-			for( int i = 0; i < list.length; ++i ) {
-				final int selected = i;
-				delButtons[i].setOnAction(new EventHandler<ActionEvent>() {
-					@Override public void handle(ActionEvent e) {
-						grid.getChildren().removeAll(favButtons[selected], delButtons[selected]);
-						String str = favButtons[selected].getText();
-						String tokens[] = str.split(" ");
-						favList.remove(tokens[0]);
-						favList.save(FAVOURITES_FILE);
-					}
-				});
-			}
-		}
-		*/
-		
-		/*
-		//Button Press event handler for the favourites buttons to open data window
-		if( list != null ){
-			for( int i = 0; i < list.length; ++i ) {
-				final int selected = i;
-				favButtons[i].setOnAction(new EventHandler<ActionEvent>() {
-					@Override public void handle(ActionEvent e) {
-						try {
-							//listOpen = true;
-							GuiDataWindow.dataWindow(primaryStage, favList.search(list[selected][0]) );
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}	
-					}
-				});
-			}
-		}
-		*/
 		
 		//Creates border and sets the layout for the elements
         BorderPane border = new BorderPane();
