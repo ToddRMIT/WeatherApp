@@ -1,5 +1,9 @@
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * @author Todd Ryan
+ *
+ */
 public class Data {
 
 	private final SimpleStringProperty sort_order;
