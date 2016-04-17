@@ -25,6 +25,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * @author Daniel Bugeja & Todd Ryan
+ *
+ */
 public class GuiListWindow {
 
 	
@@ -35,11 +39,12 @@ public class GuiListWindow {
 	static TableView<Site> table;
 	static Stage subStage; 
 
-	static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
+	//static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
+	static void GuiWindow(Stage primaryStage, ObservableList sites ) throws IOException{
 		
 		
 		subStage = new Stage();
-		subStage.setTitle(stageName);
+		subStage.setTitle( "Site List" );
 		subStage.initModality(Modality.WINDOW_MODAL);
 		
 		
@@ -69,7 +74,8 @@ public class GuiListWindow {
 		urlColumn.setCellValueFactory(new PropertyValueFactory<>("URL"));
 		
 		//Favorite column
-		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("fav");
+
+		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
 		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("fav"));
 		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
 			
@@ -78,12 +84,12 @@ public class GuiListWindow {
 		}});
 		
 		
+		
 		//Append columns to table and fill in data
 		table = new TableView<>();
 		table.setMinSize(640, 480);
-		
-		table.setItems(getExtensiveSite());
-		//table.setEditable(true);
+
+		table.setItems(sites);
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
@@ -139,7 +145,7 @@ public class GuiListWindow {
 	}
 	
 	
-	
+	/*
 	//Temporary Data-Retrieval for testing modified from utilities
 	public static  ObservableList<Site> getExtensiveSite(){
 		
@@ -165,6 +171,7 @@ public class GuiListWindow {
 	    }
 		return lsites;
 	}
+	*/
 	
 	
 	

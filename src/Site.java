@@ -4,28 +4,30 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 
 
-
-
-
-public class Site{
+/**
+ * @author Todd Ryan
+ *
+ */
+public class Site implements Comparable<Site>{
 
     private String name;
     private String url;
+    private Double temp;
     private List<String[]> data;
     private Double[] coords;
-    private boolean favourite;
-    private BooleanProperty fav;
+
+    private BooleanProperty favourite;
     
     private static String[] key = {
     		"sort_order", "wmo", "name", "history_product", "local_date_time",
@@ -38,48 +40,68 @@ public class Site{
     };
 
 
-    
     public Site( String name, String url ){
+        this.name = name;
+        this.url = url;
+        temp = null;
+        data = null;
+        coords = new Double[]{ 100.0, 100.0 };
+        favourite = new SimpleBooleanProperty(false);
+
+    }
+    
+    public Site( String name, String url, String fav ){
         this.name = name;
         this.url = url;
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
-        
-        this.favourite = false;
-      
-        	this.fav = new SimpleBooleanProperty(false);
-        
-        this.fav.addListener(new ChangeListener<Boolean>() {
-
+        if( fav.compareTo( "true" ) == 0 ) favourite = new SimpleBooleanProperty(true);
+        else favourite = new SimpleBooleanProperty(false);
+        this.favourite.addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-
-                System.out.println(name + " favorite set to: " + t1);
-               // if(fav.equals(false))
-                	
-               
+            	setFavourite( t1 );
             }
-
-        });       
+        });
     }
-    
-    
-    
+     
+    public BooleanProperty favProperty(){ return favourite; }
+	public void setFavourite(boolean b){ favourite.set(b); }
+
     public String[] getKey(){ return key; }
     public String getName(){ return name; }
     public String getURL(){ return url; }
 
     public Double[] getCoords(){ return coords; }
-    public boolean isFavourite(){ return favourite; }
-    public void toggleFavourite(){ favourite = !favourite; }
-    
-    //Allows cellfactory to pull data
-    public BooleanProperty favProperty(){ return fav; }
-    
-    //Allows toggle to SimplePropertyBoolean favourite
-	public void setFavourite(boolean b) {
-		fav.set(b);
-	}
-    
+    public boolean isFavourite(){ return favourite.get(); }
+    public Double getTemp(){
+    	if( temp == null ){ updateTemp(); }
+    	return temp;
+    }
+       
+    // Overide compareTo method to make Site sortable
+    public int compareTo( Site s ){
+    	return this.name.toUpperCase().compareTo( s.name.toUpperCase() );
+    }
+      
+    public void updateTemp(){
+    	try {
+			InputStreamReader isr = getJSON();
+			BufferedReader reader = new BufferedReader( isr );
+			String line;
+			while( ( line = reader.readLine() ) != null ){
+				if( line.matches( ".*air_temp.*" ) ){
+					int start = line.indexOf(": ");
+					int end = line.indexOf(",");
+					temp = Double.parseDouble( line.substring(start+2, end) );
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+      
     /**
      * Returns a list of arrays containing the time series data
      * relevant to the legends argument
@@ -124,10 +146,8 @@ public class Site{
     		}
     		reversed.add( temp );
     	}
-    	
     	return reversed;
     }
-    
     
     
     // Only for testing
@@ -140,15 +160,11 @@ public class Site{
     	return str;
     }
     
-    
-    
     public InputStreamReader getJSON() throws Exception{
     	URL thisURL = new URL( url );
     	InputStreamReader is = new InputStreamReader( thisURL.openStream() );
     	return is;
     }
-    
-    
     
     //  ---{ THIS CAN POSSIBLY BE FACTORED OUT }---
     //  ---{ updateData() may be all that is needed }---
@@ -162,13 +178,11 @@ public class Site{
     	return data;
     }
     
-    
-    
     public void loadData(){
     	String filename = "./Sites/" + name + ".txt";
     	FileReader file = null;
     	BufferedReader reader = null;
-    	try{
+    	try {
     		file = new FileReader( filename );
     		reader = new BufferedReader( file );
     		String line;
@@ -177,20 +191,16 @@ public class Site{
     		String tokens[] = line.split(",");
     		coords[0] = Double.parseDouble( tokens[0] );
     		coords[1] = Double.parseDouble( tokens[1] );
-    		favourite = ( ( tokens[2].compareTo( "true" ) == 0 ) ? true: false );
     		data = new ArrayList<String[]>();
     		while( ( line = reader.readLine() ) != null ){
     			tokens = line.split(",");
     			data.add(tokens);
     		}
     		if( reader != null ) reader.close();
-    	}
-    	catch( IOException e ){
+    	} catch( IOException e ){
     		System.err.println( "Error loading site data: " + e );
     	}
-    }
-    
-    
+    } 
     
     public void save( Double x, Double y ){
     	coords[0] = x;
@@ -198,10 +208,10 @@ public class Site{
         FileWriter file = null;
         PrintWriter out = null;
         String filename = "./Sites/" + name + ".txt";
-        try{
+        try {
             file = new FileWriter( filename );
             out = new PrintWriter( file );
-            String fav = ( favourite ? "true": "false" );
+            String fav = ( favourite.get() ? "true": "false" );
             out.println( x + "," + y + "," + fav );
             for( int i = 0; i < data.size(); ++i ){
             	String str = "";
@@ -219,12 +229,10 @@ public class Site{
         }
     }
     
-    
-
     public void updateData(){
     	InputStreamReader isr = null;
 		BufferedReader reader = null;
-    	try{
+    	try {
     		isr = getJSON();
     		reader = new BufferedReader( isr );
     		String line;
@@ -290,13 +298,10 @@ public class Site{
     				tempList.get(k)[0] = Integer.toString(Integer.parseInt( tempList.get(k)[0] ) + newItems);
     				data.add( tempList.get(k) );
     			}
-    		}
-    		
-    	}
-    	catch ( Exception e ){
-    		System.err.println( "Error updating data: " + e );
-    	}
-    	
+    		}	
+    	} catch ( Exception e ){
+            System.err.println( "Error updating data: " + e );
+    	}	
     }
 
 
