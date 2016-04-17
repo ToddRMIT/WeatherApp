@@ -60,6 +60,8 @@ public class Site implements Comparable<Site>{
         this.favourite.addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
             	setFavourite( t1 );
+            	GuiHandler.clearBtns();
+            	GuiHandler.createFavButtons();
             }
         });
     }
