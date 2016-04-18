@@ -166,6 +166,7 @@ public class GuiHandler extends Application {
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
+        scene.getStylesheets().add("StyleSheets/weatherCharcoal.css");
         window.setX( Double.parseDouble( prefs[0] ) );
         window.setY( Double.parseDouble( prefs[1] ) );
         window.setOnCloseRequest( new EventHandler<WindowEvent>(){ 
@@ -192,15 +193,19 @@ public class GuiHandler extends Application {
 					
 					favBtns.add(new Button(str));
 					int lastIndex = favBtns.size() - 1;
+					//favBtns.get(lastIndex).getStyleClass().add("favorite");
 					favBtns.get(lastIndex).setTextAlignment(TextAlignment.LEFT);
 					favBtns.get(lastIndex).setMinWidth(300);
 					grid.add(favBtns.get(lastIndex),0,lastIndex);
 					
 					//New delete buttons that link to each fav button
 					delBtns.add(new Button("X"));
+					delBtns.get(lastIndex).getStyleClass().add("unfavorite");
 					delBtns.get(lastIndex).setMinWidth(20);
 					grid.add(delBtns.get(lastIndex), 1, lastIndex);
-				
+					
+					grid.setVgap(5);
+					grid.setHgap(10);
 					final int favselected = i;
 					delBtns.get(lastIndex).setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {

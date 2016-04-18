@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 
@@ -22,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 
@@ -67,7 +70,51 @@ public class GuiListWindow {
 		//Name column
 		TableColumn<Site, String> nameColumn = new TableColumn<>("Name");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-				
+		nameColumn.setCellFactory(new Callback<TableColumn<Site,String>,TableCell<Site, String>>() {
+			
+			public TableCell<Site,String> call(TableColumn<Site,String> t){
+				  TableCell cell = new TableCell<Site, String>() {
+					  
+					     @Override
+		                    public void updateItem(String item, boolean empty) {
+		                        super.updateItem(item, empty);
+		                        setText(empty ? null : getString());
+		                        setGraphic(null);
+		                    }
+
+		                    private String getString() {
+		                        return getItem() == null ? "" : getItem().toString();
+		                    }
+		                
+				  };
+				  
+				  cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+	                    @Override
+	                    public void handle(MouseEvent event) {
+	                        if (event.getClickCount() > 1) {
+	                            
+	                            TableCell c = (TableCell) event.getSource();
+	                            for(int i = 0; i < sites.size(); i++){
+	                            	if(c.getText().equals(((Site) sites.get(i)).getName())){
+	                            		try {
+											GuiDataWindow.dataWindow( primaryStage, (Site) sites.get(i) );
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+	                            	}
+	                            }
+	                            
+	                            System.out.println("Cell text: " + c.getText());
+	                        }
+	                    }
+	                });
+	                return cell;
+			}
+			
+		});
+			
+		
 		//URL column
 		TableColumn<Site, String> urlColumn = new TableColumn<>("URL");
 		urlColumn.setCellValueFactory(new PropertyValueFactory<>("URL"));
@@ -88,8 +135,9 @@ public class GuiListWindow {
 		
 		FilteredList<Site> filteredSites = new FilteredList<>(sites,p-> true);
 		
-		TextField searchText = new TextField("Text");
+		TextField searchText = new TextField("search");
 		searchText.setMaxSize(140, 20);
+		
 		searchText.textProperty().addListener((observable, oldValue,newValue) -> {
 			
 			filteredSites.setPredicate(site -> {
@@ -120,12 +168,14 @@ public class GuiListWindow {
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
-		VBox layout = new VBox();
+		VBox layout = new VBox(10);
 		layout.getChildren().addAll(searchText, table);
-		        
+		layout.setPadding(new Insets (15,0,0,0));
+		layout.setStyle("-fx-background-color: #336699;");        
 		
 	    Scene scene = new Scene(layout);
 	    subStage.setScene(scene);
+	    
 
 	    subStage.setOnCloseRequest(e -> closeWindow());
 	    subStage.show();

@@ -1,19 +1,19 @@
 Adelaide,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94675.json,false
 Adelaide Airport,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94672.json,false
 Adele Island,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94210.json,false
-Aireys Inlet,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94846.json,true
+Aireys Inlet,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94846.json,false
 Albany,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94801.json,false
 Albany Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94802.json,false
-Albion Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95748.json,false
+Albion Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95748.json,true
 Albury,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95896.json,false
 Alice Springs Airport,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94326.json,false
 Alva Beach,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95296.json,false
 Amberley,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94568.json,false
 Andamooka,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95660.json,false
-Applethorpe,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94553.json,true
+Applethorpe,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94553.json,false
 Ararat,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94834.json,false
 Archerfield,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94575.json,false
-Argyle,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94217.json,true
+Argyle,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94217.json,false
 Arkaroola,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94676.json,false
 Arlington Reef,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94284.json,false
 Arltunga,http://www.bom.gov.au/fwo/IDD60801/IDD60801.95323.json,false
