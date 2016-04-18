@@ -57,8 +57,7 @@ public class GuiHandler extends Application {
 
 		window = primaryStage;
 		window.setTitle("Weather app");
-		
-
+	
 		// Instantiate a list of Site(s) and
 		// load Site data from disk
 		sites = FXCollections.observableArrayList();

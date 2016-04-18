@@ -6,9 +6,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 
@@ -38,7 +41,8 @@ public class GuiListWindow {
 	
 	static TableView<Site> table;
 	static Stage subStage; 
-
+	
+	
 	//static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
 	static void GuiWindow(Stage primaryStage, ObservableList sites ) throws IOException{
 		
@@ -60,11 +64,6 @@ public class GuiListWindow {
 			subStage.setY(100);
 		}
 		
-		
-		
-		TextField text = new TextField("Text");
-		text.setMaxSize(140, 20);
-
 		//Name column
 		TableColumn<Site, String> nameColumn = new TableColumn<>("Name");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -83,18 +82,46 @@ public class GuiListWindow {
 		    return new CheckBoxTableCell<Site, Boolean>();
 		}});
 		
-		
-		
-		//Append columns to table and fill in data
 		table = new TableView<>();
 		table.setMinSize(640, 480);
 
-		table.setItems(sites);
+		
+		FilteredList<Site> filteredSites = new FilteredList<>(sites,p-> true);
+		
+		TextField searchText = new TextField("Text");
+		searchText.setMaxSize(140, 20);
+		searchText.textProperty().addListener((observable, oldValue,newValue) -> {
+			
+			filteredSites.setPredicate(site -> {
+				if (newValue == null || newValue.isEmpty()){
+					return true;
+				}
+				
+				String lowerCase = newValue.toLowerCase();
+				
+				if(site.getName().toLowerCase().contains(lowerCase)){
+					return true;
+				}
+				
+				return false;
+				
+				
+			});		
+		});
+
+		SortedList<Site> sortedSites = new SortedList<>(filteredSites);
+		
+		sortedSites.comparatorProperty().bind(table.comparatorProperty());
+		
+		
+		//Append columns to table and fill in data
+		
+		table.setItems(sortedSites);
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
 		VBox layout = new VBox();
-		layout.getChildren().addAll(text, table);
+		layout.getChildren().addAll(searchText, table);
 		        
 		
 	    Scene scene = new Scene(layout);
