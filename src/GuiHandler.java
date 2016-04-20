@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-import java.awt.Font;
-=======
 
->>>>>>> master
+import java.awt.Font;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -116,7 +114,7 @@ public class GuiHandler extends Application {
 		grid.setStyle("-fx-background-color: #336699;");
 		grid.setMinHeight(300);
 		
-<<<<<<< HEAD
+
 		//Count how many sites are favourites and instantiate the buttons
 		int count = 0;
 		for( int i = 0; i < sites.size(); ++i ){
@@ -134,6 +132,7 @@ public class GuiHandler extends Application {
 		    }
 		}
 
+		/*
 		if( sites != null ){
 			int j = 0;
 			for( int i = 0; i < sites.size(); ++i ){
@@ -173,11 +172,10 @@ public class GuiHandler extends Application {
 				}
 			}
 		}
-=======
+        */
 		//Creates favourite buttons based on fav list and sets preferences
 		createFavButtons();
 		
->>>>>>> master
 
 		
 		//Creates border pane and sets the layout for the elements
@@ -188,7 +186,7 @@ public class GuiHandler extends Application {
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
-        scene.getStylesheets().add("StyleSheets/weatherCharcoal.css");
+        // scene.getStylesheets().add("StyleSheets/weatherCharcoal.css");
         window.setX( Double.parseDouble( prefs[0] ) );
         window.setY( Double.parseDouble( prefs[1] ) );
         window.setOnCloseRequest( new EventHandler<WindowEvent>(){ 
@@ -202,30 +200,41 @@ public class GuiHandler extends Application {
         window.show();
 	}
 	
-<<<<<<< HEAD
-=======
+
 	//creates favourite buttons 
 	public static void createFavButtons(){
-		
+	    // Go through the list of names to find the longest name
+        // and then set the gap between the name and temp accordingly
+        int gap = 0;
+        for( int i = 0; i < sites.size(); ++i ){
+            if( sites.get(i).getName().length() > gap ){
+                gap = sites.get(i).getName().length();
+            }
+        }
+        System.out.println(gap);
+        
 		if( sites != null ){
 
 			for( int i = 0; i < sites.size(); ++i ){
 				if( sites.get(i).isFavourite() ){
 					
-					String format = "%-40s%5s";
-					String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
+				    int thisGap = gap - sites.get(i).getName().length();
+                    String format = "%s%" + thisGap + "s";
+                    String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
 					
 					favBtns.add(new Button(str));
 					int lastIndex = favBtns.size() - 1;
 					//favBtns.get(lastIndex).getStyleClass().add("favorite");
-					favBtns.get(lastIndex).setTextAlignment(TextAlignment.LEFT);
-					favBtns.get(lastIndex).setMinWidth(300);
+					// favBtns.get(lastIndex).setTextAlignment(TextAlignment.LEFT);
+					// favBtns.get(lastIndex).setMinWidth(300);
+					favBtns.get(lastIndex).setFont(javafx.scene.text.Font.font("Monaco", 12) );
 					grid.add(favBtns.get(lastIndex),0,lastIndex);
 					
 					//New delete buttons that link to each fav button
 					delBtns.add(new Button("X"));
-					delBtns.get(lastIndex).getStyleClass().add("unfavorite");
-					delBtns.get(lastIndex).setMinWidth(20);
+					// delBtns.get(lastIndex).getStyleClass().add("unfavorite");
+					// delBtns.get(lastIndex).setMinWidth(20);
+					delBtns.get(lastIndex).setFont(javafx.scene.text.Font.font("Monaco", 12) );
 					grid.add(delBtns.get(lastIndex), 1, lastIndex);
 					
 					grid.setVgap(5);
@@ -268,7 +277,7 @@ public class GuiHandler extends Application {
 		
 		
 	}
->>>>>>> master
+
 	
 	
 	//sets list windows open tracking value to false

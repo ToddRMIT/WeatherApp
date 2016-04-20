@@ -4,7 +4,7 @@ Adele Island,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94210.json,false
 Aireys Inlet,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94846.json,false
 Albany,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94801.json,false
 Albany Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94802.json,false
-Albion Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95748.json,true
+Albion Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95748.json,false
 Albury,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95896.json,false
 Alice Springs Airport,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94326.json,false
 Alva Beach,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95296.json,false
@@ -88,16 +88,16 @@ Burketown Airport,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94260.json,false
 Burnie,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94958.json,false
 Burnie Port,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95963.json,false
 Burrinjuck Dam,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94909.json,false
-Bushy Park,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94964.json,false
+Bushy Park,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94964.json,true
 Busselton Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95611.json,false
 Busselton Jetty,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95602.json,false
 Butlers Gorge,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94959.json,false
 Cabramurra,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95916.json,false
 Cairns,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94287.json,false
 Cairns Racecourse,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94288.json,false
-Camden,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94755.json,false
-Camooweal,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94255.json,true
-Campania,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95972.json,false
+Camden,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94755.json,true
+Camooweal,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94255.json,false
+Campania,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95972.json,true
 Campbelltown,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94757.json,false
 Canberra,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94926.json,false
 Canterbury,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94766.json,false
@@ -126,7 +126,7 @@ Casey (Cape Poinsett)*,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89610.json,fa
 Casey (Haupt Nunatak)*,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89815.json,false
 Casey (Law Dome)*,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89811.json,false
 Casey (Skiway South)*,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89809.json,false
-Casey (Snyder Rocks)*,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89807.json,false
+Casey (Snyder Rocks)*,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89807.json,true
 Casey*,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89611.json,false
 Casino,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94573.json,false
 Casterton,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95825.json,false
@@ -437,7 +437,7 @@ McMurdo,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89664.json,false
 Meekatharra,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94430.json,false
 Melbourne (Olympic Park),http://www.bom.gov.au/fwo/IDV60801/IDV60801.95936.json,false
 Melbourne Airport,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94866.json,false
-Melton Mowbray,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94971.json,true
+Melton Mowbray,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94971.json,false
 Melville Water,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95620.json,false
 Menindee,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94694.json,false
 Meningie,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95814.json,false

@@ -222,38 +222,7 @@ public class GuiListWindow {
 	}
 	
 	
-<<<<<<< HEAD
-=======
-	/*
-	//Temporary Data-Retrieval for testing modified from utilities
-	public static  ObservableList<Site> getExtensiveSite(){
-		
-		ObservableList<Site> lsites = FXCollections.observableArrayList();
-	    SortedLinkedList<Site> sites = new SortedLinkedList<Site>();
-	    SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
-	    
-	    favList.load( FAVOURITES_FILE );
-	    sites.load( SITES_FILE );
-	    
-	    String list[][] = sites.list();
-	    String flist[][] = favList.list();
-	    
-	    for( int i = 0; i < list.length; ++i ){
-	    	lsites.add( new Site( list[i][0], list[i][1] ) );
-	    	
-	    	 for( int j = 0; j < flist.length; ++j ){
-	    		 if(list[i][0].equals(flist[j][0])){
-	    			 System.out.println("Favorite match:" + " : " + list[i][0]);
-	    			 lsites.get(lsites.size() - 1).setFavourite(true);
-	    		 }
-	    	 }
-	    }
-		return lsites;
-	}
-	*/
-	
-	
->>>>>>> master
+
 	
 	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
 		private CheckBox checkBox;
