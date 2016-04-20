@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 import java.awt.Font;
+=======
+
+>>>>>>> master
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -14,40 +19,54 @@ import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Labeled;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+
 import javafx.scene.text.TextAlignment;
+
 
 /**
  * @author Daniel Bugeja & Todd Ryan
  *
  */
+
 public class GuiHandler extends Application {
 
 	public static final String SITES_FILE = "sites.txt";
 	public static final String FAVOURITES_FILE = "favourites.txt";
 	public static final String MAIN_PREFERENCES_FILE = "prefs.txt";
 	
-	Stage window;
+	static Stage window;
+	static GridPane grid;
+	static ObservableList<Site> sites;
     static boolean listOpen;
+    
 	
+    //lists to store favorite and favorite delete buttons
+    private static ArrayList<Button> favBtns = new ArrayList();
+    private static ArrayList<Button> delBtns = new ArrayList();
+
 	public GuiHandler( ) {
-        
+
 	}
 
 	@Override
 	public void start( final Stage primaryStage ) throws Exception {
 
+
 		window = primaryStage;
 		window.setTitle("Weather app");
-		
+	
 		// Instantiate a list of Site(s) and
 		// load Site data from disk
-		ObservableList<Site> sites = FXCollections.observableArrayList();
+		sites = FXCollections.observableArrayList();
 		loadSites( sites );
+
 		
 		// Update siteList from BOM
 		// This should be done when the sites window is opened
@@ -92,11 +111,12 @@ public class GuiHandler extends Application {
 			
 		// Sets flow pane preferences
 		// for the favourites list
-		GridPane grid = new GridPane();
+		grid = new GridPane();
 		grid.setPadding(new Insets (15,15,15,15));
 		grid.setStyle("-fx-background-color: #336699;");
 		grid.setMinHeight(300);
 		
+<<<<<<< HEAD
 		//Count how many sites are favourites and instantiate the buttons
 		int count = 0;
 		for( int i = 0; i < sites.size(); ++i ){
@@ -153,6 +173,11 @@ public class GuiHandler extends Application {
 				}
 			}
 		}
+=======
+		//Creates favourite buttons based on fav list and sets preferences
+		createFavButtons();
+		
+>>>>>>> master
 
 		
 		//Creates border pane and sets the layout for the elements
@@ -163,6 +188,7 @@ public class GuiHandler extends Application {
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
+        scene.getStylesheets().add("StyleSheets/weatherCharcoal.css");
         window.setX( Double.parseDouble( prefs[0] ) );
         window.setY( Double.parseDouble( prefs[1] ) );
         window.setOnCloseRequest( new EventHandler<WindowEvent>(){ 
@@ -176,6 +202,73 @@ public class GuiHandler extends Application {
         window.show();
 	}
 	
+<<<<<<< HEAD
+=======
+	//creates favourite buttons 
+	public static void createFavButtons(){
+		
+		if( sites != null ){
+
+			for( int i = 0; i < sites.size(); ++i ){
+				if( sites.get(i).isFavourite() ){
+					
+					String format = "%-40s%5s";
+					String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
+					
+					favBtns.add(new Button(str));
+					int lastIndex = favBtns.size() - 1;
+					//favBtns.get(lastIndex).getStyleClass().add("favorite");
+					favBtns.get(lastIndex).setTextAlignment(TextAlignment.LEFT);
+					favBtns.get(lastIndex).setMinWidth(300);
+					grid.add(favBtns.get(lastIndex),0,lastIndex);
+					
+					//New delete buttons that link to each fav button
+					delBtns.add(new Button("X"));
+					delBtns.get(lastIndex).getStyleClass().add("unfavorite");
+					delBtns.get(lastIndex).setMinWidth(20);
+					grid.add(delBtns.get(lastIndex), 1, lastIndex);
+					
+					grid.setVgap(5);
+					grid.setHgap(10);
+					final int favselected = i;
+					delBtns.get(lastIndex).setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							grid.getChildren().removeAll( favBtns.get(lastIndex), delBtns.get(lastIndex));
+							
+							sites.get( favselected ).setFavourite(false);
+						}
+					} );
+					favBtns.get(lastIndex).setOnAction(new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent e) {
+							try {
+								GuiDataWindow.dataWindow( window, sites.get(favselected) );
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}	
+						}
+					});
+					
+				}
+
+			}
+		}
+
+		
+	}
+	
+	
+	//removes buttons and reset the button lists
+	public static void clearBtns(){
+		
+		while(favBtns.size() > 0){
+			grid.getChildren().removeAll( favBtns.get(0), delBtns.get(0));
+			 favBtns.remove(0);
+			 delBtns.remove(0);
+		}
+		
+		
+	}
+>>>>>>> master
 	
 	
 	//sets list windows open tracking value to false

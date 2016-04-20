@@ -4,17 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+
 
 /**
  * @author Todd Ryan
@@ -27,6 +26,7 @@ public class Site implements Comparable<Site>{
     private Double temp;
     private List<String[]> data;
     private Double[] coords;
+
     private BooleanProperty favourite;
     
     private static String[] key = {
@@ -39,7 +39,10 @@ public class Site implements Comparable<Site>{
 			"vis_km", "weather", "wind_dir", "wind_spd_kmh", "wind_spd_kt"
     };
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> master
 
     public Site( String name, String url ){
         this.name = name;
@@ -48,6 +51,7 @@ public class Site implements Comparable<Site>{
         data = null;
         coords = new Double[]{ 100.0, 100.0 };
         favourite = new SimpleBooleanProperty(false);
+
     }
     
     public Site( String name, String url, String fav ){
@@ -60,6 +64,8 @@ public class Site implements Comparable<Site>{
         this.favourite.addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
             	setFavourite( t1 );
+            	GuiHandler.clearBtns();
+            	GuiHandler.createFavButtons();
             }
         });
     }
@@ -70,6 +76,7 @@ public class Site implements Comparable<Site>{
     public String[] getKey(){ return key; }
     public String getName(){ return name; }
     public String getURL(){ return url; }
+
     public Double[] getCoords(){ return coords; }
     public boolean isFavourite(){ return favourite.get(); }
     public Double getTemp(){
@@ -150,6 +157,7 @@ public class Site implements Comparable<Site>{
     
     
     // Only for testing
+
     public String print(){
     	String str = "";
     	str = name;
@@ -301,5 +309,8 @@ public class Site implements Comparable<Site>{
             System.err.println( "Error updating data: " + e );
     	}	
     }
+
+
+
     
 }
