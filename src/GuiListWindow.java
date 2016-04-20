@@ -222,6 +222,8 @@ public class GuiListWindow {
 	}
 	
 	
+<<<<<<< HEAD
+=======
 	/*
 	//Temporary Data-Retrieval for testing modified from utilities
 	public static  ObservableList<Site> getExtensiveSite(){
@@ -251,6 +253,7 @@ public class GuiListWindow {
 	*/
 	
 	
+>>>>>>> master
 	
 	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
 		private CheckBox checkBox;
