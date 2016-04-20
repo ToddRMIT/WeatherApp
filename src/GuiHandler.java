@@ -97,9 +97,11 @@ public class GuiHandler extends Application {
 		grid.setStyle("-fx-background-color: #336699;");
 		grid.setMinHeight(300);
 		
-		//Creates favourite buttons based on fav list and sets preferences
+		//Count how many sites are favourites and instantiate the buttons
 		int count = 0;
-		for( int i = 0; i < sites.size(); ++i ){ if( sites.get(i).isFavourite() ) ++count; }
+		for( int i = 0; i < sites.size(); ++i ){
+		    if( sites.get(i).isFavourite() ) ++count;
+		}
 		Button favButtons[] = new Button[count];
 		Button delButtons[] = new Button[count];
 		
@@ -153,12 +155,11 @@ public class GuiHandler extends Application {
 		}
 
 		
-		
-		//Creates border and sets the layout for the elements
+		//Creates border pane and sets the layout for the elements
         BorderPane border = new BorderPane();
         border.setTop(top);
         border.setCenter(grid);
-
+        
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
         window.setScene(scene);
@@ -175,10 +176,14 @@ public class GuiHandler extends Application {
         window.show();
 	}
 	
+	
+	
 	//sets list windows open tracking value to false
 	public static void listClosed() {
 		listOpen = false;
 	}
+	
+	
 	
 	/**
 	 * Loads preferences for the main window from the MAIN_PREFERENCES_FILE</br>

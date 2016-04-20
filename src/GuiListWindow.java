@@ -137,21 +137,6 @@ public class GuiListWindow {
 	}
 	
 	
-	/*
-	//Temporary Data-Retrieval for testing modified from utilities
-	public static  ObservableList<Site> getExtensiveSite(){
-		ObservableList<Site> lsites = FXCollections.observableArrayList();
-	    SortedLinkedList<Site> sites = new SortedLinkedList<Site>();
-	    sites.load( SITES_FILE );
-	    String list[][] = sites.list();
-	    for( int i = 0; i < list.length; ++i ){
-	    	lsites.add( new Site( list[i][0], list[i][1] ) );
-	    }
-		return lsites;
-	}
-	*/
-	
-	
 	
 	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
 		private final CheckBox checkBox;
