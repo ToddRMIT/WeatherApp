@@ -132,47 +132,8 @@ public class GuiHandler extends Application {
 		    }
 		}
 
-		/*
-		if( sites != null ){
-			int j = 0;
-			for( int i = 0; i < sites.size(); ++i ){
-				if( sites.get(i).isFavourite() ){
-				    int thisGap = gap - sites.get(i).getName().length();
-					String format = "%s%" + thisGap + "s";
-					String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
-					favButtons[j] = new Button( str );
-					favButtons[j].setFont(javafx.scene.text.Font.font("Monaco", 12) );
-					grid.add( favButtons[j], 0, j );
-					
-					//New delete buttons that link to each fav button
-					delButtons[j] = new Button("X");
-					delButtons[j].setFont(javafx.scene.text.Font.font("Monaco", 12) );
-					grid.add( delButtons[j], 1, j );
-					final int selected = j;
-					final int favselected = i;
-					
-					// Set action for delete button
-					delButtons[j].setOnAction(new EventHandler<ActionEvent>() {
-						@Override public void handle(ActionEvent e) {
-							grid.getChildren().removeAll( favButtons[selected], delButtons[selected] );
-							sites.get( favselected ).setFavourite(false);
-						}
-					} );
-					// Set action for favourite button
-					favButtons[j].setOnAction(new EventHandler<ActionEvent>() {
-						@Override public void handle(ActionEvent e) {
-							try {
-								GuiDataWindow.dataWindow( primaryStage, sites.get(favselected) );
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}	
-						}
-					});
-					++j;
-				}
-			}
-		}
-        */
+		
+		
 		//Creates favourite buttons based on fav list and sets preferences
 		createFavButtons();
 		
@@ -211,7 +172,6 @@ public class GuiHandler extends Application {
                 gap = sites.get(i).getName().length();
             }
         }
-        System.out.println(gap);
         
 		if( sites != null ){
 

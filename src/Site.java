@@ -129,13 +129,15 @@ public class Site implements Comparable<Site>{
 				max = -1000.0;
 				thisDay = data.get(i)[5].substring( 0, 8 );
 			}
-    		thisTemp = Double.parseDouble( data.get(i)[18] );
-			if( thisTemp < min ) min = thisTemp;
-			if( thisTemp > max ) max = thisTemp;
-			if( data.get(i)[4].matches( ".*9:00am.*" ) ){
-				temp[0] = data.get(i)[5];
-    			temp[3] = data.get(i)[18];
+    		if( data.get(i)[18].compareTo( "null" ) != 0 ){
+    		    thisTemp = Double.parseDouble( data.get(i)[18] );
+                if( thisTemp < min ) min = thisTemp;
+                if( thisTemp > max ) max = thisTemp;
     		}
+    		if( data.get(i)[4].matches( ".*9:00am.*" ) ){
+                temp[0] = data.get(i)[5];
+                temp[3] = data.get(i)[18];
+            }
 			if( data.get(i)[4].matches( ".*3:00pm.*" ) ){
 				temp[0] = data.get(i)[5];
     			temp[4] = data.get(i)[18];
