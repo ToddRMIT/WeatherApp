@@ -1,4 +1,0 @@
-100.0,100.0,true
-0,94801,Albany,IDW60801,17/09:00am,20160417090000,20160417010000,-35.0,117.9,22.1,Cloudy,null,8,-,null,0.6,null,null,20.0,19.0,null,null,null,-,1.0,94,-,-,null,null,15,Fine,NNW,6,3
-1,94801,Albany,IDW60801,16/09:00am,20160416090000,20160416010000,-35.0,117.9,15.0,Cloudy,null,8,-,null,0.8,null,null,18.0,16.7,null,null,null,-,0.3,92,-,-,null,null,15,Fine,E,28,15
-2,94801,Albany,IDW60801,15/09:00am,20160415090000,20160415010000,-35.0,117.9,16.0,Mostly cloudy,null,6,-,null,3.6,null,null,18.0,11.4,null,null,null,-,0.6,65,-,-,null,null,20,Fine,S,13,7

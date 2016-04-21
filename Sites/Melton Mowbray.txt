@@ -1,4 +1,0 @@
-507.0,83.0,true
-0,94971,Melton Mowbray,IDT60801,18/09:00am,20160418090000,20160417230000,-42.5,147.2,3.0,Partly cloudy,null,3,-,null,0.4,null,null,4.4,3.4,null,null,null,-,0.0,93,-,-,null,null,50,Fine,CALM,0,0
-1,94971,Melton Mowbray,IDT60801,17/09:00am,20160417090000,20160416230000,-42.5,147.2,3.8,Mostly clear,null,2,-,null,0.8,null,null,5.2,3.3,null,null,null,-,0.0,87,-,-,null,null,50,Fine,CALM,0,0
-2,94971,Melton Mowbray,IDT60801,16/09:00am,20160416090000,20160415230000,-42.5,147.2,9.3,Mostly cloudy,null,7,-,null,3.0,null,null,12.0,5.6,null,null,null,-,0.0,65,-,-,null,null,50,Fine,SSW,9,5
