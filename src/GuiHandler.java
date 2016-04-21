@@ -41,7 +41,8 @@ public class GuiHandler extends Application {
 	
 	static Stage window;
 	static GridPane grid;
-	static ObservableList<Site> sites;
+	// static ObservableList<Site> sites;
+	static ObservableList<Station> sites;
     static boolean listOpen;
     
 	
@@ -65,6 +66,17 @@ public class GuiHandler extends Application {
 		sites = FXCollections.observableArrayList();
 		loadSites( sites );
 
+		// Testing new functions to grab daily observation data
+		// Utility.getURLs();
+		// Utility.getData( "http://www.bom.gov.au/climate/dwo/201604/text/IDCJDW9203.201604.csv" );
+		/*
+		Station test = new Station( "test", "9203" );
+		test.loadData();
+		test.updateData();
+		test.print();
+		test.save(100.0, 100.0);
+		*/
+		
 		
 		// Update siteList from BOM
 		// This should be done when the sites window is opened
@@ -179,9 +191,9 @@ public class GuiHandler extends Application {
 				if( sites.get(i).isFavourite() ){
 					
 				    int thisGap = gap - sites.get(i).getName().length();
-                    String format = "%s%" + thisGap + "s";
-                    String str = String.format( format, sites.get(i).getName(), sites.get(i).getTemp() );
-					
+                    String format = "%-" + gap + "s";
+                    String str = String.format( format, sites.get(i).getName() );
+                    
 					favBtns.add(new Button(str));
 					int lastIndex = favBtns.size() - 1;
 					//favBtns.get(lastIndex).getStyleClass().add("favorite");
@@ -302,6 +314,7 @@ public class GuiHandler extends Application {
 		}
 	}
 	
+	/*
 	public static void loadSites( ObservableList<Site> sites ){
     	FileReader file = null;
     	BufferedReader buffer = null;
@@ -319,7 +332,27 @@ public class GuiHandler extends Application {
     		System.err.println( "Error: " + e );
     	}
     }
+	*/
+	public static void loadSites( ObservableList<Station> sites ){
+	    FileReader file = null;
+        BufferedReader buffer = null;
+        String line = null;
+        try{
+            file = new FileReader( SITES_FILE );
+            buffer = new BufferedReader( file );
+            String[] tokens = null;
+            while( ( line = buffer.readLine() ) != null ){
+                tokens = line.split(",");
+                sites.add( new Station( tokens[0], tokens[1], tokens[2] ) );
+            }
+        }
+        catch (IOException e ){
+            System.err.println( "Error: " + e );
+            Utility.getStations(sites);
+        }
+	}
 	
+	/*
 	public static void saveSites( ObservableList<Site> sites ){
 		try( BufferedWriter buffer = new BufferedWriter( new PrintWriter( SITES_FILE ) ) ){
 			for( int i = 0; i < sites.size(); ++i ){
@@ -334,5 +367,21 @@ public class GuiHandler extends Application {
 			System.err.println( "Error saving sites: " + e );
 		}
 	}
+	*/
+	
+	public static void saveSites( ObservableList<Station> sites ){
+        try( BufferedWriter buffer = new BufferedWriter( new PrintWriter( SITES_FILE ) ) ){
+            for( int i = 0; i < sites.size(); ++i ){
+                String str = sites.get(i).getName() + ",";
+                str = str.concat( sites.get(i).getCode() + "," );
+                String fav = ( sites.get(i).isFavourite() ? "true" : "false" );
+                str = str.concat( fav );
+                buffer.write( str );
+                buffer.newLine();
+            }
+        } catch( IOException e ){
+            System.err.println( "Error saving sites: " + e );
+        }
+    }
 	
 }
