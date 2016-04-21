@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -42,19 +40,15 @@ public class GuiListWindow {
 	public static final String FAVOURITES_FILE = "favourites.txt";
 	private static final String GUI_LIST_PREFS_FILE = "guilistprefs.txt";
 	
-	static TableView<Site> table;
+	static TableView<Station> table;
 	static Stage subStage; 
 	
 	
-	//static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
 	static void GuiWindow(Stage primaryStage, ObservableList sites ) throws IOException{
-		
-		
+
 		subStage = new Stage();
 		subStage.setTitle( "Site List" );
 		subStage.initModality(Modality.WINDOW_MODAL);
-		
-		
 		
 		// Load prefs
 		String prefs[] = loadPrefs();
@@ -68,12 +62,12 @@ public class GuiListWindow {
 		}
 		
 		//Name column
-		TableColumn<Site, String> nameColumn = new TableColumn<>("Name");
+		TableColumn<Station, String> nameColumn = new TableColumn<>("Name");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		nameColumn.setCellFactory(new Callback<TableColumn<Site,String>,TableCell<Site, String>>() {
+		nameColumn.setCellFactory(new Callback<TableColumn<Station,String>,TableCell<Station, String>>() {
 			
-			public TableCell<Site,String> call(TableColumn<Site,String> t){
-				  TableCell cell = new TableCell<Site, String>() {
+			public TableCell<Station,String> call(TableColumn<Station,String> t){
+				  TableCell cell = new TableCell<Station, String>() {
 					  
 					     @Override
 		                    public void updateItem(String item, boolean empty) {
@@ -92,20 +86,18 @@ public class GuiListWindow {
 	                    @Override
 	                    public void handle(MouseEvent event) {
 	                        if (event.getClickCount() > 1) {
-	                            
 	                            TableCell c = (TableCell) event.getSource();
 	                            for(int i = 0; i < sites.size(); i++){
-	                            	if(c.getText().equals(((Site) sites.get(i)).getName())){
+	                            	if(c.getText().equals(((Station) sites.get(i)).getName())){
 	                            		try {
-											GuiDataWindow.dataWindow( primaryStage, (Site) sites.get(i) );
+											GuiDataWindow.dataWindow( primaryStage, (Station) sites.get(i) );
 										} catch (IOException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
 										}
 	                            	}
 	                            }
-	                            
-	                            System.out.println("Cell text: " + c.getText());
+	                            // System.out.println("Cell text: " + c.getText());
 	                        }
 	                    }
 	                });
@@ -114,58 +106,47 @@ public class GuiListWindow {
 			
 		});
 			
-		
+		/*
 		//URL column
-		TableColumn<Site, String> urlColumn = new TableColumn<>("URL");
+		TableColumn<Station, String> urlColumn = new TableColumn<>("URL");
 		urlColumn.setCellValueFactory(new PropertyValueFactory<>("URL"));
+		*/
 		
 		//Favorite column
-
-		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
+		TableColumn<Station, Boolean> favoriteColumn = new TableColumn<>("Favourite");
 		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("fav"));
-		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
-			
-			public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
-		    return new CheckBoxTableCell<Site, Boolean>();
+		favoriteColumn.setCellFactory(new Callback<TableColumn<Station, Boolean>, TableCell<Station, Boolean>>() {
+			public TableCell<Station, Boolean> call(TableColumn<Station, Boolean> p) {
+		    return new CheckBoxTableCell<Station, Boolean>();
 		}});
 		
 		table = new TableView<>();
-		table.setMinSize(640, 480);
+		//table.setMinSize(640, 480);
 
 		
-		FilteredList<Site> filteredSites = new FilteredList<>(sites,p-> true);
-		
+		FilteredList<Station> filteredSites = new FilteredList<>(sites,p-> true);
 		TextField searchText = new TextField("search");
 		searchText.setMaxSize(140, 20);
-		
 		searchText.textProperty().addListener((observable, oldValue,newValue) -> {
-			
 			filteredSites.setPredicate(site -> {
 				if (newValue == null || newValue.isEmpty()){
 					return true;
 				}
-				
 				String lowerCase = newValue.toLowerCase();
-				
 				if(site.getName().toLowerCase().contains(lowerCase)){
 					return true;
 				}
-				
 				return false;
-				
-				
 			});		
 		});
 
-		SortedList<Site> sortedSites = new SortedList<>(filteredSites);
-		
+		SortedList<Station> sortedSites = new SortedList<>(filteredSites);
 		sortedSites.comparatorProperty().bind(table.comparatorProperty());
 		
 		
 		//Append columns to table and fill in data
-		
 		table.setItems(sortedSites);
-		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
+		table.getColumns().addAll(nameColumn, favoriteColumn);
 				
 		//Setting layout
 		VBox layout = new VBox(10);
