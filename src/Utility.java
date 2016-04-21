@@ -39,6 +39,7 @@ public class Utility{
             while( (inputLine = in.readLine() ) != null ){
                 if( inputLine.matches( ".*station.*shtml.*" ) ){
                     processLine( inputLine, siteList, siteNames );
+
                 }
             }
             in.close();

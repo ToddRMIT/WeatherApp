@@ -1,11 +1,11 @@
-Adelaide,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94675.json,true
+Adelaide,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94675.json,false
 Adelaide Airport,http://www.bom.gov.au/fwo/IDS60801/IDS60801.94672.json,false
 Adele Island,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94210.json,false
 Aireys Inlet,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94846.json,false
 Albany,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94801.json,false
 Albany Airport,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94802.json,false
-Albion Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95748.json,false
-Albury,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95896.json,true
+Albion Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95748.json,true
+Albury,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95896.json,false
 Alice Springs Airport,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94326.json,false
 Alva Beach,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95296.json,false
 Amberley,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94568.json,false
@@ -19,7 +19,7 @@ Arlington Reef,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94284.json,false
 Arltunga,http://www.bom.gov.au/fwo/IDD60801/IDD60801.95323.json,false
 Armidale,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94773.json,false
 Armidale Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95773.json,false
-Avalon,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94854.json,true
+Avalon,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94854.json,false
 Ayr,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95295.json,false
 Badgerys Creek,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94752.json,false
 Badgingarra,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94603.json,false
@@ -30,7 +30,7 @@ Ballera,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.95487.json,false
 Ballina,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94596.json,false
 Balranald,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94696.json,false
 Banana Bank,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94591.json,false
-Bankstown,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94765.json,true
+Bankstown,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94765.json,false
 Barcaldine,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94350.json,false
 Barimunya,http://www.bom.gov.au/fwo/IDW60801/IDW60801.99313.json,false
 Barraba,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94761.json,false
@@ -96,7 +96,7 @@ Cabramurra,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95916.json,false
 Cairns,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94287.json,false
 Cairns Racecourse,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94288.json,false
 Camden,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94755.json,false
-Camooweal,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94255.json,false
+Camooweal,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94255.json,true
 Campania,http://www.bom.gov.au/fwo/IDT60801/IDT60801.95972.json,false
 Campbelltown,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94757.json,false
 Canberra,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94926.json,false
@@ -307,7 +307,7 @@ Holsworthy,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95761.json,false
 Hopetoun Airport,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94838.json,false
 Hopetoun North,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95635.json,false
 Horn Island,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94174.json,false
-Horsham,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95839.json,true
+Horsham,http://www.bom.gov.au/fwo/IDV60801/IDV60801.95839.json,false
 Horsley Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94760.json,false
 Hughenden,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94343.json,false
 Hume Reservoir,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94901.json,false
@@ -436,8 +436,8 @@ McCluer Island,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94135.json,false
 McMurdo,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89664.json,false
 Meekatharra,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94430.json,false
 Melbourne (Olympic Park),http://www.bom.gov.au/fwo/IDV60801/IDV60801.95936.json,false
-Melbourne Airport,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94866.json,true
-Melton Mowbray,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94971.json,false
+Melbourne Airport,http://www.bom.gov.au/fwo/IDV60801/IDV60801.94866.json,false
+Melton Mowbray,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94971.json,true
 Melville Water,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95620.json,false
 Menindee,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94694.json,false
 Meningie,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95814.json,false
@@ -492,6 +492,7 @@ Mudgee,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94727.json,false
 Mullewa,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94411.json,false
 Mungindi,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94520.json,false
 Munglinup West,http://www.bom.gov.au/fwo/IDW60801/IDW60801.95644.json,false
+Murchison,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94422.json,false
 Murganella Airstrip,http://www.bom.gov.au/fwo/IDD60801/IDD60801.94109.json,false
 Murray Bridge,http://www.bom.gov.au/fwo/IDS60801/IDS60801.95812.json,false
 Murrurundi,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94756.json,false
@@ -660,7 +661,7 @@ Swanbourne,http://www.bom.gov.au/fwo/IDW60801/IDW60801.94614.json,false
 Swansea,http://www.bom.gov.au/fwo/IDT60801/IDT60801.94981.json,false
 Sweers Island,http://www.bom.gov.au/fwo/IDQ60801/IDQ60801.94257.json,false
 Sydney - Observatory Hill,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94768.json,false
-Sydney Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94767.json,true
+Sydney Airport,http://www.bom.gov.au/fwo/IDN60801/IDN60801.94767.json,false
 Sydney Harbour,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95766.json,false
 Sydney Olympic Park,http://www.bom.gov.au/fwo/IDN60801/IDN60801.95765.json,false
 Syowa,http://www.bom.gov.au/fwo/IDT60803/IDT60803.89532.json,false

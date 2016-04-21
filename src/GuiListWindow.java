@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -5,19 +6,28 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -27,15 +37,17 @@ import javafx.util.Callback;
  */
 public class GuiListWindow {
 
+	
 	private static final String SITES_FILE = "sites.txt";
+	public static final String FAVOURITES_FILE = "favourites.txt";
 	private static final String GUI_LIST_PREFS_FILE = "guilistprefs.txt";
 	
 	static TableView<Site> table;
 	static Stage subStage; 
-
+	
+	
 	//static void GuiWindow(Stage primaryStage, String stageName ) throws IOException{
 	static void GuiWindow(Stage primaryStage, ObservableList sites ) throws IOException{
-		
 		
 		
 		subStage = new Stage();
@@ -55,43 +67,116 @@ public class GuiListWindow {
 			subStage.setY(100);
 		}
 		
-		
-		
-		TextField text = new TextField("Text");
-		text.setMaxSize(140, 20);
-
 		//Name column
 		TableColumn<Site, String> nameColumn = new TableColumn<>("Name");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-				
+		nameColumn.setCellFactory(new Callback<TableColumn<Site,String>,TableCell<Site, String>>() {
+			
+			public TableCell<Site,String> call(TableColumn<Site,String> t){
+				  TableCell cell = new TableCell<Site, String>() {
+					  
+					     @Override
+		                    public void updateItem(String item, boolean empty) {
+		                        super.updateItem(item, empty);
+		                        setText(empty ? null : getString());
+		                        setGraphic(null);
+		                    }
+
+		                    private String getString() {
+		                        return getItem() == null ? "" : getItem().toString();
+		                    }
+		                
+				  };
+				  
+				  cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+	                    @Override
+	                    public void handle(MouseEvent event) {
+	                        if (event.getClickCount() > 1) {
+	                            
+	                            TableCell c = (TableCell) event.getSource();
+	                            for(int i = 0; i < sites.size(); i++){
+	                            	if(c.getText().equals(((Site) sites.get(i)).getName())){
+	                            		try {
+											GuiDataWindow.dataWindow( primaryStage, (Site) sites.get(i) );
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+	                            	}
+	                            }
+	                            
+	                            System.out.println("Cell text: " + c.getText());
+	                        }
+	                    }
+	                });
+	                return cell;
+			}
+			
+		});
+			
+		
 		//URL column
 		TableColumn<Site, String> urlColumn = new TableColumn<>("URL");
 		urlColumn.setCellValueFactory(new PropertyValueFactory<>("URL"));
 		
 		//Favorite column
+
 		TableColumn<Site, Boolean> favoriteColumn = new TableColumn<>("Favourite");
 		favoriteColumn.setCellValueFactory(new PropertyValueFactory<>("fav"));
-		
 		favoriteColumn.setCellFactory(new Callback<TableColumn<Site, Boolean>, TableCell<Site, Boolean>>() {
+			
 			public TableCell<Site, Boolean> call(TableColumn<Site, Boolean> p) {
 		    return new CheckBoxTableCell<Site, Boolean>();
 		}});
 		
+		table = new TableView<>();
+		table.setMinSize(640, 480);
+
+		
+		FilteredList<Site> filteredSites = new FilteredList<>(sites,p-> true);
+		
+		TextField searchText = new TextField("search");
+		searchText.setMaxSize(140, 20);
+		
+		searchText.textProperty().addListener((observable, oldValue,newValue) -> {
+			
+			filteredSites.setPredicate(site -> {
+				if (newValue == null || newValue.isEmpty()){
+					return true;
+				}
+				
+				String lowerCase = newValue.toLowerCase();
+				
+				if(site.getName().toLowerCase().contains(lowerCase)){
+					return true;
+				}
+				
+				return false;
+				
+				
+			});		
+		});
+
+		SortedList<Site> sortedSites = new SortedList<>(filteredSites);
+		
+		sortedSites.comparatorProperty().bind(table.comparatorProperty());
 		
 		
 		//Append columns to table and fill in data
-		table = new TableView<>();
-		table.setMinSize(640, 480);
-		table.setItems(sites);
+		
+		table.setItems(sortedSites);
 		table.getColumns().addAll(nameColumn, urlColumn , favoriteColumn);
 				
 		//Setting layout
-		VBox layout = new VBox();
-		layout.getChildren().addAll(text, table);
-		        
+		VBox layout = new VBox(10);
+		layout.getChildren().addAll(searchText, table);
+		layout.setPadding(new Insets (15,0,0,0));
+		layout.setStyle("-fx-background-color: #336699;");        
 		
 	    Scene scene = new Scene(layout);
 	    subStage.setScene(scene);
+	    
+
 	    subStage.setOnCloseRequest(e -> closeWindow());
 	    subStage.show();
 	}
@@ -137,24 +222,41 @@ public class GuiListWindow {
 	}
 	
 	
+<<<<<<< HEAD
+=======
 	/*
 	//Temporary Data-Retrieval for testing modified from utilities
 	public static  ObservableList<Site> getExtensiveSite(){
+		
 		ObservableList<Site> lsites = FXCollections.observableArrayList();
 	    SortedLinkedList<Site> sites = new SortedLinkedList<Site>();
+	    SortedLinkedList<Favourite> favList = new SortedLinkedList<Favourite>();
+	    
+	    favList.load( FAVOURITES_FILE );
 	    sites.load( SITES_FILE );
+	    
 	    String list[][] = sites.list();
+	    String flist[][] = favList.list();
+	    
 	    for( int i = 0; i < list.length; ++i ){
 	    	lsites.add( new Site( list[i][0], list[i][1] ) );
+	    	
+	    	 for( int j = 0; j < flist.length; ++j ){
+	    		 if(list[i][0].equals(flist[j][0])){
+	    			 System.out.println("Favorite match:" + " : " + list[i][0]);
+	    			 lsites.get(lsites.size() - 1).setFavourite(true);
+	    		 }
+	    	 }
 	    }
 		return lsites;
 	}
 	*/
 	
 	
+>>>>>>> master
 	
 	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
-		private final CheckBox checkBox;
+		private CheckBox checkBox;
 		private ObservableValue<T> ov;
 		public CheckBoxTableCell() {
 			this.checkBox = new CheckBox();
