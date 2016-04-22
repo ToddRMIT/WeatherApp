@@ -1,6 +1,4 @@
 
-import java.awt.Font;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -21,11 +19,8 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Labeled;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-
-import javafx.scene.text.TextAlignment;
 
 
 /**
@@ -41,7 +36,6 @@ public class GuiHandler extends Application {
 	
 	static Stage window;
 	static GridPane grid;
-	// static ObservableList<Site> sites;
 	static ObservableList<Station> sites;
     static boolean listOpen;
     
@@ -66,22 +60,6 @@ public class GuiHandler extends Application {
 		sites = FXCollections.observableArrayList();
 		loadSites( sites );
 
-		// Testing new functions to grab daily observation data
-		// Utility.getURLs();
-		// Utility.getData( "http://www.bom.gov.au/climate/dwo/201604/text/IDCJDW9203.201604.csv" );
-		/*
-		Station test = new Station( "test", "9203" );
-		test.loadData();
-		test.updateData();
-		test.print();
-		test.save(100.0, 100.0);
-		*/
-		
-		
-		// Update siteList from BOM
-		// This should be done when the sites window is opened
-		// Utility.FetchSites( sites );	
-		
 		// Load preferences
 		// Currently returns an array of dimension 2
 		// [0]: window.X    [1]: window.Y
@@ -167,7 +145,6 @@ public class GuiHandler extends Application {
         	public void handle(final WindowEvent e){
         		savePrefs( window.getX(), window.getY() );
         		saveSites( sites );
-        		//favList.save(FAVOURITES_FILE);
         	}
         });
         window.show();
@@ -190,23 +167,19 @@ public class GuiHandler extends Application {
 			for( int i = 0; i < sites.size(); ++i ){
 				if( sites.get(i).isFavourite() ){
 					
-				    int thisGap = gap - sites.get(i).getName().length();
-                    String format = "%-" + gap + "s";
-                    String str = String.format( format, sites.get(i).getName() );
-                    
+				    String str = sites.get(i).getName();
+				    
 					favBtns.add(new Button(str));
 					int lastIndex = favBtns.size() - 1;
 					//favBtns.get(lastIndex).getStyleClass().add("favorite");
-					// favBtns.get(lastIndex).setTextAlignment(TextAlignment.LEFT);
-					// favBtns.get(lastIndex).setMinWidth(300);
-					favBtns.get(lastIndex).setFont(javafx.scene.text.Font.font("Monaco", 12) );
+					favBtns.get(lastIndex).setMinWidth(300);
+					favBtns.get(lastIndex).setAlignment(Pos.BASELINE_LEFT);
 					grid.add(favBtns.get(lastIndex),0,lastIndex);
 					
 					//New delete buttons that link to each fav button
 					delBtns.add(new Button("X"));
 					// delBtns.get(lastIndex).getStyleClass().add("unfavorite");
-					// delBtns.get(lastIndex).setMinWidth(20);
-					delBtns.get(lastIndex).setFont(javafx.scene.text.Font.font("Monaco", 12) );
+					delBtns.get(lastIndex).setMinWidth(20);
 					grid.add(delBtns.get(lastIndex), 1, lastIndex);
 					
 					grid.setVgap(5);
@@ -314,25 +287,7 @@ public class GuiHandler extends Application {
 		}
 	}
 	
-	/*
-	public static void loadSites( ObservableList<Site> sites ){
-    	FileReader file = null;
-    	BufferedReader buffer = null;
-    	String line = null;
-    	try{
-    		file = new FileReader( SITES_FILE );
-        	buffer = new BufferedReader( file );
-        	String[] tokens = null;
-    		while( ( line = buffer.readLine() ) != null ){
-        		tokens = line.split(",");
-        		sites.add( new Site( tokens[0], tokens[1], tokens[2] ) );
-        	}
-    	}
-    	catch (IOException e ){
-    		System.err.println( "Error: " + e );
-    	}
-    }
-	*/
+
 	public static void loadSites( ObservableList<Station> sites ){
 	    FileReader file = null;
         BufferedReader buffer = null;
@@ -352,22 +307,6 @@ public class GuiHandler extends Application {
         }
 	}
 	
-	/*
-	public static void saveSites( ObservableList<Site> sites ){
-		try( BufferedWriter buffer = new BufferedWriter( new PrintWriter( SITES_FILE ) ) ){
-			for( int i = 0; i < sites.size(); ++i ){
-				String str = sites.get(i).getName() + ",";
-				str = str.concat( sites.get(i).getURL() + "," );
-				String fav = ( sites.get(i).isFavourite() ? "true" : "false" );
-				str = str.concat( fav );
-				buffer.write( str );
-				buffer.newLine();
-			}
-		} catch( IOException e ){
-			System.err.println( "Error saving sites: " + e );
-		}
-	}
-	*/
 	
 	public static void saveSites( ObservableList<Station> sites ){
         try( BufferedWriter buffer = new BufferedWriter( new PrintWriter( SITES_FILE ) ) ){
