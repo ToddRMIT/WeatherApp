@@ -1,5 +1,5 @@
 Abrolhos,IDCJDW6137,false
-Adelaide,IDCJDW5002,true
+Adelaide,IDCJDW5002,false
 Adelaide Airport,IDCJDW5001,false
 Adele Island,IDCJDW6159,false
 Aireys Inlet,IDCJDW3001,false
