@@ -90,7 +90,7 @@ public class GuiListWindow {
 	                            for(int i = 0; i < sites.size(); i++){
 	                            	if(c.getText().equals(((Station) sites.get(i)).getName())){
 	                            		try {
-											GuiDataWindow.dataWindow( primaryStage, (Station) sites.get(i) );
+											GuiDataWindow.dataWindow( (Station) sites.get(i) );
 										} catch (IOException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();

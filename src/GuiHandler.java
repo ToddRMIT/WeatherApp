@@ -153,37 +153,20 @@ public class GuiHandler extends Application {
 
 	//creates favourite buttons 
 	public static void createFavButtons(){
-	    // Go through the list of names to find the longest name
-        // and then set the gap between the name and temp accordingly
-        int gap = 0;
-        for( int i = 0; i < sites.size(); ++i ){
-            if( sites.get(i).getName().length() > gap ){
-                gap = sites.get(i).getName().length();
-            }
-        }
-        
 		if( sites != null ){
-
 			for( int i = 0; i < sites.size(); ++i ){
 				if( sites.get(i).isFavourite() ){
-					
-				    String str = sites.get(i).getName();
 				    
-					favBtns.add(new Button(str));
+				    favBtns.add(new FavouriteButton(sites.get(i)));
 					int lastIndex = favBtns.size() - 1;
-					//favBtns.get(lastIndex).getStyleClass().add("favorite");
-					favBtns.get(lastIndex).setMinWidth(300);
-					favBtns.get(lastIndex).setAlignment(Pos.BASELINE_LEFT);
 					grid.add(favBtns.get(lastIndex),0,lastIndex);
 					
-					//New delete buttons that link to each fav button
-					delBtns.add(new Button("X"));
-					// delBtns.get(lastIndex).getStyleClass().add("unfavorite");
-					delBtns.get(lastIndex).setMinWidth(20);
+					delBtns.add(new DeleteButton(sites.get(i)));
 					grid.add(delBtns.get(lastIndex), 1, lastIndex);
 					
-					grid.setVgap(5);
-					grid.setHgap(10);
+					grid.setVgap(0);
+					grid.setHgap(0);
+					
 					final int favselected = i;
 					delBtns.get(lastIndex).setOnAction(new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent e) {
@@ -192,22 +175,10 @@ public class GuiHandler extends Application {
 							sites.get( favselected ).setFavourite(false);
 						}
 					} );
-					favBtns.get(lastIndex).setOnAction(new EventHandler<ActionEvent>() {
-						@Override public void handle(ActionEvent e) {
-							try {
-								GuiDataWindow.dataWindow( window, sites.get(favselected) );
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}	
-						}
-					});
-					
 				}
 
 			}
 		}
-
-		
 	}
 	
 	
