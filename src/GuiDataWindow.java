@@ -31,13 +31,18 @@ public class GuiDataWindow {
      * @param primaryStage
      * @param site
      * @throws IOException
+     * 
      */
+	
+	static Stage dataStage; 
+	static Station siteName;
+	
     public static void dataWindow(Stage primaryStage, Station site ) throws IOException {
         // site.getData(); *****************
         site.loadData();
         site.updateData();
         if( site.returnData().size() == 0 ) return;
-        Stage dataStage = new Stage();
+         dataStage = new Stage();
         BorderPane pane = new BorderPane();
         pane.setTop(getChart( site ) );
         pane.setBottom( getTable( site ) );
@@ -45,13 +50,13 @@ public class GuiDataWindow {
         dataStage.setY( site.getCoords()[1] );
         dataStage.setTitle( site.getName() );
         dataStage.setResizable(false);
-        dataStage.setOnCloseRequest( new EventHandler<WindowEvent>(){ 
-            @Override 
-            public void handle(final WindowEvent e){
-                site.save( dataStage.getX(), dataStage.getY() );
-            }});
+        dataStage.setOnCloseRequest(e -> closeWindow());
+       
         dataStage.setScene(new Scene (pane));		
         dataStage.show();
+        
+        //added for saving when closing from main window
+        siteName = site;
     }
 
     /**
@@ -205,5 +210,11 @@ public class GuiDataWindow {
         pane.setPrefWidth(600);
         return pane;
     }
+    
+	static  void closeWindow () {
+		GuiHandler.listClosed();
+		siteName.save( dataStage.getX(), dataStage.getY() );
+		dataStage.close();
+	}
 
 }

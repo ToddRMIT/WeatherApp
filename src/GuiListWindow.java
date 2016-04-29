@@ -164,7 +164,7 @@ public class GuiListWindow {
 
 	
 	
-	private static  void closeWindow () {
+	static  void closeWindow () {
 		GuiHandler.listClosed();
 		savePrefs( subStage.getX(), subStage.getY() );
 		subStage.close();

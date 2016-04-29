@@ -145,6 +145,8 @@ public class GuiHandler extends Application {
         	public void handle(final WindowEvent e){
         		savePrefs( window.getX(), window.getY() );
         		saveSites( sites );
+        		GuiListWindow.closeWindow();  
+        		GuiDataWindow.closeWindow();   
         	}
         });
         window.show();
@@ -322,5 +324,7 @@ public class GuiHandler extends Application {
             System.err.println( "Error saving sites: " + e );
         }
     }
+	
+
 	
 }
