@@ -12,6 +12,7 @@ public class WeatherApp {
 	
     public static void main(String[] args) throws IOException {
     	
+    	
     	GuiHandler guiHandler = new GuiHandler(args);
       
     }

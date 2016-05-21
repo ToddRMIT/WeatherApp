@@ -9,14 +9,21 @@ import java.util.ArrayList;
 
 import data.Station;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -33,6 +40,7 @@ public class GuiMainWindow extends Application{
 	
 	static Stage window;
 	static GridPane grid;
+	static ScrollPane sBar = new ScrollPane();
 	static ObservableList<Station> sites;
     static boolean listOpen;
     
@@ -47,6 +55,8 @@ public class GuiMainWindow extends Application{
 
 		window = primaryStage;
 		window.setTitle("Weather app");
+		window.setMinWidth(400);
+		window.setMinHeight(500);
 	
 		// Instantiate a list of Site(s) and
 		// load Site data from disk
@@ -62,11 +72,14 @@ public class GuiMainWindow extends Application{
 		Button btn = new Button("Open Site List");
 		btn.setMinWidth(200);
 		
+		Label title = new Label("Weather App");
+		
 		// Set up the top part of the main window
 		GridPane top = new GridPane();
-		top.add( btn,0,0 );
+		top.add( title,0,0 );
+		top.add( btn,0,1 );
 		top.setPadding(new Insets (15,15,15,15));
-		top.setStyle("-fx-background-color: #336699;");
+		//top.setStyle("-fx-background-color: #336699;");
 		top.setAlignment(Pos.CENTER);
 		
 		// Button btnRefresh = new Button("Refresh"); CAN BE REMOVED??
@@ -95,10 +108,11 @@ public class GuiMainWindow extends Application{
 		// for the favourites list
 		grid = new GridPane();
 		grid.setPadding(new Insets (15,15,15,15));
-		grid.setStyle("-fx-background-color: #336699;");
+		//grid.setStyle("-fx-background-color: #336699;");
 		grid.setMinHeight(300);
 		
-
+      
+		
 		//Count how many sites are favourites and instantiate the buttons
 		int count = 0;
 		for( int i = 0; i < sites.size(); ++i ){
@@ -126,10 +140,27 @@ public class GuiMainWindow extends Application{
 		//Creates border pane and sets the layout for the elements
         BorderPane border = new BorderPane();
         border.setTop(top);
-        border.setCenter(grid);
+        border.setCenter(sBar);
+        //set Css
+        border.getStylesheets().add("stylesheets/clean.css");
         
         //Creates the window and initiates the scene
         Scene scene = new Scene(border);
+        
+        	
+        
+      	 sBar.setContent(grid);	
+         sBar.setHbarPolicy(ScrollBarPolicy.NEVER);
+         border.setPadding(new Insets(10,10,10,10));
+        
+      		sBar.vvalueProperty().addListener(new ChangeListener<Number>(){
+      			public void changed(ObservableValue<? extends Number> ov ,
+      				Number old_val, Number new_val) {
+      				grid.setLayoutY(-new_val.doubleValue());
+      			}
+      					
+      		});
+        
         window.setScene(scene);
         // scene.getStylesheets().add("StyleSheets/weatherCharcoal.css");
         window.setX( Double.parseDouble( prefs[0] ) );
@@ -172,7 +203,7 @@ public class GuiMainWindow extends Application{
 					
 					//New delete buttons that link to each fav button
 					delBtns.add(new Button("X"));
-					// delBtns.get(lastIndex).getStyleClass().add("unfavorite");
+					 delBtns.get(lastIndex).setId("delButton");
 					delBtns.get(lastIndex).setMinWidth(20);
 					grid.add(delBtns.get(lastIndex), 1, lastIndex);
 					

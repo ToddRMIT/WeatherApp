@@ -136,7 +136,7 @@ public class GuiListWindow  extends BaseWindow{
 		layout.getChildren().addAll(searchText, table);
 		layout.setPadding(new Insets (15,0,0,0));
 		layout.setStyle("-fx-background-color: #336699;");        
-		
+		layout.setPadding(new Insets(10,10,10,10));
 	    Scene scene = new Scene(layout);
 	    window.setScene(scene);
 	    

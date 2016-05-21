@@ -33,7 +33,7 @@ public class GuiDataWindow extends BaseWindow{
 	
 	private Station site;
 	
-
+   
     public GuiDataWindow(String title, String fileName, Station site) {
 		super(title, fileName);
 	
@@ -41,6 +41,7 @@ public class GuiDataWindow extends BaseWindow{
 	    site.loadData();   //!!!!
         site.updateData(); //!!!!
         if( site.returnData().size() == 0 ) return;
+        
         
        
         BorderPane pane = new BorderPane();

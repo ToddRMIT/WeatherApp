@@ -6,24 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import data.Station;
 import data.Utility;
-import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.stage.WindowEvent;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-
 import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import java.util.logging.*;;
 
 
 /**
@@ -41,13 +29,12 @@ public class GuiHandler {
 	static ObservableList<Station> sites;
     static boolean listOpen;
     
-	
-    //lists to store favorite and favorite delete buttons
-    private static ArrayList<Button> favBtns = new ArrayList();
-    private static ArrayList<Button> delBtns = new ArrayList();
+    private static final Logger log =  Logger.getLogger("GuiHandler");
 
 	public GuiHandler(String[] args ) {
-
+			
+		System.out.println(getClass().getClassLoader().getResource("logging.properties"));
+			log.info("Main window launched");
 			GuiMainWindow.launch(GuiMainWindow.class,args);
 		
 	}
@@ -88,6 +75,7 @@ public class GuiHandler {
 			prefs[0] = "100";
 			prefs[1] = "100";
 		}
+		log.info("Loading : " + MAIN_PREFERENCES_FILE );
 		return prefs;
 	}
 	
@@ -113,6 +101,7 @@ public class GuiHandler {
 		finally{
 			if( out != null ) out.close();
 		}
+		log.info("Saving : " + MAIN_PREFERENCES_FILE );
 	}
 	
 
@@ -133,7 +122,7 @@ public class GuiHandler {
             System.err.println( "Error: " + e );
             Utility.getStations(sites);
         }
-        
+        log.info("Loading : " + SITES_FILE );
         return sites;
 	}
 	
@@ -151,6 +140,7 @@ public class GuiHandler {
         } catch( IOException e ){
             System.err.println( "Error saving sites: " + e );
         }
+        log.info("Saved : " + SITES_FILE );
     }
 	
 	
