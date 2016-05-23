@@ -116,8 +116,22 @@ public class Station implements Comparable<Station>{
         return thisData;
     }
 
-    
-    
+   //WIP dynamic data return
+   public List<String[]> getGraphData(){
+	    List<String[]> thisData = new ArrayList<>();
+        String[] tokens = new String[21];
+        int length;
+        for( int i = 0; i < data.size(); ++i ){
+            if( ( length = data.get(i).length ) > 15 ){
+            	for( int t = 0; t < 21; t++){
+            		tokens[t] = data.get(i)[t];
+            	}
+                thisData.add(tokens);
+                tokens = new String[21];
+            }
+        }
+        return thisData;
+   }
     
     public void loadData(){
         String filename = "./Sites/" + name + ".txt";
@@ -173,7 +187,7 @@ public class Station implements Comparable<Station>{
             if( out != null ) out.close();
         }
     }
-    
+   
     
     
     public void updateData(){
@@ -297,6 +311,7 @@ public class Station implements Comparable<Station>{
                 line = line.substring(1);
                 tokens = line.split(",");
                 list.add( tokens );
+                //System.out.println(line);
             }
             buffer.close();
             isr.close();

@@ -13,22 +13,22 @@ import javafx.stage.WindowEvent;
 
 public abstract class BaseWindow {
 
-	protected static Stage window;
+	protected Stage window;
 	private String windowPrefs[] = new String[2];
-	private static String Window_Prefences_File;
+	public  String Window_Prefences_File;
 	
 	public BaseWindow(String title, String fileName){
 		
 		window = new Stage();
 		window.setTitle(title);
-		Window_Prefences_File = fileName;
+		this.Window_Prefences_File = fileName;
 		window.initModality(Modality.WINDOW_MODAL);
 		
 		window.setOnCloseRequest(e -> windowClose());
 		
 		// Load prefs
 		if(Window_Prefences_File != null){
-			windowPrefs = getWindowPrefs();
+			windowPrefs = getWindowPrefs(fileName);
 			if( windowPrefs != null ){
 				window.setX(Double.parseDouble(windowPrefs[0]));
 				window.setY(Double.parseDouble(windowPrefs[1]));
@@ -41,6 +41,10 @@ public abstract class BaseWindow {
 		//window.show();
 	}
 	
+	public Stage getWindow(){
+		return window;
+	}
+	
 	public void setWindowPrefs(Double posX, Double posY)
 	{
 		window.setX(posX);
@@ -49,11 +53,11 @@ public abstract class BaseWindow {
 	
 	public void windowClose()
 	{
-		saveWindowPrefs( window.getX(), window.getY());
+		saveWindowPrefs( window.getX(), window.getY() , Window_Prefences_File);
 		window.close();
 	}
 	
-	public String[] getWindowPrefs(){
+	public String[] getWindowPrefs(String Window_Prefences_File){
 		String tokens[] = null;
 		try{
 			FileReader file = new FileReader( Window_Prefences_File );
@@ -68,7 +72,7 @@ public abstract class BaseWindow {
 	}
 	
 
-	public static boolean saveWindowPrefs( Double x, Double y ){
+	public static boolean saveWindowPrefs( Double x, Double y ,String Window_Prefences_File){
 		try{
 			FileWriter file = new FileWriter( Window_Prefences_File );
 			PrintWriter out = new PrintWriter( file );

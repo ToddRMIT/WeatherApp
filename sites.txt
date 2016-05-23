@@ -2,16 +2,16 @@ Abrolhos,IDCJDW6137,true
 Adelaide,IDCJDW5002,true
 Adelaide Airport,IDCJDW5001,true
 Adele Island,IDCJDW6159,true
-Aireys Inlet,IDCJDW3001,true
+Aireys Inlet,IDCJDW3001,false
 Albany,IDCJDW6001,false
 Albany Airport,IDCJDW6002,false
-Albion Park,IDCJDW2001,false
+Albion Park,IDCJDW2001,true
 Albury-Wodonga,IDCJDW2002,false
 Alice Springs,IDCJDW8002,false
 Alva Beach,IDCJDW4001,false
-Amberley,IDCJDW4002,false
-Andamooka,IDCJDW5003,false
-Applethorpe,IDCJDW4140,false
+Amberley,IDCJDW4002,true
+Andamooka,IDCJDW5003,true
+Applethorpe,IDCJDW4140,true
 Ararat,IDCJDW3002,false
 Archerfield,IDCJDW4003,false
 Argyle,IDCJDW6003,false

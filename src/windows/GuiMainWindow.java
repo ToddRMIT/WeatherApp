@@ -73,13 +73,12 @@ public class GuiMainWindow extends Application{
 		btn.setMinWidth(200);
 		
 		Label title = new Label("Weather App");
-		
+		title.setId("title");
 		// Set up the top part of the main window
 		GridPane top = new GridPane();
 		top.add( title,0,0 );
 		top.add( btn,0,1 );
 		top.setPadding(new Insets (15,15,15,15));
-		//top.setStyle("-fx-background-color: #336699;");
 		top.setAlignment(Pos.CENTER);
 		
 		// Button btnRefresh = new Button("Refresh"); CAN BE REMOVED??

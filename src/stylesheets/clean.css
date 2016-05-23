@@ -22,6 +22,28 @@
 	 -fx-background-color: rgba(255,255,255,0.5);
 }
 
+#gridpane {
+	-fx-background-color:  linear-gradient(#61a2b1, black);
+}
+
+.axis {
+    -fx-tick-label-fill: white;
+}
+
+.chart-legend {
+   -fx-background-color:  rgba(255,255,255,0.5);
+}
+
+.chart-plot-background {
+    -fx-background-color: rgba(255,255,255,0.1);
+}
+
+.chart-alternative-row-fill {
+    -fx-fill: rgba(255,255,255,0.15);
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
 #delButton {
 	 -fx-border-radius: 16px;
 	 -fx-background-radius: 16px;
@@ -38,7 +60,7 @@
 	
 }
 
-.label{
+#title{
    -fx-font-size: 32px;
    -fx-font-family: "Arial Black";
    -fx-text-fill: linear-gradient(#ffffff, #ffffff, #61a2b1);
@@ -46,6 +68,29 @@
 }
 
 .scroll-pane > .viewport{
-	 	-fx-background-color: linear-gradient(#61a2b1, #2A5058);
+	 -fx-background-color:  linear-gradient(#61a2b1, #2A5058);
+
+	 
+}	
+
+#graphSel {
+	-fx-background-color: #8BCBE0;
 }
+
+
+#graphNorm:even {
+	-fx-background-color:  rgba(255,255,255,0.1);
+	-fx-text-fill: #000000;
+}
+
+#graphNorm:odd {
+	-fx-background-color:  rgba(255,255,255,0.15);
+	-fx-text-fill: #000000;
+}
+
+.list-view{
+	-fx-background-color: rgba(255,255,255,0.15);
+	-fx-background-radius: 8px;
+}
+
 

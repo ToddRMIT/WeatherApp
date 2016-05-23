@@ -47,7 +47,7 @@ public class GuiListWindow  extends BaseWindow{
 		View(sites);
 	}
 
-	static void View(ObservableList sites  ) throws IOException{
+	 void View(ObservableList sites  ) throws IOException{
 		
 	
 		Stage primaryStage = null;
@@ -138,12 +138,12 @@ public class GuiListWindow  extends BaseWindow{
 		layout.setStyle("-fx-background-color: #336699;");        
 		layout.setPadding(new Insets(10,10,10,10));
 	    Scene scene = new Scene(layout);
-	    window.setScene(scene);
-	    
-	    window.show();
-	}
-
+	    getWindow().setScene(scene);
+		getWindow().show();
 	
+	}
+	
+
 	@Override
 	public void windowClose() {
 		GuiHandler.listClosed();
