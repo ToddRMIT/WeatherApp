@@ -67,6 +67,10 @@
   
 }
 
+#heading1 {
+	    -fx-text-fill: white;
+}
+
 .scroll-pane > .viewport{
 	 -fx-background-color:  linear-gradient(#61a2b1, #2A5058);
 
@@ -75,6 +79,13 @@
 
 #graphSel {
 	-fx-background-color: #8BCBE0;
+}
+
+#backing{
+	
+	-fx-background-color: rgba(255,255,255,0.15);
+	-fx-background-radius: 8px;
+	
 }
 
 

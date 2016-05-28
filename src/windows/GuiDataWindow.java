@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import data.Station;
 import data.StationData;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -18,10 +18,10 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,7 +31,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-import windows.GuiListWindow.CheckBoxTableCell;
 
 /**
  * @author Luke Young & Todd Ryan
@@ -47,6 +46,8 @@ public class GuiDataWindow extends BaseWindow{
 	public static boolean[] displayElement = new boolean[20];
 	public  BorderPane pane = new BorderPane();
     public ObservableList<String> options;
+    static int sampleSize = 5;
+    static int offsetSize = 0;
 
    
     public GuiDataWindow(String title, String fileName, Station site) {
@@ -128,7 +129,56 @@ public class GuiDataWindow extends BaseWindow{
 	                return cell;
 	            }
 	        });
+        Slider slider = new Slider();
+        slider.setMin(0);
+        slider.setMax(30);
+        slider.setShowTickMarks(true);
+        slider.setShowTickLabels(true);
+        slider.setMajorTickUnit(10);
+        slider.setMinorTickCount(5);
+        slider.setBlockIncrement(5);
         
+        Slider offset = new Slider();
+        offset.setMin(-356);
+        offset.setMax(0);
+        offset.setShowTickMarks(true);
+        offset.setShowTickLabels(true);
+        offset.setMajorTickUnit(28);
+        offset.setMinorTickCount(14);
+        offset.setBlockIncrement(7);
+        
+        slider.valueProperty().addListener(new ChangeListener<Number>(){
+        	public void changed(ObservableValue<? extends Number> ov,
+        	Number old_val, Number new_val){
+        		sampleSize = new_val.intValue();
+        		pane.setCenter(getChart( site ) );
+        	}
+        }			
+        );
+        
+        offset.valueProperty().addListener(new ChangeListener<Number>(){
+        	public void changed(ObservableValue<? extends Number> ov,
+        	Number old_val, Number new_val){
+        		offsetSize = new_val.intValue();
+        		pane.setCenter(getChart( site ) );
+        	}
+        }			
+        );
+        
+        Label sampleLabel = new Label("Sample Size");
+        Label offsetLabel = new Label("Offset Size");
+        
+        sampleLabel.setId("heading1");
+        offsetLabel.setId("heading1");
+        
+        VBox sliderBox = new VBox();
+        sliderBox.getChildren().addAll(sampleLabel,slider,offsetLabel,offset);
+        
+        sliderBox.setId("backing");
+        sliderBox.setPadding(new Insets(5,5,5,5));
+        sliderBox.setMaxWidth(350);
+        
+        pane.setTop(sliderBox);
         pane.setRight(list);
         pane.setCenter(getChart( site ) );
         pane.setBottom( getTable( site ) );
@@ -188,8 +238,7 @@ public class GuiDataWindow extends BaseWindow{
 	public void setChartElements(int index) {
 		
 		displayElement[index] = !displayElement[index]; 
-		
-		
+				
 		pane.setCenter(getChart(site));
 		
 	}
@@ -217,11 +266,19 @@ public class GuiDataWindow extends BaseWindow{
        // List<String[]> data = site.getTimeSeries();
         List<String[]> data = site.getGraphData();
         
-        for( int i = 0; i < 19; ++i ){
+        for( int i = 0; i < displayElement.length; ++i ){
             XYChart.Series<String, Double> series = new XYChart.Series<>();
             series.setName( legends[i] );
            
-            for( int j = 5; j >= 0; --j ){
+           int sampleStart = sampleSize + -offsetSize;
+           if (sampleStart >= 356 - sampleSize ){
+        	   sampleStart = 356 - sampleSize;
+           }
+           
+           int sampleEnd = 0-offsetSize;
+        		   
+            	//System.out.println("Sample-size:" + data.size());
+            for( int j = sampleStart; j >= sampleEnd; --j ){
                 String date = data.get( j )[ 0 ];
                 if( data.get(j)[i+1].compareTo("") != 0 && displayElement[i] == true){
                 	try{
