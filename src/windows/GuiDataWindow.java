@@ -27,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -38,6 +39,9 @@ import javafx.util.Callback;
  * Top level class for creating station data windows</br
  * containg a chart and table. The daily min and max values and the</br>
  * temp recorded at 9am & 3pm are dsiplayed in the chart.
+ * 
+ * 
+ * @modifed for Part 2, Dainel Bugeja 
  */
 public class GuiDataWindow extends BaseWindow{
 	
@@ -134,8 +138,8 @@ public class GuiDataWindow extends BaseWindow{
         slider.setMax(30);
         slider.setShowTickMarks(true);
         slider.setShowTickLabels(true);
-        slider.setMajorTickUnit(10);
-        slider.setMinorTickCount(5);
+        slider.setMajorTickUnit(5);
+        slider.setMinorTickCount(1);
         slider.setBlockIncrement(5);
         
         Slider offset = new Slider();
@@ -171,12 +175,12 @@ public class GuiDataWindow extends BaseWindow{
         sampleLabel.setId("heading1");
         offsetLabel.setId("heading1");
         
-        VBox sliderBox = new VBox();
+        HBox sliderBox = new HBox();
         sliderBox.getChildren().addAll(sampleLabel,slider,offsetLabel,offset);
         
         sliderBox.setId("backing");
-        sliderBox.setPadding(new Insets(5,5,5,5));
-        sliderBox.setMaxWidth(350);
+      //  sliderBox.setPadding(new Insets(5,5,5,5));
+       
         
         pane.setTop(sliderBox);
         pane.setRight(list);
@@ -235,6 +239,12 @@ public class GuiDataWindow extends BaseWindow{
 		window.close();
 	}
 	
+	/**
+	 * Toggles displayArray boolean and refreshes graph
+	 * 
+	 * 0. Index display boolean
+	 * @param index
+	 */
 	public void setChartElements(int index) {
 		
 		displayElement[index] = !displayElement[index]; 
@@ -256,8 +266,13 @@ public class GuiDataWindow extends BaseWindow{
         //String[] legends = { "min", "max", "9:00am", "3:00pm" }; //Make dyn
         String[] legends = new String[20];
         String[] op = site.getKey();
+      
         for(int i = 1; i < site.getKey().length; i++){
-        	        	legends[i - 1] = op[i];
+        	
+        			
+        	        	legends[i-1] = op[i];
+        	      
+        			
         }
 
         
@@ -297,7 +312,7 @@ public class GuiDataWindow extends BaseWindow{
         for( int i = 0; i < seriesList.size(); ++i ){
             lineChart.getData().addAll( seriesList.get(i) );
         }
-        lineChart.setLegendSide( Side.RIGHT );
+        lineChart.setLegendSide( Side.BOTTOM );
         pane.setCenter(lineChart);
         //pane.setMaxHeight(200);
         return pane;

@@ -21,9 +21,7 @@ public class dynamicList {
     public dynamicList(){
 	//Name column
     	
-    	
-    	
-    	
+
 	TableColumn<Station, String> nameColumn = new TableColumn<>("Name");
 	nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 	nameColumn.setCellFactory(new Callback<TableColumn<Station,String>,TableCell<Station, String>>() {

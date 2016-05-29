@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2016-05-30T00:19:26</date>
+  <millis>1464531566440</millis>
+  <sequence>0</sequence>
+  <logger>WeatherApp</logger>
+  <level>INFO</level>
+  <class>windows.GuiHandler</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Main window launched</message>
+</record>
+<record>
+  <date>2016-05-30T00:19:27</date>
+  <millis>1464531567557</millis>
+  <sequence>1</sequence>
+  <logger>WeatherApp</logger>
+  <level>INFO</level>
+  <class>windows.GuiHandler</class>
+  <method>loadSites</method>
+  <thread>15</thread>
+  <message>Loading : sites.txt</message>
+</record>
+<record>
+  <date>2016-05-30T00:24:43</date>
+  <millis>1464531883389</millis>
+  <sequence>2</sequence>
+  <logger>WeatherApp</logger>
+  <level>INFO</level>
+  <class>windows.GuiHandler</class>
+  <method>saveSites</method>
+  <thread>15</thread>
+  <message>Saved : sites.txt</message>
+</record>
+</log>

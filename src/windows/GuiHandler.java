@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import data.Station;
 import data.Utility;
+import data.WeatherApp;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
@@ -17,10 +18,12 @@ import java.util.logging.*;;
 /**
  * @author Daniel Bugeja & Todd Ryan
  *
+ * @modifed for Part 2, Dainel Bugeja 
  */
 
 public class GuiHandler {
 
+	
 	public static final String SITES_FILE = "sites.txt";
 	public static final String MAIN_PREFERENCES_FILE = "prefs.txt";
 	
@@ -29,12 +32,12 @@ public class GuiHandler {
 	static ObservableList<Station> sites;
     static boolean listOpen;
     
-    private static final Logger log =  Logger.getLogger("GuiHandler");
+
 
 	public GuiHandler(String[] args ) {
 			
-		System.out.println(getClass().getClassLoader().getResource("logging.properties"));
-			log.info("Main window launched");
+		
+			WeatherApp.log.info("Main window launched");
 			GuiMainWindow.launch(GuiMainWindow.class,args);
 		
 	}
@@ -68,6 +71,7 @@ public class GuiHandler {
 			}
 		}
 		catch (IOException e){
+			WeatherApp.log.info(" Error: File " + MAIN_PREFERENCES_FILE + " not found.");
 			System.err.println( " Error: File " + MAIN_PREFERENCES_FILE + " not found." );
 			// File not found
 			// Falling back to sane defaults
@@ -75,13 +79,13 @@ public class GuiHandler {
 			prefs[0] = "100";
 			prefs[1] = "100";
 		}
-		log.info("Loading : " + MAIN_PREFERENCES_FILE );
+		WeatherApp.log.info("Loading : " + MAIN_PREFERENCES_FILE );
 		return prefs;
 	}
 	
 	/**
 	 * Saves preferences for the main window to the MAIN_PREFERENCES_FILE</br>
-	 * Currently savess 2 lines</br>
+	 * Currently saves 2 lines</br>
 	 * 0: x co-ords</br>
 	 * 1: y co-ords</br>
 	 * @param Double X co-ord
@@ -101,10 +105,14 @@ public class GuiHandler {
 		finally{
 			if( out != null ) out.close();
 		}
-		log.info("Saving : " + MAIN_PREFERENCES_FILE );
+		WeatherApp.log.info("Saving : " + MAIN_PREFERENCES_FILE );
 	}
 	
-
+    /**
+     * Loads and returns updated Observable list of all stations
+     * @param sites , current sites list
+     * 
+     **/
 	public static ObservableList<Station> loadSites( ObservableList<Station> sites ){
 	    FileReader file = null;
         BufferedReader buffer = null;
@@ -119,14 +127,19 @@ public class GuiHandler {
             }
         }
         catch (IOException e ){
+        	WeatherApp.log.info("Failed load of site list: " + e);
             System.err.println( "Error: " + e );
             Utility.getStations(sites);
         }
-        log.info("Loading : " + SITES_FILE );
+        WeatherApp.log.info("Loading : " + SITES_FILE );
         return sites;
 	}
 	
-	
+	 /**
+     * Save Observable list to Sites.txt file
+     * @param sites , current sites list
+     * 
+     **/
 	public static void saveSites( ObservableList<Station> sites ){
         try( BufferedWriter buffer = new BufferedWriter( new PrintWriter( SITES_FILE ) ) ){
             for( int i = 0; i < sites.size(); ++i ){
@@ -138,9 +151,10 @@ public class GuiHandler {
                 buffer.newLine();
             }
         } catch( IOException e ){
+        	WeatherApp.log.info("Error saving sites: " + e  );
             System.err.println( "Error saving sites: " + e );
         }
-        log.info("Saved : " + SITES_FILE );
+        WeatherApp.log.info("Saved : " + SITES_FILE );
     }
 	
 	

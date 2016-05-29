@@ -6,11 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import data.WeatherApp;
 import javafx.event.EventHandler;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+
+/**
+ * @author Daniel Bugeja (Part 2)
+ *
+ */
 public abstract class BaseWindow {
 
 	protected Stage window;
@@ -41,22 +47,45 @@ public abstract class BaseWindow {
 		//window.show();
 	}
 	
+	/**
+	 * Getter for window instance
+	 * 
+	 * @return window instance
+	 */
 	public Stage getWindow(){
 		return window;
 	}
 	
+	/**
+	 * Set window postion on screen
+	 * 
+	 * 0. X position on screen
+	 * 1. Y position on screen
+	 * 
+	 * @param posX
+	 * @param posY
+	 */
 	public void setWindowPrefs(Double posX, Double posY)
 	{
 		window.setX(posX);
 		window.setY(posY);
 	}
 	
+	/**
+	 * Sets default close opperation of window
+	 */
 	public void windowClose()
 	{
 		saveWindowPrefs( window.getX(), window.getY() , Window_Prefences_File);
 		window.close();
 	}
 	
+	/**
+	 * Loads Window Preferences file, and returns screen last screen position
+	 * 
+	 * @param Window_Prefences_File
+	 * @return array of screen postion {x,y}
+	 */
 	public String[] getWindowPrefs(String Window_Prefences_File){
 		String tokens[] = null;
 		try{
@@ -71,7 +100,13 @@ public abstract class BaseWindow {
 		return tokens;
 	}
 	
-
+    /**
+     * Saves Window position to file {x,y}
+     * @param x 
+     * @param y
+     * @param Window_Prefences_File
+     * @return success
+     */
 	public static boolean saveWindowPrefs( Double x, Double y ,String Window_Prefences_File){
 		try{
 			FileWriter file = new FileWriter( Window_Prefences_File );
@@ -80,9 +115,11 @@ public abstract class BaseWindow {
 			if( out != null ) out.close();
 		}
 		catch( IOException e ){
+			WeatherApp.log.info("Error saving prefs: " + e );
 			System.err.println( "Error saving prefs: " + e );
 			return false;
 		}
+		WeatherApp.log.info("Prefrences Saved to : " + Window_Prefences_File);
 		return true;
 	}
 

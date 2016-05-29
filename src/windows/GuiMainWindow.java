@@ -29,8 +29,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-
-
+/**
+ * @author Daniel Bugeja (Part 2)
+ *
+ */
 public class GuiMainWindow extends Application{
 
 	

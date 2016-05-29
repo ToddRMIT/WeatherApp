@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import data.Station;
+import data.WeatherApp;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -35,6 +36,7 @@ import javafx.util.Callback;
 /**
  * @author Daniel Bugeja & Todd Ryan
  *
+ * @modifed for Part 2, Dainel Bugeja 
  */
 public class GuiListWindow  extends BaseWindow{
 	
@@ -47,6 +49,12 @@ public class GuiListWindow  extends BaseWindow{
 		View(sites);
 	}
 
+	/**
+	 * Creates stage for all Gui elements 
+	 * @param sites
+	 * @throws IOException
+	 */
+	
 	 void View(ObservableList sites  ) throws IOException{
 		
 	
@@ -82,6 +90,7 @@ public class GuiListWindow  extends BaseWindow{
 	                            	if(c.getText().equals(((Station) sites.get(i)).getName())){
 	                            		try {
 											GuiDataWindow.dataWindow( primaryStage, (Station) sites.get(i) );
+											 WeatherApp.log.info("Station window opened: " + ((Station) sites.get(i)).getName() );
 										} catch (IOException e) {
 											e.printStackTrace();
 										}
@@ -144,6 +153,9 @@ public class GuiListWindow  extends BaseWindow{
 	}
 	
 
+	/**
+	 * Overrides default inherited close method
+	 */
 	@Override
 	public void windowClose() {
 		GuiHandler.listClosed();
@@ -151,7 +163,12 @@ public class GuiListWindow  extends BaseWindow{
 	}
 	
 	
-	
+	/**
+	 * Custom Table cell containing tick box functionality
+	 *
+	 * @param <S>
+	 * @param <T>
+	 */
 	public static class CheckBoxTableCell<S, T> extends TableCell<S, T> {
 		private CheckBox checkBox;
 		private ObservableValue<T> ov;

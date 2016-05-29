@@ -23,6 +23,7 @@ import windows.GuiMainWindow;
 /**
  * @author toddryan
  *
+ * @modifed for Part 2, Dainel Bugeja 
  */
 public class Station implements Comparable<Station>{
 
@@ -59,6 +60,10 @@ public class Station implements Comparable<Station>{
                 setFavourite( t1 );
                 GuiMainWindow.clearBtns();
                 GuiMainWindow.createFavButtons();
+                if(t1 == true)
+                	WeatherApp.log.info("Station Favorited: " + name);
+                else
+                	WeatherApp.log.info("Station Unfavorited: " + name);
             }
         });
     }
@@ -116,7 +121,11 @@ public class Station implements Comparable<Station>{
         return thisData;
     }
 
-   //WIP dynamic data return
+   /**
+    * Getter for graph data
+    * 
+    * @return String[]
+    */
    public List<String[]> getGraphData(){
 	    List<String[]> thisData = new ArrayList<>();
         String[] tokens = new String[21];
